@@ -159,6 +159,7 @@ section.blk{padding:64px 0}
 .spec{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
 .spec td{padding:7px 0;border-bottom:1px solid #eee;vertical-align:top}
 .spec td:first-child{color:var(--sub);width:42%}
+.spec td+td{text-align:start}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .chip{background:#f1f1f1;border-radius:999px;padding:3px 10px;font-size:13px}
 .drawer{position:fixed;top:0;bottom:0;inset-inline-end:0;width:min(420px,100%);background:var(--card);z-index:90;transform:translateX(110%);transition:.25s;display:flex;flex-direction:column}
@@ -294,6 +295,51 @@ table.lst th{color:var(--sub);font-weight:600;font-size:12px}
 .due{background:#FFF6D6;border-inline-start:4px solid var(--y);padding:10px 12px;border-radius:8px;margin-bottom:8px;font-size:14px}
 .empty2{color:var(--sub);font-size:14px;padding:8px 0}
 .disclaim{font-size:12px;color:var(--sub);margin-top:10px}
+
+/* product page */
+.pd{display:grid;grid-template-columns:1.05fr 1fr;gap:32px;align-items:start}
+@media (max-width:860px){.pd{grid-template-columns:1fr;gap:20px}}
+.gal .main{aspect-ratio:1;border-radius:var(--r);background:linear-gradient(160deg,#f1efe8,#e5e2d8);display:grid;place-items:center;overflow:hidden;border:1px solid #e9e7e0}
+.gal .main img{width:100%;height:100%;object-fit:contain;background:#fff}
+.gal .main .ph{width:52%}
+.gal .th{display:flex;gap:8px;margin-top:10px;overflow-x:auto}
+.gal .th button{flex:0 0 70px;height:70px;border-radius:10px;overflow:hidden;border:2px solid transparent;padding:0;background:#fff;cursor:pointer}
+.gal .th button.on{border-color:var(--y)}
+.gal .th img{width:100%;height:100%;object-fit:cover}
+.pi .brd{font-size:13px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:.6px}
+.pi h1{font-size:26px;line-height:1.35;margin:4px 0}
+.pi .bigsz{direction:ltr;text-align:start;font-size:28px;font-weight:900}
+.pi .rt{display:flex;align-items:center;gap:8px;margin:6px 0 2px;color:var(--sub);font-size:14px}
+.pi .rt b{color:var(--y);letter-spacing:1px;font-size:16px}
+.qbox{background:var(--card);border:1px solid #e9e7e0;border-radius:var(--r);padding:16px;margin-top:16px}
+.qrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.qctl{display:flex;align-items:center;border:1px solid #ddd;border-radius:12px;overflow:hidden;background:#fff}
+.qctl button{width:44px;height:46px;border:0;background:#f6f5f1;font-size:22px;cursor:pointer}
+.qctl input{width:56px;height:46px;border:0;text-align:center;font-size:18px;font-weight:800;-moz-appearance:textfield}
+.qctl input::-webkit-outer-spin-button,.qctl input::-webkit-inner-spin-button{-webkit-appearance:none}
+.qpre{display:flex;gap:6px}
+.qpre button{border:1px solid #ddd;background:#fff;border-radius:10px;padding:8px 12px;font-weight:700;cursor:pointer}
+.qpre button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.psel{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 12px}
+.psel button{border:1px solid #ddd;background:#fff;border-radius:10px;padding:8px 14px;font-weight:700;cursor:pointer;direction:ltr}
+.psel button.on{border-color:var(--y);background:#FFF1E3}
+.pbtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.pbtns .btn{flex:1;justify-content:center;min-width:150px}
+.psec{background:var(--card);border:1px solid #e9e7e0;border-radius:var(--r);padding:20px;margin-top:20px}
+.psec h2{font-size:19px;margin-bottom:10px}
+.psec p.dsc{line-height:1.9;color:#333;white-space:pre-line}
+.rv{border-top:1px solid #eee;padding:12px 0}
+.rv:first-of-type{border-top:0}
+.rv .hd{display:flex;justify-content:space-between;gap:8px;font-size:14px}
+.rv .hd b{color:var(--y);letter-spacing:1px}
+.rv p{margin-top:4px;line-height:1.8;color:#333}
+.rsum{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.rsum .n{font-size:40px;font-weight:900}
+.stpick{display:flex;gap:4px;direction:ltr;justify-content:flex-end}
+.stpick button{font-size:30px;line-height:1;border:0;background:none;color:#ccc;cursor:pointer;padding:0 2px}
+.stpick button.on{color:var(--y)}
+.crumb{font-size:14px;color:var(--sub);margin-bottom:14px}
+.crumb a{color:var(--sub)}
 </style>
 </head>
 <body>
@@ -453,11 +499,19 @@ table.lst th{color:var(--sub);font-weight:600;font-size:12px}
 </div>
 
 <!-- OILS -->
+<!-- PRODUCT -->
+<div class="page" id="p-item">
+  <section class="blk" style="padding-top:24px">
+    <div class="wrap" id="itemWrap"></div>
+  </section>
+</div>
+
 <div class="page" id="p-oils">
   <div class="pagehead"><div class="wrap"><h1 data-t="nav_oils"></h1><p data-t="oils_p"></p></div></div>
   <section class="blk" style="padding-top:28px">
     <div class="wrap">
       <div class="info"><h3 data-t="sae_h"></h3><p data-t="sae_p" data-html></p></div>
+      <div class="gsec" id="oilShop" style="display:none"><h3 data-t="oils_shop"></h3><div class="grid" id="oilGrid" style="margin-top:12px"></div></div>
       <div id="oilGrades"></div>
       <div class="gsec"><h3 data-t="ob_h"></h3><p class="d" data-t="ob_p"></p><div class="brands" id="oilBrands"></div></div>
     </div>
@@ -941,6 +995,7 @@ async function loadTires(){
     try{const r=await fetch(API_URL,{cache:"no-store"});if(r.ok){const j=await r.json();if(Array.isArray(j))data=j}}catch(e){}
   }
   TIRES=dedupe((data&&data.length?data:FALLBACK_TIRES).map(norm));
+  try{const r=await fetch("/api/oils",{cache:"no-store"});if(r.ok){const j=await r.json();if(Array.isArray(j))OILS=j}}catch(e){}
 }
 
 /* i18n apply */
@@ -1001,7 +1056,15 @@ function renderBrands(){
   const ob=OIL_BRANDS.map(b=>brandTile(b,"oil")).join("");
   $("#oilBrands").innerHTML=ob; $("#allOilBrands").innerHTML=ob;
 }
+function oilCard(x){
+  const img=x.images&&x.images[0]?`<img src="${esc(x.images[0])}" alt="${esc(x.brand)}" loading="lazy" style="object-fit:contain;background:#fff">`:`<svg class="ph" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.5"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>`;
+  return `<div class="pc"><div class="img" data-open-oil="${x.id}">${img}</div><div class="bd">
+    <div class="br">${esc(x.brand)}</div><h3 data-open-oil="${x.id}">${esc(x.name)}</h3><div class="sz">${esc(x.grade||"")}</div>
+    ${x.reviews?`<div class="stars">${stars(x.rating)} <small>(${x.reviews} ${t("reviews")})</small></div>`:""}
+    <div class="act"><button class="btn y" data-open-oil="${x.id}">${t("details")}</button></div></div></div>`;
+}
 function renderOils(){
+  if($("#oilShop")){$("#oilShop").style.display=OILS.length?"":"none";$("#oilGrid").innerHTML=OILS.map(oilCard).join("")}
   $("#oilGrades").innerHTML=OIL_GRADES.map(s=>`<div class="gsec"><h3>${t("g_"+s.k)}</h3><p class="d">${t("gd_"+s.k)}</p>
     <div class="grades">${s.g.map(g=>`<a class="gr" target="_blank" rel="noopener" href="${waURL(t("wa_oil")+" "+g+" ("+t("g_"+s.k)+")")}"><b>${esc(g)}</b><small>${t("ask")}</small></a>`).join("")}</div></div>`).join("");
 }
@@ -1027,7 +1090,7 @@ function card(x){
       <div class="br">${esc(x.brand)}${x.oeType&&CATS[x.oeType]?` · <span style="text-transform:none;font-weight:500">${esc(catT(x.oeType))}</span>`:""}</div>
       <h3 data-open="${x.id}">${esc(x.pattern||x.sizeText)}</h3>
       <div class="sz">${esc(sizeOf(x))}</div>
-      <div class="stars">${"★".repeat(Math.round(x.rating||5))} <small>(${x.reviews||0} ${t("reviews")})</small></div>
+      ${x.reviews?`<div class="stars">${stars(x.rating)} <small>(${x.reviews} ${t("reviews")})</small></div>`:""}
       ${x.warranty?`<span class="war">${esc(x.warranty)}</span>`:""}
       <div class="act"><button class="btn y" data-add="${x.id}">+ ${t("add")}</button><button class="btn o" style="color:var(--txt);border-color:#ccc" data-open="${x.id}">${t("details")}</button></div>
     </div></div>`;
@@ -1077,6 +1140,7 @@ function renderAll(){
   $("#featGrid").innerHTML=feat.slice(0,8).map(card).join("")||`<div class="empty">${t("none")}</div>`;
   renderTires(); renderNews(); renderServices(); renderCart(); renderBrands(); renderOils(); renderAllSizes();
   const m=location.hash.match(/^#\/article\/(.+)$/); if(m)renderPost(m[1]);
+  const mi=location.hash.match(/^#\/(tire|oil)\/(\d+)/); if(mi)renderItem(mi[1],+mi[2]);
 }
 
 /* modal */
@@ -1103,17 +1167,19 @@ function closeAll(){$("#modal").classList.remove("on");$("#drawer").classList.re
 
 /* cart */
 function saveCart(){store.set("zad_cart",cart);renderCart()}
-function addCart(id){const c=cart.find(z=>z.id==id);if(c)c.q++;else cart.push({id:+id,q:4});saveCart();toast(t("added"))}
+function cartItem(c){return c.t==="oil"?OILS.find(y=>y.id==c.id):TIRES.find(y=>y.id==c.id)}
+function cartLabel(c){const x=cartItem(c);if(!x)return["",""];return c.t==="oil"?[`${x.brand} ${x.name}`,[x.grade,c.s].filter(Boolean).join(" · ")]:[`${x.brand} ${x.pattern||""}`,x.sizeText||sizeOf(x)]}
+function addCart(id,q=4,type="tire",size=""){const c=cart.find(z=>(z.t||"tire")===type&&z.id==id&&(z.s||"")===size);if(c)c.q+=q;else cart.push({t:type,id:+id,q,s:size||undefined});saveCart();toast(t("added"))}
 function renderCart(){
-  cart=cart.filter(c=>TIRES.some(x=>x.id==c.id)&&c.q>0);
+  cart=cart.filter(c=>cartItem(c)&&c.q>0);
   $("#cartN").textContent=cart.reduce((s,c)=>s+c.q,0);
-  $("#cartList").innerHTML=cart.length?cart.map(c=>{const x=TIRES.find(y=>y.id==c.id);return `<div class="ci"><div class="t">${esc(x.brand)} ${esc(x.pattern||"")}<b>${esc(sizeOf(x))}</b></div><div class="qty"><button data-q="${c.id}" data-d="-1">−</button><span>${c.q}</span><button data-q="${c.id}" data-d="1">+</button></div></div>`}).join(""):`<p style="color:var(--sub);padding:20px 0">${t("cart_empty")}</p>`;
+  $("#cartList").innerHTML=cart.length?cart.map((c,i)=>{const [n,s]=cartLabel(c);return `<div class="ci"><div class="t">${esc(n)}<b>${esc(s)}</b><small style="color:var(--sub)">${t(c.t==="oil"?"u_can":"u_tire")}</small></div><div class="qty"><button data-q="${i}" data-d="-1">−</button><span>${c.q}</span><button data-q="${i}" data-d="1">+</button></div></div>`}).join(""):`<p style="color:var(--sub);padding:20px 0">${t("cart_empty")}</p>`;
   $("#cartSend").disabled=!cart.length;$("#cartSend").style.opacity=cart.length?1:.5;
 }
 function sendCart(){
   if(!cart.length)return;
-  const lines=cart.map(c=>{const x=TIRES.find(y=>y.id==c.id);return `• ${x.brand} ${x.pattern||""} — ${x.sizeText||sizeOf(x)} × ${c.q} ${t("qty")}`});
-  const items=cart.map(c=>{const x=TIRES.find(y=>y.id==c.id);return {id:x.id,name:x.brand+" "+(x.pattern||""),size:x.sizeText||sizeOf(x),qty:c.q}});
+  const lines=cart.map(c=>{const [n,s]=cartLabel(c);return `• ${n} — ${s} × ${c.q} ${t(c.t==="oil"?"u_can":"u_tire")}`});
+  const items=cart.map(c=>{const [n,s]=cartLabel(c);return {id:c.id,name:(c.t==="oil"?"[Oil] ":"")+n,size:s,qty:c.q}});
   const w=window.open("about:blank","_blank");
   fetch("/api/orders",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({items})}).then(r=>r.json()).catch(()=>({})).then(j=>{
     const msg=t("wa_cart")+(j&&j.id?` (#${j.id})`:"")+"\n"+lines.join("\n");
@@ -1122,17 +1188,108 @@ function sendCart(){
 }
 let tt;function toast(m){const e=$("#toast");e.textContent=m;e.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>e.classList.remove("on"),1800)}
 
+
+/* ---------- product page ---------- */
+let OILS=[];
+const stars=r=>{const n=Math.round(+r||0);return "★".repeat(n)+"☆".repeat(5-n)};
+const LI_KG={60:250,61:257,62:265,63:272,64:280,65:290,66:300,67:307,68:315,69:325,70:335,71:345,72:355,73:365,74:375,75:387,76:400,77:412,78:425,79:437,80:450,81:462,82:475,83:487,84:500,85:515,86:530,87:545,88:560,89:580,90:600,91:615,92:630,93:650,94:670,95:690,96:710,97:730,98:750,99:775,100:800,101:825,102:850,103:875,104:900,105:925,106:950,107:975,108:1000,109:1030,110:1060,111:1090,112:1120,113:1150,114:1180,115:1215,116:1250,117:1285,118:1320,119:1360,120:1400,121:1450,122:1500,123:1550,124:1600,125:1650,126:1700,127:1750,128:1800,129:1850,130:1900,131:1950,132:2000,133:2060,134:2120,135:2180,136:2240,137:2300,138:2360,139:2430,140:2500,141:2575,142:2650,143:2725,144:2800,145:2900,146:3000,147:3075,148:3150,149:3250,150:3350,151:3450,152:3550,153:3650,154:3750,155:3875,156:4000,157:4125,158:4250,159:4375,160:4500};
+const SPD={L:120,M:130,N:140,P:150,Q:160,R:170,S:180,T:190,U:200,H:210,V:240,W:270,Y:300,Z:240};
+function parseLS(s){const m=String(s||"").match(/\b(\d{2,3})(?:\/(\d{2,3}))?\s?([LMNPQRSTUHVWYZ])\b/);if(!m)return null;return {li:m[1]+(m[2]?"/"+m[2]:""),kg:LI_KG[+m[1]],sp:m[3],kmh:SPD[m[3]],xl:/\bXL\b|\bRF\b|\bEXTRA LOAD\b/i.test(s),rf:/\bRFT\b|\bRUN.?FLAT\b|\bZP\b|\bSSR\b/i.test(s)}}
+const OTYPE={"Full synthetic":{fa:"تمام‌سنتتیک",ar:"اصطناعي بالكامل",en:"Full synthetic"},"Synthetic blend":{fa:"نیمه‌سنتتیک",ar:"شبه اصطناعي",en:"Synthetic blend"},"Mineral":{fa:"معدنی",ar:"معدني",en:"Mineral"},"Diesel":{fa:"دیزل",ar:"ديزل",en:"Diesel"},"Gear / ATF":{fa:"گیربکس / ATF",ar:"ناقل حركة / ATF",en:"Gear / ATF"}};
+let ITEM={type:"tire",id:0,q:4,s:"",img:0,star:0};
+function renderItem(type,id){
+  const x=type==="oil"?OILS.find(y=>y.id==id):TIRES.find(y=>y.id==id);
+  const W=$("#itemWrap");
+  if(!x){W.innerHTML=`<div class="empty">${t("none")}<br><br><a class="btn y" href="#/${type==="oil"?"oils":"tires"}">${t("back")}</a></div>`;return}
+  if(ITEM.type!==type||ITEM.id!==id){const sizes=type==="oil"?String(x.sizes||"").split(/[,،]/).map(s=>s.trim()).filter(Boolean):[];ITEM={type,id,q:type==="oil"?1:4,s:sizes[0]||"",img:0,star:0,sizes}}
+  const imgs=(x.images||[]).filter(Boolean);
+  const ph=type==="oil"?`<svg class="ph" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.2"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>`:tireSVG;
+  const title=type==="oil"?x.name:(x.pattern||x.sizeText);
+  const sz=type==="oil"?(x.grade||""):(x.sizeText||sizeOf(x));
+  document.title=`${x.brand} ${title} ${type==="tire"?sizeOf(x):sz} | Zad CSC`;
+  const ls=type==="tire"?parseLS(x.sizeText):null;
+  const rows=type==="tire"?[
+    [t("brand"),x.brand],[t("pattern_l"),x.pattern],[t("size_l"),sizeOf(x)],
+    ls?[t("load_idx"),`${ls.li}${ls.kg?` — ${ls.kg} kg ${t("per_tire")}`:""}${ls.xl?" · XL":""}`]:null,
+    ls&&ls.kmh?[t("speed_idx"),`${ls.sp} — ${ls.kmh} km/h`]:null,
+    ls&&ls.rf?[t("runflat"),"✓"]:null,
+    x.oeType?[t("category"),catT(x.oeType)]:null,[t("dot"),x.dotYear],[t("warranty"),x.warranty],[t("load"),x.utqg],[t("sku_l"),x.sku]
+  ]:[[t("brand"),x.brand],[t("oil_grade_l"),x.grade],[t("spec_l"),x.spec],[t("type_l"),(OTYPE[x.type]&&OTYPE[x.type][L])||x.type],[t("pack_l"),x.sizes],[t("sku_l"),x.sku]];
+  const unit=t(type==="oil"?"u_can":"u_tire");
+  const pre=type==="oil"?[1,4,6,12]:[1,2,4];
+  const waTxt=`${t("wa_ask")}\n${x.brand} ${title} — ${type==="oil"?[sz,ITEM.s].filter(Boolean).join(" "):sz} × ${ITEM.q} ${unit}`;
+  const others=type==="tire"?TIRES.filter(y=>y.id!==x.id&&sizeOf(y)===sizeOf(x)).slice(0,4):[];
+  W.innerHTML=`<div class="crumb"><a href="#/">${t("nav_home")}</a> / <a href="#/${type==="oil"?"oils":"tires"}">${t(type==="oil"?"nav_oils":"nav_tires")}</a> / ${esc(x.brand)}</div>
+  <div class="pd">
+    <div class="gal"><div class="main">${imgs.length?`<img src="${esc(imgs[ITEM.img]||imgs[0])}" alt="${esc(x.brand+" "+title)}">`:ph}</div>
+      ${imgs.length>1?`<div class="th">${imgs.map((u,i)=>`<button data-gi="${i}" class="${i===ITEM.img?"on":""}"><img src="${esc(u)}" alt="" loading="lazy"></button>`).join("")}</div>`:""}</div>
+    <div class="pi">
+      <div class="brd">${esc(x.brand)}</div><h1>${esc(title)}</h1><div class="bigsz">${esc(sz)}</div>
+      <div class="rt">${x.reviews?`<b>${stars(x.rating)}</b> ${(+x.rating).toFixed(1)} · <a href="#rvs" data-goto="rvs">${x.reviews} ${t("reviews")}</a>`:`<a href="#rvs" data-goto="rvs">${t("rev_first")}</a>`}</div>
+      ${x.warranty?`<span class="war" style="display:inline-block;margin-top:6px;font-size:12px;background:#FFF1E3;color:#8a4300;padding:4px 9px;border-radius:8px;font-weight:600">${esc(x.warranty)}</span>`:""}
+      <div class="qbox">
+        ${type==="oil"&&ITEM.sizes.length?`<div style="font-size:14px;color:var(--sub)">${t("pack_l")}</div><div class="psel">${ITEM.sizes.map(s=>`<button data-ps="${esc(s)}" class="${s===ITEM.s?"on":""}">${esc(s)}</button>`).join("")}</div>`:""}
+        <div style="font-size:14px;color:var(--sub);margin-bottom:6px">${t("qty_l")} (${unit})</div>
+        <div class="qrow"><div class="qctl"><button data-qd="-1" aria-label="-">−</button><input id="iq" type="number" min="1" max="99" inputmode="numeric" value="${ITEM.q}"><button data-qd="1" aria-label="+">+</button></div>
+          <div class="qpre">${pre.map(n=>`<button data-qp="${n}" class="${n===ITEM.q?"on":""}">${n} ${unit}</button>`).join("")}</div></div>
+        <div class="pbtns"><button class="btn y" id="iadd">+ ${t("add")}</button><a class="btn wa" id="iwa" target="_blank" rel="noopener" href="${waURL(waTxt)}">${t("ask")}</a></div>
+      </div>
+      <table class="spec" style="margin-top:16px">${rows.filter(r=>r&&r[1]).map(([k,v])=>`<tr><td>${esc(k)}</td><td${/[A-Za-z0-9]/.test(v)&&!/[؀-ۿ]/.test(v)?' style="direction:ltr;text-align:start"':""}>${esc(v)}</td></tr>`).join("")}</table>
+      ${type==="tire"&&x.vehicles&&x.vehicles.length?`<div style="margin-top:12px;font-size:14px;color:var(--sub)">${t("fits")}</div><div class="chips">${x.vehicles.map(v=>`<span class="chip">${esc(v)}</span>`).join("")}</div>`:""}
+    </div>
+  </div>
+  ${desc(x)?`<div class="psec"><h2>${t("desc_h")}</h2><p class="dsc">${esc(desc(x))}</p></div>`:""}
+  ${others.length?`<div class="psec"><h2>${t("same_size")}</h2><div class="grid">${others.map(card).join("")}</div></div>`:""}
+  <div class="psec" id="rvs"><h2>${t("rev_h")}</h2><div id="rvList"><p style="color:var(--sub)">…</p></div>
+    <form id="rvForm" style="margin-top:16px;border-top:1px solid #eee;padding-top:16px"><h3 style="font-size:16px;margin-bottom:8px">${t("rev_write")}</h3>
+      <div class="stpick" id="stp" style="justify-content:${L==="en"?"flex-start":"flex-end"}">${[1,2,3,4,5].map(n=>`<button type="button" data-st="${n}" class="${n<=ITEM.star?"on":""}" aria-label="${n}">★</button>`).join("")}</div>
+      <div class="fg2" style="grid-template-columns:1fr;margin-top:8px">
+        <div class="fld"><label>${t("f_name")}</label><input name="name" required maxlength="60"></div>
+        <div class="fld"><label>${t("rev_text")}</label><textarea name="text" rows="3" maxlength="1500"></textarea></div>
+      </div><button class="btn y" style="margin-top:10px">${t("rev_send")}</button><div class="msg" id="rvMsg"></div></form></div>`;
+  loadReviews(type,id);
+  const iq=$("#iq");iq.onchange=()=>{ITEM.q=Math.max(1,Math.min(99,+iq.value||1));renderItem(type,id)};
+  $("#iadd").onclick=()=>addCart(id,ITEM.q,type,ITEM.s);
+  $("#rvForm").onsubmit=async e=>{e.preventDefault();const f=e.target;if(!ITEM.star){$("#rvMsg").className="msg err";$("#rvMsg").textContent=t("rev_pick");return}
+    try{const r=await fetch("/api/reviews",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({type,id,rating:ITEM.star,name:f.name.value,text:f.text.value})});const j=await r.json().catch(()=>({}));
+      if(!r.ok)throw new Error(j.error||"x");f.reset();ITEM.star=0;$$("#stp button").forEach(b=>b.classList.remove("on"));$("#rvMsg").className="msg ok";$("#rvMsg").textContent=t("rev_ok")}
+    catch(er){$("#rvMsg").className="msg err";$("#rvMsg").textContent=er.message==="too_many_attempts"?t("rev_limit"):t("e_generic")}};
+}
+async function loadReviews(type,id){
+  let l=[];try{const r=await fetch(`/api/reviews?type=${type}&id=${id}`);if(r.ok)l=await r.json()}catch(e){}
+  const el=$("#rvList");if(!el)return;
+  if(!l.length){el.innerHTML=`<p style="color:var(--sub)">${t("rev_none")}</p>`;return}
+  const avg=l.reduce((s,r)=>s+r.rating,0)/l.length;
+  el.innerHTML=`<div class="rsum"><div class="n">${avg.toFixed(1)}</div><div><b style="color:var(--y);font-size:20px;letter-spacing:1px">${stars(avg)}</b><div style="color:var(--sub);font-size:14px">${l.length} ${t("reviews")}</div></div></div>`+
+    l.map(r=>`<div class="rv"><div class="hd"><span><strong>${esc(r.name)}</strong> · <b>${stars(r.rating)}</b></span><small style="color:var(--sub)">${esc((r.created_at||"").slice(0,10))}</small></div>${r.text?`<p>${esc(r.text)}</p>`:""}</div>`).join("");
+}
+document.addEventListener("click",e=>{
+  if(!$("#p-item")||!$("#p-item").classList.contains("on"))return;
+  const g=e.target.closest("[data-gi]");if(g){ITEM.img=+g.dataset.gi;renderItem(ITEM.type,ITEM.id);return}
+  const qd=e.target.closest("[data-qd]");if(qd){ITEM.q=Math.max(1,Math.min(99,ITEM.q+ +qd.dataset.qd));renderItem(ITEM.type,ITEM.id);return}
+  const qp=e.target.closest("[data-qp]");if(qp){ITEM.q=+qp.dataset.qp;renderItem(ITEM.type,ITEM.id);return}
+  const ps=e.target.closest("[data-ps]");if(ps){ITEM.s=ps.dataset.ps;renderItem(ITEM.type,ITEM.id);return}
+  const st=e.target.closest("[data-st]");if(st){ITEM.star=+st.dataset.st;$$("#stp button").forEach(b=>b.classList.toggle("on",+b.dataset.st<=ITEM.star));return}
+  const go=e.target.closest("[data-goto]");if(go){e.preventDefault();const el=document.getElementById(go.dataset.goto);if(el)el.scrollIntoView({behavior:"smooth"})}
+});
+const T3={
+fa:{oils_shop:"روغن‌های موجود در فروشگاه",u_tire:"حلقه",u_can:"عدد",qty_l:"تعداد",pattern_l:"مدل آج",size_l:"سایز",load_idx:"شاخص بار",speed_idx:"شاخص سرعت",per_tire:"برای هر حلقه",runflat:"ران‌فلت (Run-flat)",sku_l:"کد کالا",oil_grade_l:"گرید",spec_l:"استانداردها و تأییدیه‌ها",type_l:"نوع روغن",pack_l:"حجم بسته",desc_h:"توضیحات",same_size:"تایرهای دیگر در همین سایز",rev_h:"نظرات مشتریان",rev_none:"هنوز نظری ثبت نشده؛ اولین نفر باشید!",rev_first:"اولین نظر را بنویسید",rev_write:"نظر خود را بنویسید",rev_text:"نظر شما",rev_send:"ارسال نظر",rev_ok:"ممنون! نظر شما ثبت شد و پس از تأیید نمایش داده می‌شود.",rev_pick:"لطفاً امتیاز (ستاره) را انتخاب کنید.",rev_limit:"تعداد نظرات زیاد است؛ کمی بعد دوباره امتحان کنید.",back:"بازگشت"},
+ar:{oils_shop:"الزيوت المتوفرة في المتجر",u_tire:"إطار",u_can:"عبوة",qty_l:"الكمية",pattern_l:"النقشة",size_l:"المقاس",load_idx:"مؤشر الحمولة",speed_idx:"مؤشر السرعة",per_tire:"لكل إطار",runflat:"رن فلات (Run-flat)",sku_l:"رمز المنتج",oil_grade_l:"اللزوجة",spec_l:"المواصفات والاعتمادات",type_l:"نوع الزيت",pack_l:"حجم العبوة",desc_h:"الوصف",same_size:"إطارات أخرى بنفس المقاس",rev_h:"آراء العملاء",rev_none:"لا توجد آراء بعد؛ كن أول من يكتب!",rev_first:"اكتب أول تقييم",rev_write:"اكتب رأيك",rev_text:"رأيك",rev_send:"إرسال التقييم",rev_ok:"شكراً! تم استلام رأيك وسيظهر بعد المراجعة.",rev_pick:"يرجى اختيار التقييم (النجوم).",rev_limit:"محاولات كثيرة؛ حاول لاحقاً.",back:"رجوع"},
+en:{oils_shop:"Oils in stock",u_tire:"tire(s)",u_can:"pcs",qty_l:"Quantity",pattern_l:"Pattern",size_l:"Size",load_idx:"Load index",speed_idx:"Speed rating",per_tire:"per tire",runflat:"Run-flat",sku_l:"SKU",oil_grade_l:"Grade",spec_l:"Specs & approvals",type_l:"Oil type",pack_l:"Pack size",desc_h:"Description",same_size:"Other tires in this size",rev_h:"Customer reviews",rev_none:"No reviews yet — be the first!",rev_first:"Write the first review",rev_write:"Write a review",rev_text:"Your review",rev_send:"Submit review",rev_ok:"Thanks! Your review will appear after approval.",rev_pick:"Please choose a star rating.",rev_limit:"Too many reviews — please try later.",back:"Back"}};
+Object.keys(T3).forEach(l=>Object.assign(T[l],T3[l]));
+
 /* router */
 function route(){
   const h=location.hash||"#/";
   let p="home",m;
   if(h.startsWith("#/tires"))p="tires";else if(h.startsWith("#/car"))p="car";else if(h.startsWith("#/booking"))p="booking";else if(h.startsWith("#/account"))p="account";else if(h.startsWith("#/oils"))p="oils";else if(h.startsWith("#/brands"))p="brands";else if(h.startsWith("#/services"))p="services";else if(h.startsWith("#/news"))p="news";else if(h.startsWith("#/contact"))p="contact";
   else if(m=h.match(/^#\/article\/(.+)$/)){p="article";renderPost(m[1])}
+  else if(m=h.match(/^#\/(tire|oil)\/(\d+)/)){p="item";renderItem(m[1],+m[2])}
   $$(".page").forEach(e=>e.classList.toggle("on",e.id==="p-"+p));
-  $$("nav.main a").forEach(a=>a.classList.toggle("on",a.dataset.r===p||(p==="article"&&a.dataset.r==="news")));
+  $$("nav.main a").forEach(a=>a.classList.toggle("on",a.dataset.r===p||(p==="article"&&a.dataset.r==="news")||(p==="item"&&a.dataset.r===(location.hash.startsWith("#/oil/")?"oils":"tires"))));
   $("#nav").classList.remove("open");
   if(p==="account")renderAccount();if(p==="car")initCar();if(p==="booking")initBooking();
-  if(p!=="article")applyTitle();
+  if(p!=="article"&&p!=="item")applyTitle();
   window.scrollTo(0,0);
 }
 function applyTitle(){document.title = L==="en"?"Zad CSC | Tires, Wheels & Tire-Industry News — Salalah":L==="ar"?"زاد CSC | إطارات وجنوط وأخبار صناعة الإطارات — صلالة":"Zad CSC | تایر، رینگ و اخبار صنعت لاستیک — صلاله"}
@@ -1140,8 +1297,9 @@ function applyTitle(){document.title = L==="en"?"Zad CSC | Tires, Wheels & Tire-
 /* events */
 document.addEventListener("click",e=>{
   const a=e.target.closest("[data-add]");if(a){addCart(a.dataset.add);return}
-  const o=e.target.closest("[data-open]");if(o){openTire(o.dataset.open);return}
-  const q=e.target.closest("[data-q]");if(q){const c=cart.find(z=>z.id==q.dataset.q);c.q+=+q.dataset.d;saveCart();return}
+  const o=e.target.closest("[data-open]");if(o){location.hash="#/tire/"+o.dataset.open;return}
+  const oo=e.target.closest("[data-open-oil]");if(oo){location.hash="#/oil/"+oo.dataset.openOil;return}
+  const q=e.target.closest("[data-q]");if(q){const c=cart[+q.dataset.q];if(c){c.q+=+q.dataset.d;saveCart()}return}
   const sz=e.target.closest("[data-size]");if(sz){const m=sz.dataset.size.match(/^(\d+)\/(\d+)(R\d+)$/);if(m){["#fq","#fb","#fv"].forEach(s=>$(s).value="");setFilterSize(m[1],m[2],m[3]);renderTires();window.scrollTo({top:0,behavior:"smooth"})}return}
   const br=e.target.closest("[data-brand]");if(br){["#fq","#fw","#fp","#fr","#fv"].forEach(s=>$(s).value="");buildSelects();$("#fb").value=br.dataset.brand;location.hash="#/tires";setTimeout(renderTires,0);return}
   if(e.target.id==="mx")closeAll();

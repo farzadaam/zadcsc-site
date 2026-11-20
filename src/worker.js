@@ -252,6 +252,21 @@ async function api(req, env, url) {
     const make = str(url.searchParams.get("make"), 60), model = str(url.searchParams.get("model"), 60), year = int(url.searchParams.get("year"));
     return json(await findFitments(env, make, model, year));
   }
+  if (p === "/api/oils" && M === "GET") {
+    const { results } = await DB.prepare("SELECT * FROM oils ORDER BY id DESC").all();
+    return json(results.map(o => ({ ...o, images: safeJSON(o.images, []) })));
+  }
+  const mm = p.match(/^\/api\/media\/(\d+)$/);
+  if (mm && M === "GET") {
+    const r = await DB.prepare("SELECT mime, data FROM media WHERE id=?").bind(+mm[1]).first();
+    if (!r) return bad("not_found", 404);
+    return new Response(new Uint8Array(r.data), { headers: { "content-type": r.mime, "cache-control": "public, max-age=31536000, immutable" } });
+  }
+  if (p === "/api/reviews" && M === "GET") {
+    const type = url.searchParams.get("type") === "oil" ? "oil" : "tire", id = int(url.searchParams.get("id"));
+    const { results } = await DB.prepare("SELECT id, name, rating, text, created_at FROM reviews WHERE item_type=? AND item_id=? AND status='approved' ORDER BY id DESC LIMIT 100").bind(type, id).all();
+    return json(results);
+  }
   if (p === "/api/insta" && M === "GET") {
     const { results } = await DB.prepare("SELECT id, url FROM insta ORDER BY id DESC LIMIT 6").all();
     return json(results, 200, { "cache-control": "public, max-age=300" });
@@ -318,6 +333,22 @@ async function api(req, env, url) {
   /* public booking & order (login optional) */
   const me = await currentUser(req, env);
 
+  if (p === "/api/reviews" && M === "POST") {
+    const b = await body(req);
+    const type = b.type === "oil" ? "oil" : "tire", id = int(b.id), rating = int(b.rating);
+    const name = str(b.name, 60) || me?.name, text = str(b.text, 1500);
+    if (!id || !rating || rating < 1 || rating > 5) return bad("invalid_review");
+    if (!name) return bad("name_required");
+    const exists = await DB.prepare(`SELECT id FROM ${type === "oil" ? "oils" : "tires"} WHERE id=?`).bind(id).first();
+    if (!exists) return bad("not_found", 404);
+    const ip = req.headers.get("cf-connecting-ip") || "x";
+    const rk = "rv:" + ip;
+    const rl = await DB.prepare("SELECT v FROM meta WHERE k=? AND at>datetime('now','-1 hour')").bind(rk).first();
+    if (rl && +rl.v >= 5) return bad("too_many_attempts", 429);
+    await DB.prepare("INSERT INTO meta (k,v,at) VALUES (?,1,datetime('now')) ON CONFLICT(k) DO UPDATE SET v=CASE WHEN at>datetime('now','-1 hour') THEN v+1 ELSE 1 END, at=datetime('now')").bind(rk).run();
+    await DB.prepare("INSERT INTO reviews (item_type,item_id,user_id,name,rating,text) VALUES (?,?,?,?,?,?)").bind(type, id, me?.id || null, name, rating, text).run();
+    return json({ ok: true });
+  }
   if (p === "/api/bookings" && M === "POST") {
     const b = await body(req);
     const name = str(b.name, 80) || me?.name, phone = normPhone(b.phone) || me?.phone;
@@ -396,10 +427,17 @@ const TABLES = {
   orders: ["user_id", "name", "phone", "items", "total", "status", "note"],
   bookings: ["user_id", "name", "phone", "vehicle", "service", "date", "time", "status", "note"],
   users: ["phone", "name", "email", "role", "notes"],
-  insta: ["url"]
+  insta: ["url"],
+  oils: ["brand", "name", "grade", "spec", "type", "sizes", "sku", "images", "desc_fa", "desc_ar", "desc_en"],
+  reviews: ["status", "name", "rating", "text"]
 };
 const NUMERIC = new Set(["rating", "reviews", "year_from", "year_to", "oil_capacity_l", "user_id", "vehicle_id", "year", "mileage", "price", "next_due_km", "total"]);
 const JSONCOLS = new Set(["vehicles", "images", "tire_sizes", "items"]);
+async function syncRating(DB, type, id) {
+  const t = type === "oil" ? "oils" : "tires";
+  const s = await DB.prepare("SELECT COUNT(*) n, AVG(rating) a FROM reviews WHERE item_type=? AND item_id=? AND status='approved'").bind(type, id).first();
+  await DB.prepare(`UPDATE ${t} SET reviews=?, rating=? WHERE id=?`).bind(s.n, s.n ? Math.round(s.a * 10) / 10 : (type === "oil" ? 0 : 5), id).run();
+}
 
 function cleanRow(table, b) {
   const row = {};
@@ -411,6 +449,7 @@ function cleanRow(table, b) {
     else v = str(v, 2000);
     if (c === "phone" && v != null) v = normPhone(v);
     if (c === "role" && v && !["customer", "admin"].includes(v)) v = "customer";
+    if (table === "reviews" && c === "status" && !["pending", "approved"].includes(v)) v = "pending";
     if (table === "insta" && c === "url") {
       const m = String(v || "").match(/instagram\.com\/(?:[\w.]+\/)?(p|reel|tv)\/([\w-]+)/i);
       v = m ? `https://www.instagram.com/${m[1].toLowerCase()}/${m[2]}/` : null;
@@ -464,6 +503,14 @@ async function admin(req, env, url, p, M, me) {
     ]);
     return json({ user, vehicles: vehicles.results, services: services.results, orders: orders.results.map(o => ({ ...o, items: safeJSON(o.items, []) })), bookings: bookings.results });
   }
+  if (p === "/api/admin/upload" && M === "POST") {
+    const mime = (req.headers.get("content-type") || "").split(";")[0];
+    if (!/^image\/(jpeg|png|webp)$/.test(mime)) return bad("image_only");
+    const buf = await req.arrayBuffer();
+    if (!buf.byteLength || buf.byteLength > 1500000) return bad("image_too_large");
+    const r = await DB.prepare("INSERT INTO media (mime, data) VALUES (?, ?)").bind(mime, buf).run();
+    return json({ ok: true, url: "/api/media/" + r.meta.last_row_id });
+  }
   const pm = p.match(/^\/api\/admin\/customers\/(\d+)\/password$/);
   if (pm && M === "POST") {
     const pw = String((await body(req)).password || "");
@@ -486,7 +533,7 @@ async function admin(req, env, url, p, M, me) {
   }
 
   /* generic CRUD: /api/admin/:table and /api/admin/:table/:id */
-  const g = p.match(/^\/api\/admin\/(tires|fitments|vehicles|services|orders|bookings|users|insta)(?:\/(\d+))?$/);
+  const g = p.match(/^\/api\/admin\/(tires|fitments|vehicles|services|orders|bookings|users|insta|oils|reviews)(?:\/(\d+))?$/);
   if (g) {
     const [, table, idS] = g;
     const id = idS ? +idS : null;
@@ -515,6 +562,7 @@ async function admin(req, env, url, p, M, me) {
       const cols = Object.keys(row);
       if (!cols.length) return bad("empty");
       await DB.prepare(`UPDATE ${table} SET ${cols.map(c => c + "=?").join(",")} WHERE id=?`).bind(...cols.map(c => row[c]), id).run();
+      if (table === "reviews") { const rv = await DB.prepare("SELECT item_type, item_id FROM reviews WHERE id=?").bind(id).first(); if (rv) await syncRating(DB, rv.item_type, rv.item_id); }
       return json({ ok: true });
     }
     if (M === "DELETE" && id) {
@@ -529,7 +577,9 @@ async function admin(req, env, url, p, M, me) {
           DB.prepare("DELETE FROM users WHERE id=?").bind(id)
         ]);
       } else {
+        const rv = table === "reviews" ? await DB.prepare("SELECT item_type, item_id FROM reviews WHERE id=?").bind(id).first() : null;
         await DB.prepare(`DELETE FROM ${table} WHERE id=?`).bind(id).run();
+        if (rv) await syncRating(DB, rv.item_type, rv.item_id);
       }
       return json({ ok: true });
     }

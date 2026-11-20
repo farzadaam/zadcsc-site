@@ -95,3 +95,17 @@ CREATE INDEX IF NOT EXISTS idx_fitments_mm ON fitments(make, model);
 CREATE TABLE IF NOT EXISTS meta (k TEXT PRIMARY KEY, v TEXT, at TEXT DEFAULT (datetime('now')));
 
 CREATE TABLE IF NOT EXISTS insta (id INTEGER PRIMARY KEY AUTOINCREMENT, url TEXT NOT NULL, created_at TEXT DEFAULT (datetime('now')));
+
+CREATE TABLE IF NOT EXISTS oils (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  brand TEXT NOT NULL, name TEXT NOT NULL, grade TEXT, spec TEXT, type TEXT, sizes TEXT, sku TEXT,
+  images TEXT DEFAULT '[]', desc_fa TEXT, desc_ar TEXT, desc_en TEXT,
+  rating REAL DEFAULT 0, reviews INTEGER DEFAULT 0, created_at TEXT DEFAULT (datetime('now'))
+);
+CREATE TABLE IF NOT EXISTS reviews (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  item_type TEXT NOT NULL, item_id INTEGER NOT NULL, user_id INTEGER, name TEXT NOT NULL,
+  rating INTEGER NOT NULL, text TEXT, status TEXT DEFAULT 'pending', created_at TEXT DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_reviews_item ON reviews(item_type, item_id, status);
+CREATE TABLE IF NOT EXISTS media (id INTEGER PRIMARY KEY AUTOINCREMENT, mime TEXT NOT NULL, data BLOB NOT NULL, created_at TEXT DEFAULT (datetime('now')));

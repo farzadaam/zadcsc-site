@@ -63,6 +63,8 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
   <button data-tab="orders">سفارش‌ها</button>
   <button data-tab="tires">تایرها</button>
   <button data-tab="fitments">مشخصات خودروها</button>
+  <button data-tab="oils">روغن‌ها</button>
+  <button data-tab="reviews">نظرات</button>
   <button data-tab="insta">اینستاگرام</button>
 </nav>
 <main id="main"></main>
@@ -95,11 +97,12 @@ function openDlg(title,html,onSubmit){
   const d=$("#dlg");
   d.innerHTML=`<form method="dialog" id="dlgF"><h3 style="margin-bottom:12px">${title}</h3>${html}<div class="row" style="margin-top:14px"><button class="btn y" value="ok">ذخیره</button><button class="btn" value="cancel" formnovalidate>انصراف</button></div></form>`;
   d.showModal();
+  const im=d.querySelector('[name=images]');if(im)addUploader(im);
   $("#dlgF").onsubmit=async e=>{if(e.submitter&&e.submitter.value==="cancel")return;e.preventDefault();try{await onSubmit(form(e.target));d.close()}catch(er){}};
 }
 
 /* ---------- tabs ---------- */
-const TABS={dash,customers,bookings,orders,tires,fitments,insta};
+const TABS={dash,customers,bookings,orders,tires,fitments,oils,reviews,insta};
 let cur="dash";
 document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{cur=b.dataset.tab;document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("on",x===b));TABS[cur]()});
 
@@ -166,13 +169,13 @@ async function bookings(){const l=await api("/bookings");$("#main").innerHTML=`<
 async function orders(){const l=await api("/orders");$("#main").innerHTML=`<div class="panel"><h3>سفارش‌ها (${l.length})</h3>${l.length?ordersTable(l):`<p class="muted">سفارشی نیست.</p>`}</div>`;bindStatus()}
 
 /* ---------- tires & fitments ---------- */
-const TIRE_F=[["brand","برند"],["pattern","مدل آج"],["width","پهنا","number"],["profile","ارتفاع","number"],["rim","رینگ (مثلاً R21)"],["sizeText","عنوان کامل سایز (مثلاً 275/50R21 113V XL)"],["dotYear","سال تولید DOT"],["warranty","ضمانت"],["utqg","بار / تأییدیه"],["oeType","دسته","select",[["Passenger / SUV","سواری و شاسی‌بلند"],["Light truck / Van","وانت و ون"],["Off-road","آفرود"],["Truck & Bus","کامیون و اتوبوس"],["OTR / Industrial","صنعتی و معدنی"]]],["sku","کد کالا (SKU)"],["rating","امتیاز","number"],["reviews","تعداد نظر","number"],["vehicles","خودروهای مناسب (JSON، مثلاً [\"Lexus LX600\"])","textarea"],["images","آدرس عکس‌ها (JSON)","textarea"],["desc_fa","توضیح فارسی","textarea"],["desc_ar","توضیح عربی","textarea"],["desc_en","توضیح انگلیسی","textarea"]];
+const TIRE_F=[["brand","برند"],["pattern","مدل آج"],["width","پهنا","number"],["profile","ارتفاع","number"],["rim","رینگ (مثلاً R21)"],["sizeText","عنوان کامل سایز (مثلاً 275/50R21 113V XL)"],["dotYear","سال تولید DOT"],["warranty","ضمانت"],["utqg","بار / تأییدیه"],["oeType","دسته","select",[["Passenger / SUV","سواری و شاسی‌بلند"],["Light truck / Van","وانت و ون"],["Off-road","آفرود"],["Truck & Bus","کامیون و اتوبوس"],["OTR / Industrial","صنعتی و معدنی"]]],["sku","کد کالا (SKU)"],["rating","امتیاز","number"],["reviews","تعداد نظر","number"],["vehicles","خودروهای مناسب (JSON، مثلاً [\"Lexus LX600\"])","textarea"],["images","عکس‌ها (با دکمه‌ی آپلود زیر اضافه کنید)","textarea"],["desc_fa","توضیح فارسی","textarea"],["desc_ar","توضیح عربی","textarea"],["desc_en","توضیح انگلیسی","textarea"]];
 const FIT_F=[["make","برند"],["model","مدل"],["year_from","از سال","number"],["year_to","تا سال","number"],["engine","موتور"],["oil_grade","گرید روغن"],["oil_capacity_l","حجم روغن (لیتر)","number"],["tire_sizes","سایز تایرها (JSON، مثلاً [\"265/65R18\"])","textarea"],["notes","یادداشت"]];
 async function tires(){
   const all=await api("/tires"),tq=(window.__tq||"").toLowerCase();
   const l=tq?all.filter(x=>[x.brand,x.pattern,x.sizeText,x.sku].join(" ").toLowerCase().includes(tq)):all;
   $("#main").innerHTML=`<div class="panel"><h3><span>تایرهای سایت (${l.length})</span><span class="row"><input class="search" id="tq" placeholder="جستجو: سایز، برند، کد کالا" value="${esc(window.__tq||"")}"><button class="btn y" id="addT">+ تایر جدید</button></span></h3>
-  <table><tr><th>#</th><th>کد کالا</th><th>برند</th><th>مدل</th><th>سایز</th><th>DOT</th><th>ضمانت</th><th></th></tr>${l.map(x=>`<tr><td>${x.id}</td><td class="ltr">${esc(x.sku||"")}</td><td>${esc(x.brand)}</td><td>${esc(x.pattern||"")}</td><td class="ltr">${esc(x.profile&&x.width?x.width+"/"+x.profile+x.rim:(x.sizeText||""))}</td><td>${esc(x.dotYear||"")}</td><td>${esc(x.warranty||"")}</td><td><button class="btn s" data-et="${x.id}">ویرایش</button> <button class="btn r s" data-dt="${x.id}">حذف</button></td></tr>`).join("")}</table></div>`;
+  <table><tr><th>#</th><th>کد کالا</th><th>برند</th><th>مدل</th><th>سایز</th><th>DOT</th><th>ضمانت</th><th></th></tr>${l.map(x=>`<tr><td>${x.id}</td><td class="ltr">${esc(x.sku||"")}</td><td>${esc(x.brand)}</td><td>${esc(x.pattern||"")}</td><td class="ltr">${esc(x.profile&&x.width?x.width+"/"+x.profile+x.rim:(x.sizeText||""))}</td><td>${esc(x.dotYear||"")}</td><td>${esc(x.warranty||"")}</td><td><a class="btn s" target="_blank" href="/#/tire/${x.id}">مشاهده</a> <button class="btn s" data-et="${x.id}">ویرایش</button> <button class="btn r s" data-dt="${x.id}">حذف</button></td></tr>`).join("")}</table></div>`;
   let tto;$("#tq").oninput=e=>{clearTimeout(tto);tto=setTimeout(()=>{window.__tq=e.target.value;tires().then(()=>{const i=$("#tq");i.focus();i.setSelectionRange(i.value.length,i.value.length)})},350)};
   $("#addT").onclick=()=>openDlg("تایر جدید",fields(TIRE_F,{system:"metric",rating:5,reviews:0,vehicles:"[]",images:"[]"}),async b=>{await api("/tires",{method:"POST",body:b});toast("اضافه شد — روی سایت هم نمایش داده می‌شود");tires()});
   document.querySelectorAll("[data-et]").forEach(x=>x.onclick=()=>{const v=l.find(y=>y.id==x.dataset.et);openDlg("ویرایش تایر",fields(TIRE_F,v),async b=>{await api("/tires/"+v.id,{method:"PUT",body:b});tires()})});
@@ -186,6 +189,58 @@ async function fitments(){
   $("#addF").onclick=()=>openDlg("خودروی جدید",fields(FIT_F,{tire_sizes:"[]"}),async b=>{await api("/fitments",{method:"POST",body:b});fitments()});
   document.querySelectorAll("[data-ef]").forEach(x=>x.onclick=()=>{const v=l.find(y=>y.id==x.dataset.ef);openDlg("ویرایش",fields(FIT_F,v),async b=>{await api("/fitments/"+v.id,{method:"PUT",body:b});fitments()})});
   document.querySelectorAll("[data-df]").forEach(x=>x.onclick=async()=>{if(confirm("حذف شود؟")){await api("/fitments/"+x.dataset.df,{method:"DELETE"});fitments()}});
+}
+
+/* ---------- image upload (resized in browser, stored on site) ---------- */
+function addUploader(ta){
+  const box=document.createElement("div");box.style.cssText="grid-column:1/-1;margin-top:-4px";
+  box.innerHTML=`<div id="upPrev" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px"></div><label class="btn s" style="cursor:pointer">📷 آپلود عکس<input type="file" accept="image/*" multiple hidden></label> <span class="muted" id="upSt"></span>`;
+  ta.closest(".fld").after(box);
+  const list=()=>{try{const v=JSON.parse(ta.value||"[]");return Array.isArray(v)?v:[]}catch(e){return []}};
+  const draw=()=>{box.querySelector("#upPrev").innerHTML=list().map((u,i)=>`<div style="position:relative"><img src="${esc(u)}" style="width:72px;height:72px;object-fit:cover;border-radius:8px;border:1px solid #ddd"><button type="button" data-rm="${i}" style="position:absolute;top:-6px;left:-6px;border:0;border-radius:50%;width:22px;height:22px;background:#c00;color:#fff;cursor:pointer">×</button>${i===0?'<small style="position:absolute;bottom:2px;right:4px;background:#000;color:#fff;font-size:10px;padding:0 4px;border-radius:4px">اصلی</small>':""}</div>`).join("");
+    box.querySelectorAll("[data-rm]").forEach(b=>b.onclick=()=>{const l=list();l.splice(+b.dataset.rm,1);ta.value=JSON.stringify(l);draw()})};
+  ta.addEventListener("input",draw);draw();
+  box.querySelector("input").onchange=async e=>{
+    const st=box.querySelector("#upSt");
+    for(const f of e.target.files){
+      st.textContent="در حال آپلود "+f.name+"…";
+      try{
+        const bmp=await createImageBitmap(f);const s=Math.min(1,1400/Math.max(bmp.width,bmp.height));
+        const c=document.createElement("canvas");c.width=Math.round(bmp.width*s);c.height=Math.round(bmp.height*s);
+        const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(bmp,0,0,c.width,c.height);
+        let q=.85,blob;do{blob=await new Promise(r=>c.toBlob(r,"image/jpeg",q));q-=.1}while(blob.size>1400000&&q>.3);
+        const r=await fetch("/api/admin/upload",{method:"POST",credentials:"same-origin",headers:{"content-type":"image/jpeg"},body:blob});
+        const j=await r.json();if(!r.ok)throw new Error(j.error);
+        const l=list();l.push(j.url);ta.value=JSON.stringify(l);draw();st.textContent="آپلود شد ✓";
+      }catch(er){st.textContent="خطا در آپلود: "+(er.message||"")}
+    }
+    e.target.value="";
+  };
+}
+
+/* ---------- oils ---------- */
+const OIL_F=[["brand","برند"],["name","نام محصول (مثلاً Mobil 1 ESP)"],["grade","گرید (مثلاً 5W-30)"],["spec","استانداردها (مثلاً API SP, ACEA C3, MB 229.51)"],["type","نوع","select",[["Full synthetic","تمام‌سنتتیک"],["Synthetic blend","نیمه‌سنتتیک"],["Mineral","معدنی"],["Diesel","دیزل"],["Gear / ATF","گیربکس / ATF"]]],["sizes","حجم‌های بسته (با کاما، مثلاً 1L, 4L, 5L)"],["sku","کد کالا"],["images","عکس‌ها (با دکمه‌ی آپلود زیر اضافه کنید)","textarea"],["desc_fa","توضیح فارسی","textarea"],["desc_ar","توضیح عربی","textarea"],["desc_en","توضیح انگلیسی","textarea"]];
+async function oils(){
+  const l=await api("/oils");
+  $("#main").innerHTML=`<div class="panel"><h3><span>روغن‌های فروشگاه (${l.length})</span><button class="btn y" id="addO">+ روغن جدید</button></h3>
+  <p class="muted" style="margin-bottom:8px">هر روغنی اینجا اضافه شود، در صفحه‌ی «روغن‌ها» با صفحه‌ی جزئیات، عکس و نظرات نمایش داده می‌شود.</p>
+  <table><tr><th>#</th><th>عکس</th><th>برند</th><th>نام</th><th>گرید</th><th>حجم‌ها</th><th>امتیاز</th><th></th></tr>${l.map(x=>{let im=[];try{im=JSON.parse(x.images||"[]")}catch(e){}return `<tr><td>${x.id}</td><td>${im[0]?`<img src="${esc(im[0])}" style="width:40px;height:40px;object-fit:cover;border-radius:6px">`:""}</td><td>${esc(x.brand)}</td><td>${esc(x.name)}</td><td class="ltr">${esc(x.grade||"")}</td><td class="ltr">${esc(x.sizes||"")}</td><td>${x.reviews?x.rating+" ("+x.reviews+")":"—"}</td><td><a class="btn s" target="_blank" href="/#/oil/${x.id}">مشاهده</a> <button class="btn s" data-eo="${x.id}">ویرایش</button> <button class="btn r s" data-do="${x.id}">حذف</button></td></tr>`}).join("")}</table></div>`;
+  $("#addO").onclick=()=>openDlg("روغن جدید",fields(OIL_F,{images:"[]",type:"Full synthetic"}),async b=>{await api("/oils",{method:"POST",body:b});toast("اضافه شد");oils()});
+  document.querySelectorAll("[data-eo]").forEach(x=>x.onclick=()=>{const v=l.find(y=>y.id==x.dataset.eo);openDlg("ویرایش روغن",fields(OIL_F,v),async b=>{await api("/oils/"+v.id,{method:"PUT",body:b});oils()})});
+  document.querySelectorAll("[data-do]").forEach(x=>x.onclick=async()=>{if(confirm("این روغن از سایت حذف شود؟")){await api("/oils/"+x.dataset.do,{method:"DELETE"});oils()}});
+}
+
+/* ---------- reviews ---------- */
+async function reviews(){
+  const [l,tl,ol]=await Promise.all([api("/reviews"),api("/tires"),api("/oils")]);
+  const nm=r=>{const x=r.item_type==="oil"?ol.find(y=>y.id==r.item_id):tl.find(y=>y.id==r.item_id);return x?(r.item_type==="oil"?x.brand+" "+x.name:x.brand+" "+(x.pattern||"")+" "+(x.sizeText||"")):"#"+r.item_id};
+  const pend=l.filter(r=>r.status!=="approved").length;
+  $("#main").innerHTML=`<div class="panel"><h3><span>نظرات مشتریان — ${pend} در انتظار تأیید</span></h3>
+  <p class="muted" style="margin-bottom:8px">نظرها تا وقتی تأیید نکنید روی سایت نمایش داده نمی‌شوند. امتیاز محصول از روی نظرهای تأییدشده حساب می‌شود.</p>
+  <table><tr><th>محصول</th><th>نام</th><th>امتیاز</th><th>متن</th><th>تاریخ</th><th>وضعیت</th><th></th></tr>${l.map(r=>`<tr><td><a target="_blank" href="/#/${r.item_type}/${r.item_id}">${esc(nm(r))}</a></td><td>${esc(r.name)}</td><td style="color:#FF8000">${"★".repeat(r.rating)}</td><td style="max-width:320px">${esc(r.text||"")}</td><td>${esc((r.created_at||"").slice(0,10))}</td><td>${r.status==="approved"?"✅ تأیید شده":"⏳ در انتظار"}</td><td>${r.status!=="approved"?`<button class="btn y s" data-ar="${r.id}">تأیید</button> `:`<button class="btn s" data-hr="${r.id}">مخفی</button> `}<button class="btn r s" data-dr="${r.id}">حذف</button></td></tr>`).join("")||'<tr><td colspan="7" class="muted">هنوز نظری ثبت نشده.</td></tr>'}</table></div>`;
+  document.querySelectorAll("[data-ar]").forEach(x=>x.onclick=async()=>{await api("/reviews/"+x.dataset.ar,{method:"PUT",body:{status:"approved"}});reviews()});
+  document.querySelectorAll("[data-hr]").forEach(x=>x.onclick=async()=>{await api("/reviews/"+x.dataset.hr,{method:"PUT",body:{status:"pending"}});reviews()});
+  document.querySelectorAll("[data-dr]").forEach(x=>x.onclick=async()=>{if(confirm("نظر حذف شود؟")){await api("/reviews/"+x.dataset.dr,{method:"DELETE"});reviews()}});
 }
 
 /* ---------- instagram ---------- */
