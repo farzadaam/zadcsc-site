@@ -144,6 +144,27 @@ async function carModels(env, make) {
 }
 
 /* one-time import of the shop's tire list (public/data/tires.json) into D1 */
+async function ensureFitImport(env, origin) {
+  const KEY = "fitments_import_v2";
+  const lock = await env.DB.prepare("INSERT OR IGNORE INTO meta (k, v) VALUES (?, 'running')").bind(KEY).run();
+  if (lock.meta.changes !== 1) return;
+  try {
+    const res = await env.ASSETS.fetch(new Request(origin + "/data/fitments.json"));
+    const rows = await res.json();
+    const cols = ["make", "model", "year_from", "year_to", "engine", "oil_grade", "oil_capacity_l", "tire_sizes", "notes"];
+    const q = v => v == null ? "NULL" : typeof v === "number" ? String(v) : "'" + String(v).replace(/'/g, "''") + "'";
+    const stmts = [env.DB.prepare("DELETE FROM fitments WHERE id <= 43")];
+    for (let i = 0; i < rows.length; i += 100) {
+      const vals = rows.slice(i, i + 100).map(r => "(" + cols.map(c => q(r[c])).join(",") + ")");
+      stmts.push(env.DB.prepare(`INSERT INTO fitments (${cols.join(",")}) VALUES ${vals.join(",")}`));
+    }
+    stmts.push(env.DB.prepare("UPDATE meta SET v=?, at=datetime('now') WHERE k=?").bind(`done:${rows.length}`, KEY));
+    await env.DB.batch(stmts);
+  } catch (e) {
+    await env.DB.prepare("DELETE FROM meta WHERE k=?").bind(KEY).run();
+  }
+}
+
 async function ensureTireImport(env, origin) {
   const KEY = "tires_import_v1";
   const lock = await env.DB.prepare("INSERT OR IGNORE INTO meta (k, v) VALUES (?, 'running')").bind(KEY).run();
@@ -172,6 +193,7 @@ async function api(req, env, url) {
   /* public catalogue */
   if (p === "/api/tires" && M === "GET") {
     await ensureTireImport(env, url.origin);
+    await ensureFitImport(env, url.origin);
     const { results } = await DB.prepare("SELECT * FROM tires ORDER BY id DESC").all();
     return json(results.map(t => ({ ...t, vehicles: safeJSON(t.vehicles, []), images: safeJSON(t.images, []) })));
   }
@@ -190,6 +212,7 @@ async function api(req, env, url) {
     return json(await carModels(env, make), 200, { "cache-control": "public, max-age=3600" });
   }
   if (p === "/api/fitments" && M === "GET") {
+    await ensureFitImport(env, url.origin);
     const make = str(url.searchParams.get("make"), 60), model = str(url.searchParams.get("model"), 60), year = int(url.searchParams.get("year"));
     return json(await findFitments(env, make, model, year));
   }
