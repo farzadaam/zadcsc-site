@@ -6,7 +6,7 @@ vin_h:"جستجو با شماره شاسی (VIN)",vin_hint:"VIN عدد ۱۷ رق
 bk_p:"زمان مراجعه را انتخاب کنید؛ تأیید نوبت را در واتساپ دریافت می‌کنید.",f_name:"نام",f_service:"نوع خدمت",f_date:"تاریخ",f_time:"ساعت",f_note:"توضیحات",bk_send:"ثبت نوبت",bk_ok:"نوبت شما ثبت شد. به‌زودی برای تأیید تماس می‌گیریم.",
 acct_h:"حساب کاربری",acct_p:"سوابق خودرو، سرویس‌ها، سفارش‌ها و نوبت‌های شما.",login:"ورود",register:"ثبت‌نام",password:"رمز عبور",email:"ایمیل (اختیاری)",logout:"خروج",
 my_vehicles:"خودروهای من",add_vehicle:"افزودن خودرو",plate:"پلاک",mileage:"کیلومتر",svc_history:"سابقه‌ی سرویس",my_orders:"سفارش‌ها",my_bookings:"نوبت‌ها",reminders:"سرویس‌های پیش رو",
-due_on:"موعد",no_items:"موردی ثبت نشده است.",save:"ذخیره",profile:"اطلاعات من",new_password:"رمز جدید (اختیاری)",del:"حذف",
+due_on:"موعد",no_items:"موردی ثبت نشده است.",save:"ذخیره",my_profile:"اطلاعات من",new_password:"رمز جدید (اختیاری)",del:"حذف",
 car_found:"خودروی شناسایی‌شده",oil_rec:"روغن پیشنهادی",tire_rec:"سایز تایرهای کارخانه",no_fit:"اطلاعات این مدل هنوز در سیستم نیست؛ در واتساپ بپرسید تا راهنمایی‌تان کنیم.",
 ws_h:"سایز دقیق بر اساس تیپ خودرو",ws_stock:"کارخانه",ws_opt:"اختیاری",ws_src:"منبع سایزها",ig_h:"از اینستاگرام ما",ig_f:"دنبال کنید",bk_wa:"ارسال نوبت در واتساپ",e_too_many_attempts:"تلاش زیاد؛ ۱۵ دقیقه دیگر دوباره امتحان کنید.",forgot:"رمز را فراموش کرده‌اید؟ در واتساپ پیام دهید تا رمز جدید بگیرید.",fit_note:"اطلاعات مرجع است؛ لطفاً با دفترچه‌ی خودرو و برچسب در راننده تطبیق دهید.",engine:"موتور",body:"بدنه",show_tires:"نمایش تایرها",ask_oil:"استعلام روغن",
 date:"تاریخ",type:"نوع",details:"جزئیات",price:"مبلغ",status:"وضعیت",items:"اقلام",admin_link:"پنل مدیریت",select:"انتخاب کنید",
@@ -19,7 +19,7 @@ vin_h:"البحث برقم الشاصي (VIN)",vin_hint:"رقم VIN مكوّن �
 bk_p:"اختر موعد الزيارة؛ ستصلك رسالة التأكيد عبر واتساب.",f_name:"الاسم",f_service:"نوع الخدمة",f_date:"التاريخ",f_time:"الوقت",f_note:"ملاحظات",bk_send:"تأكيد الحجز",bk_ok:"تم تسجيل موعدك. سنتواصل معك قريباً للتأكيد.",
 acct_h:"حسابي",acct_p:"سجل سياراتك وخدماتك وطلباتك ومواعيدك.",login:"تسجيل الدخول",register:"إنشاء حساب",password:"كلمة المرور",email:"البريد (اختياري)",logout:"خروج",
 my_vehicles:"سياراتي",add_vehicle:"إضافة سيارة",plate:"اللوحة",mileage:"العداد (كم)",svc_history:"سجل الخدمات",my_orders:"الطلبات",my_bookings:"المواعيد",reminders:"الخدمات القادمة",
-due_on:"الموعد",no_items:"لا توجد بيانات.",save:"حفظ",profile:"بياناتي",new_password:"كلمة مرور جديدة (اختياري)",del:"حذف",
+due_on:"الموعد",no_items:"لا توجد بيانات.",save:"حفظ",my_profile:"بياناتي",new_password:"كلمة مرور جديدة (اختياري)",del:"حذف",
 car_found:"السيارة",oil_rec:"الزيت الموصى به",tire_rec:"مقاسات الإطارات الأصلية",no_fit:"بيانات هذا الطراز غير متوفرة بعد؛ اسألنا عبر واتساب.",
 ws_h:"المقاسات حسب فئة السيارة",ws_stock:"أصلي",ws_opt:"اختياري",ws_src:"مصدر المقاسات",ig_h:"من إنستغرامنا",ig_f:"تابعونا",bk_wa:"إرسال الحجز عبر واتساب",e_too_many_attempts:"محاولات كثيرة؛ حاول بعد ١٥ دقيقة.",forgot:"نسيت كلمة المرور؟ راسلنا على واتساب لتعيينها.",fit_note:"البيانات مرجعية؛ يرجى مطابقتها مع دليل السيارة وملصق باب السائق.",engine:"المحرك",body:"الهيكل",show_tires:"عرض الإطارات",ask_oil:"استفسر عن الزيت",
 date:"التاريخ",type:"النوع",details:"التفاصيل",price:"المبلغ",status:"الحالة",items:"العناصر",admin_link:"لوحة الإدارة",select:"اختر",
@@ -32,7 +32,7 @@ vin_h:"Search by VIN",vin_hint:"The 17-character VIN is on your registration car
 bk_p:"Pick a time to visit; you'll get the confirmation on WhatsApp.",f_name:"Name",f_service:"Service",f_date:"Date",f_time:"Time",f_note:"Notes",bk_send:"Book now",bk_ok:"Your booking is in. We'll contact you shortly to confirm.",
 acct_h:"My account",acct_p:"Your vehicles, service history, orders and bookings.",login:"Sign in",register:"Create account",password:"Password",email:"Email (optional)",logout:"Sign out",
 my_vehicles:"My vehicles",add_vehicle:"Add vehicle",plate:"Plate",mileage:"Mileage (km)",svc_history:"Service history",my_orders:"Orders",my_bookings:"Bookings",reminders:"Upcoming services",
-due_on:"Due",no_items:"Nothing yet.",save:"Save",profile:"My details",new_password:"New password (optional)",del:"Delete",
+due_on:"Due",no_items:"Nothing yet.",save:"Save",my_profile:"My details",new_password:"New password (optional)",del:"Delete",
 car_found:"Vehicle",oil_rec:"Recommended oil",tire_rec:"Factory tire sizes",no_fit:"We don't have this model on file yet — ask us on WhatsApp.",
 ws_h:"Exact sizes by trim",ws_stock:"OE",ws_opt:"Option",ws_src:"Sizes source",ig_h:"From our Instagram",ig_f:"Follow us",bk_wa:"Send booking on WhatsApp",e_too_many_attempts:"Too many attempts — try again in 15 minutes.",forgot:"Forgot your password? Message us on WhatsApp to reset it.",fit_note:"Reference data — please check against your owner's manual and door-jamb sticker.",engine:"Engine",body:"Body",show_tires:"Show tires",ask_oil:"Ask about oil",
 date:"Date",type:"Type",details:"Details",price:"Amount",status:"Status",items:"Items",admin_link:"Admin panel",select:"Select",
@@ -82,7 +82,7 @@ window.renderAccount=async function(){
   <div class="box2"><h3>${t("svc_history")}</h3>${ME.services.length?`<table class="lst"><tr><th>${t("date")}</th><th>${t("vehicle")}</th><th>${t("type")}</th><th>${t("mileage")}</th><th>${t("details")}</th></tr>${ME.services.map(s=>`<tr><td>${esc(fmtDate(s.date))}</td><td>${esc(vname(vmap[s.vehicle_id]))}</td><td>${esc(t("svc_"+s.type)||s.type)}</td><td>${s.mileage?s.mileage.toLocaleString():""}</td><td>${esc(s.details||"")}</td></tr>`).join("")}</table>`:`<p class="empty2">${t("no_items")}</p>`}</div>
   <div class="box2"><h3>${t("my_orders")}</h3>${ME.orders.length?`<table class="lst"><tr><th>#</th><th>${t("date")}</th><th>${t("items")}</th><th>${t("status")}</th></tr>${ME.orders.map(o=>`<tr><td>${o.id}</td><td>${esc(fmtDate(o.created_at))}</td><td style="direction:ltr;text-align:start">${o.items.map(i=>esc(`${i.name} ${i.size} ×${i.qty}`)).join("<br>")}</td><td>${pill(o.status)}</td></tr>`).join("")}</table>`:`<p class="empty2">${t("no_items")}</p>`}</div>
   <div class="box2"><h3>${t("my_bookings")}</h3>${ME.bookings.length?`<table class="lst"><tr><th>${t("date")}</th><th>${t("f_service")}</th><th>${t("vehicle")}</th><th>${t("status")}</th></tr>${ME.bookings.map(b=>`<tr><td>${esc(fmtDate(b.date))} ${esc(b.time)}</td><td>${esc(t("svc_"+b.service)||b.service)}</td><td>${esc(b.vehicle||"")}</td><td>${pill(b.status)}</td></tr>`).join("")}</table>`:`<p class="empty2">${t("no_items")}</p>`}</div>
-  <form class="box2" id="profForm"><h3>${t("profile")}</h3><div class="fg2">
+  <form class="box2" id="profForm"><h3>${t("my_profile")}</h3><div class="fg2">
     <div class="fld"><label>${t("f_name")}</label><input name="name" value="${esc(u.name)}"></div>
     <div class="fld"><label>${t("email")}</label><input name="email" type="email" class="ltrin" value="${esc(u.email||"")}"></div>
     <div class="fld"><label>${t("new_password")}</label><input name="new_password" type="password" autocomplete="new-password"></div>

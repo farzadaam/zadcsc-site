@@ -5,16 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zad CSC | تایر، رینگ و مرجع فنی لاستیک در صلاله</title>
 <meta name="description" content="زاد CSC صلاله - فروش تایرهای اصلی با ضمانت رسمی، روغن و روانکار، و اخبار و مقالات فنی صنعت لاستیک.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='46' fill='%23111'/%3E%3Ccircle cx='50' cy='50' r='24' fill='%23F5C400'/%3E%3Ccircle cx='50' cy='50' r='8' fill='%23111'/%3E%3C/svg%3E">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="canonical" href="https://zadcsc.com/">
-<meta name="theme-color" content="#111111">
+<meta name="theme-color" content="#000000">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Zad CSC">
 <meta property="og:url" content="https://zadcsc.com/">
 <meta property="og:title" content="Zad CSC — تایر، روغن و سرویس خودرو در صلاله | إطارات وزيوت في صلالة">
 <meta property="og:description" content="تایرهای اصلی با ضمانت، روغن موتور، جستجوی سایز تایر و روغن با VIN، رزرو آنلاین نوبت. صنعیه‌ی صحلنوت، صلاله.">
-<meta name="twitter:card" content="summary">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"AutoPartsStore","name":"Zad CSC","alternateName":"زاد","url":"https://zadcsc.com/","telephone":"+96896569646","priceRange":"$$",
+<meta property="og:image" content="https://zadcsc.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"AutoPartsStore","name":"Zad CSC","alternateName":"زاد","url":"https://zadcsc.com/","logo":"https://zadcsc.com/icon-512.png","image":"https://zadcsc.com/og-image.png","telephone":"+96896569646","priceRange":"$$",
 "address":{"@type":"PostalAddress","streetAddress":"Sahalnoot Industrial Area","addressLocality":"Salalah","addressRegion":"Dhofar","addressCountry":"OM"},
 "geo":{"@type":"GeoCoordinates","latitude":17.082458,"longitude":54.1914133},
 "hasMap":"https://www.google.com/maps/place/?q=place_id:ChIJG5WAJODn0z0R6MNkwa-qSXg","sameAs":["https://instagram.com/zad_tires"],
@@ -24,7 +28,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --y:#FFC400; --y2:#FFD84D; --ink:#0E0E0E; --ink2:#1A1A1A; --ink3:#262626;
+  --y:#FF8000; --y2:#FF9A33; --ink:#0E0E0E; --ink2:#1A1A1A; --ink3:#262626;
   --line:#2E2E2E; --mut:#A3A3A3; --bg:#F6F5F1; --card:#FFFFFF; --txt:#151515; --sub:#5C5C5C;
   --r:16px;
 }
@@ -40,9 +44,10 @@ input,select{font:inherit}
 header{position:sticky;top:0;z-index:50;background:rgba(14,14,14,.94);backdrop-filter:blur(10px);color:#fff;border-bottom:1px solid var(--line)}
 .hbar{display:flex;align-items:center;gap:18px;height:66px}
 .logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:20px;letter-spacing:.3px}
-.logo .mark{width:36px;height:36px;border-radius:50%;background:var(--y);display:grid;place-items:center}
-.logo .mark svg{width:26px;height:26px}
+.logo .mark{width:38px;height:38px;border-radius:9px;background:#fff;display:grid;place-items:center}
+.logo .mark img{height:28px;width:auto;display:block}
 .logo small{display:block;font-size:11px;font-weight:500;color:var(--mut);margin-top:-6px}
+@media (max-width:600px){.logo small{display:none}.logo{font-size:17px;gap:6px;white-space:nowrap}}@media (max-width:420px){.logo .csc{display:none}}@media (max-width:600px){.logo .mark{width:34px;height:34px}.logo .mark img{height:24px}}
 nav.main{display:flex;gap:4px;margin-inline-start:auto}
 nav.main a{padding:8px 14px;border-radius:999px;font-weight:500;font-size:15px;color:#ddd}
 nav.main a:hover{color:#fff;background:var(--ink3)}
@@ -65,9 +70,9 @@ nav.main a.on{background:var(--y);color:var(--ink)}
 
 /* hero */
 .hero{background:var(--ink);color:#fff;position:relative;overflow:hidden}
-.hero:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 38px,rgba(255,196,0,.05) 38px 46px);pointer-events:none}
+.hero:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 38px,rgba(255,128,0,.05) 38px 46px);pointer-events:none}
 .hero .wrap{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding-top:64px;padding-bottom:72px}
-.tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,196,0,.12);color:var(--y);border:1px solid rgba(255,196,0,.35);padding:5px 12px;border-radius:999px;font-size:13px;font-weight:700}
+.tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,128,0,.12);color:var(--y);border:1px solid rgba(255,128,0,.35);padding:5px 12px;border-radius:999px;font-size:13px;font-weight:700}
 .hero h1{font-size:clamp(30px,4.6vw,52px);line-height:1.25;font-weight:900;margin:18px 0 14px}
 .hero h1 em{font-style:normal;color:var(--y)}
 .hero p.lead{color:#cfcfcf;font-size:17px;max-width:560px}
@@ -296,8 +301,8 @@ table.lst th{color:var(--sub);font-weight:600;font-size:12px}
 <header>
   <div class="wrap hbar">
     <a href="#/" class="logo">
-      <span class="mark"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="#0E0E0E" stroke-width="4"/><circle cx="16" cy="16" r="5" fill="#0E0E0E"/><path d="M16 3v6M16 23v6M3 16h6M23 16h6" stroke="#0E0E0E" stroke-width="2"/></svg></span>
-      <span>ZAD CSC<small data-t="tagline"></small></span>
+      <span class="mark"><img src="/logo.svg" alt="Zad"></span>
+      <span>ZAD<span class="csc"> CSC</span><small data-t="tagline"></small></span>
     </a>
     <nav class="main" id="nav">
       <a href="#/" data-r="home" data-t="nav_home"></a>
@@ -1044,7 +1049,7 @@ function renderTires(keep){
 function artCard(a){
   const c=a[L]||a.en;
   return `<a class="ac" href="#/article/${a.slug}">
-    <div class="cv" style="background:${a.color}"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="#FFC400" stroke-width="9" stroke-dasharray="5 4"/><circle cx="50" cy="50" r="18" fill="none" stroke="#fff" stroke-width="3"/></svg></div>
+    <div class="cv" style="background:${a.color}"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="#FF8000" stroke-width="9" stroke-dasharray="5 4"/><circle cx="50" cy="50" r="18" fill="none" stroke="#fff" stroke-width="3"/></svg></div>
     <div class="bd"><div class="meta"><span class="kind">${t("kind_"+a.kind)}</span><span>${fmtDate(a.date)}</span></div>
     <h3>${esc(c.t)}</h3><p>${esc(c.s)}</p></div></a>`;
 }
