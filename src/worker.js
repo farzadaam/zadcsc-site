@@ -420,7 +420,7 @@ async function api(req, env, url) {
 
 /* ---------------- admin ---------------- */
 const TABLES = {
-  tires: ["brand", "pattern", "sizeText", "width", "profile", "rim", "system", "utqg", "warranty", "rating", "reviews", "dotYear", "oeType", "sku", "vehicles", "images", "desc_fa", "desc_ar", "desc_en"],
+  tires: ["in_stock", "brand", "pattern", "sizeText", "width", "profile", "rim", "system", "utqg", "warranty", "rating", "reviews", "dotYear", "oeType", "sku", "vehicles", "images", "desc_fa", "desc_ar", "desc_en"],
   fitments: ["make", "model", "year_from", "year_to", "engine", "oil_grade", "oil_capacity_l", "tire_sizes", "notes"],
   vehicles: ["user_id", "vin", "make", "model", "year", "plate", "mileage"],
   services: ["user_id", "vehicle_id", "date", "type", "mileage", "details", "price", "next_due_date", "next_due_km"],
@@ -431,7 +431,7 @@ const TABLES = {
   oils: ["brand", "name", "grade", "spec", "type", "sizes", "sku", "images", "desc_fa", "desc_ar", "desc_en"],
   reviews: ["status", "name", "rating", "text"]
 };
-const NUMERIC = new Set(["rating", "reviews", "year_from", "year_to", "oil_capacity_l", "user_id", "vehicle_id", "year", "mileage", "price", "next_due_km", "total"]);
+const NUMERIC = new Set(["in_stock", "rating", "reviews", "year_from", "year_to", "oil_capacity_l", "user_id", "vehicle_id", "year", "mileage", "price", "next_due_km", "total"]);
 const JSONCOLS = new Set(["vehicles", "images", "tire_sizes", "items"]);
 async function syncRating(DB, type, id) {
   const t = type === "oil" ? "oils" : "tires";

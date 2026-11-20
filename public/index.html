@@ -135,6 +135,8 @@ section.blk{padding:64px 0}
 .pc .img{aspect-ratio:4/3;background:linear-gradient(160deg,#f1efe8,#e5e2d8);display:grid;place-items:center;position:relative;cursor:pointer}
 .pc .img img{width:100%;height:100%;object-fit:cover}
 .pc .img .ph{width:46%;opacity:.85}
+.oos{position:absolute;bottom:10px;inset-inline-end:10px;background:#c62828;color:#fff;font-size:12px;font-weight:800;padding:4px 10px;border-radius:999px}
+.oosbig{display:inline-block;background:#c62828;color:#fff;font-weight:800;padding:6px 14px;border-radius:999px;margin-top:8px}
 .badge{position:absolute;top:10px;inset-inline-start:10px;background:var(--ink);color:var(--y);font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px}
 .pc .bd{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
 .pc .br{font-size:12px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:.6px}
@@ -983,7 +985,7 @@ const tireSVG=`<svg class="ph" viewBox="0 0 100 100"><circle cx="50" cy="50" r="
 /* normalise a tire row from API */
 function norm(x){
   const arr=v=>Array.isArray(v)?v:(()=>{try{return JSON.parse(v||"[]")}catch(e){return[]}})();
-  return {...x, vehicles:arr(x.vehicles), images:arr(x.images), rim:String(x.rim||"").toUpperCase().replace(/^(?!R)/,"R")};
+  return {...x, out:x.in_stock===0||x.in_stock==="0", vehicles:arr(x.vehicles), images:arr(x.images), rim:String(x.rim||"").toUpperCase().replace(/^(?!R)/,"R")};
 }
 function dedupe(list){
   const seen=new Set();
@@ -1069,7 +1071,7 @@ function renderOils(){
     <div class="grades">${s.g.map(g=>`<a class="gr" target="_blank" rel="noopener" href="${waURL(t("wa_oil")+" "+g+" ("+t("g_"+s.k)+")")}"><b>${esc(g)}</b><small>${t("ask")}</small></a>`).join("")}</div></div>`).join("");
 }
 function renderAllSizes(){
-  const stock=new Set(TIRES.map(sizeOf));
+  const stock=new Set(TIRES.filter(x=>!x.out).map(sizeOf));
   const byRim={};allSizes().forEach(s=>{(byRim[s.r]=byRim[s.r]||[]).push(s)});
   const rims=numSort(Object.keys(byRim));
   $("#allSizes").innerHTML=rims.map(r=>`<div class="rimh">${r}</div><div class="sizes-all">${numSort(byRim[r].map(s=>s.w+"/"+s.p)).map(wp=>{const lab=wp+r;return `<button class="${stock.has(lab)?"in":""}" data-size="${lab}">${lab}</button>`}).join("")}</div>`).join("")
@@ -1085,21 +1087,21 @@ let SHOWN=48;
 function card(x){
   const img=x.images&&x.images[0]?`<img src="${esc(x.images[0])}" alt="${esc(x.brand)}" loading="lazy" onerror="this.replaceWith(document.createRange().createContextualFragment(tireSVG))">`:tireSVG;
   return `<div class="pc">
-    <div class="img" data-open="${x.id}">${img}${x.dotYear?`<span class="badge">DOT ${esc(x.dotYear)}</span>`:""}</div>
+    <div class="img" data-open="${x.id}"${x.out?' style="opacity:.55"':""}>${img}${x.dotYear?`<span class="badge">DOT ${esc(x.dotYear)}</span>`:""}${x.out?`<span class="oos">${t("oos")}</span>`:""}</div>
     <div class="bd">
       <div class="br">${esc(x.brand)}${x.oeType&&CATS[x.oeType]?` · <span style="text-transform:none;font-weight:500">${esc(catT(x.oeType))}</span>`:""}</div>
       <h3 data-open="${x.id}">${esc(x.pattern||x.sizeText)}</h3>
       <div class="sz">${esc(sizeOf(x))}</div>
       ${x.reviews?`<div class="stars">${stars(x.rating)} <small>(${x.reviews} ${t("reviews")})</small></div>`:""}
       ${x.warranty?`<span class="war">${esc(x.warranty)}</span>`:""}
-      <div class="act"><button class="btn y" data-add="${x.id}">+ ${t("add")}</button><button class="btn o" style="color:var(--txt);border-color:#ccc" data-open="${x.id}">${t("details")}</button></div>
+      <div class="act">${x.out?`<a class="btn wa" target="_blank" rel="noopener" href="${waURL(t("wa_oos")+"\n"+x.brand+" "+(x.pattern||"")+" — "+(x.sizeText||sizeOf(x)))}">${t("ask")}</a>`:`<button class="btn y" data-add="${x.id}">+ ${t("add")}</button>`}<button class="btn o" style="color:var(--txt);border-color:#ccc" data-open="${x.id}">${t("details")}</button></div>
     </div></div>`;
 }
 function filtered(){
   const q=$("#fq").value.trim().toLowerCase(),w=$("#fw").value,p=$("#fp").value,r=$("#fr").value,b=$("#fb").value,v=$("#fv").value,c=$("#fc").value;
   const qn=/^[\d\s\/.rR-]+$/.test(q)?q.replace(/\D/g,""):"";
   return TIRES.filter(x=>(!w||x.width==w)&&(!p||x.profile==p)&&(!r||x.rim==r)&&(!b||x.brand==b)&&(!c||x.oeType==c)&&(!v||x.vehicles.includes(v))&&
-    (!q||[x.brand,x.pattern,x.sizeText,sizeOf(x),x.sku,...x.vehicles].join(" ").toLowerCase().includes(q)||(qn.length>=5&&String(x.sizeText||"").replace(/\D/g,"").includes(qn))));
+    (!q||[x.brand,x.pattern,x.sizeText,sizeOf(x),x.sku,...x.vehicles].join(" ").toLowerCase().includes(q)||(qn.length>=5&&String(x.sizeText||"").replace(/\D/g,"").includes(qn)))).sort((a,b)=>a.out-b.out);
 }
 function renderTires(keep){
   if(keep!==true)SHOWN=48;
@@ -1136,7 +1138,7 @@ function renderServices(){
   $("#svcGrid").innerHTML=[1,2,3,4].map(i=>`<div class="cat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${ic[i-1]}</svg></div><h3>${t("s"+i)}</h3><p>${t("s"+i+"p")}</p></div>`).join("");
 }
 function renderAll(){
-  const feat=[...TIRES.filter(x=>x.oeType==="Passenger / SUV"&&+x.dotYear>=2026),...TIRES].filter((x,i,a)=>a.indexOf(x)===i);
+  const feat=[...TIRES.filter(x=>!x.out&&x.oeType==="Passenger / SUV"&&+x.dotYear>=2026),...TIRES.filter(x=>!x.out)].filter((x,i,a)=>a.indexOf(x)===i);
   $("#featGrid").innerHTML=feat.slice(0,8).map(card).join("")||`<div class="empty">${t("none")}</div>`;
   renderTires(); renderNews(); renderServices(); renderCart(); renderBrands(); renderOils(); renderAllSizes();
   const m=location.hash.match(/^#\/article\/(.+)$/); if(m)renderPost(m[1]);
@@ -1169,7 +1171,7 @@ function closeAll(){$("#modal").classList.remove("on");$("#drawer").classList.re
 function saveCart(){store.set("zad_cart",cart);renderCart()}
 function cartItem(c){return c.t==="oil"?OILS.find(y=>y.id==c.id):TIRES.find(y=>y.id==c.id)}
 function cartLabel(c){const x=cartItem(c);if(!x)return["",""];return c.t==="oil"?[`${x.brand} ${x.name}`,[x.grade,c.s].filter(Boolean).join(" · ")]:[`${x.brand} ${x.pattern||""}`,x.sizeText||sizeOf(x)]}
-function addCart(id,q=4,type="tire",size=""){const c=cart.find(z=>(z.t||"tire")===type&&z.id==id&&(z.s||"")===size);if(c)c.q+=q;else cart.push({t:type,id:+id,q,s:size||undefined});saveCart();toast(t("added"))}
+function addCart(id,q=4,type="tire",size=""){if(type==="tire"){const x=TIRES.find(y=>y.id==id);if(x&&x.out){toast(t("oos"));return}}const c=cart.find(z=>(z.t||"tire")===type&&z.id==id&&(z.s||"")===size);if(c)c.q+=q;else cart.push({t:type,id:+id,q,s:size||undefined});saveCart();toast(t("added"))}
 function renderCart(){
   cart=cart.filter(c=>cartItem(c)&&c.q>0);
   $("#cartN").textContent=cart.reduce((s,c)=>s+c.q,0);
@@ -1218,7 +1220,7 @@ function renderItem(type,id){
   const unit=t(type==="oil"?"u_can":"u_tire");
   const pre=type==="oil"?[1,4,6,12]:[1,2,4];
   const waTxt=`${t("wa_ask")}\n${x.brand} ${title} — ${type==="oil"?[sz,ITEM.s].filter(Boolean).join(" "):sz} × ${ITEM.q} ${unit}`;
-  const others=type==="tire"?TIRES.filter(y=>y.id!==x.id&&sizeOf(y)===sizeOf(x)).slice(0,4):[];
+  const others=type==="tire"?TIRES.filter(y=>y.id!==x.id&&!y.out&&sizeOf(y)===sizeOf(x)).slice(0,4):[];
   W.innerHTML=`<div class="crumb"><a href="#/">${t("nav_home")}</a> / <a href="#/${type==="oil"?"oils":"tires"}">${t(type==="oil"?"nav_oils":"nav_tires")}</a> / ${esc(x.brand)}</div>
   <div class="pd">
     <div class="gal"><div class="main">${imgs.length?`<img src="${esc(imgs[ITEM.img]||imgs[0])}" alt="${esc(x.brand+" "+title)}">`:ph}</div>
@@ -1227,13 +1229,15 @@ function renderItem(type,id){
       <div class="brd">${esc(x.brand)}</div><h1>${esc(title)}</h1><div class="bigsz">${esc(sz)}</div>
       <div class="rt">${x.reviews?`<b>${stars(x.rating)}</b> ${(+x.rating).toFixed(1)} · <a href="#rvs" data-goto="rvs">${x.reviews} ${t("reviews")}</a>`:`<a href="#rvs" data-goto="rvs">${t("rev_first")}</a>`}</div>
       ${x.warranty?`<span class="war" style="display:inline-block;margin-top:6px;font-size:12px;background:#FFF1E3;color:#8a4300;padding:4px 9px;border-radius:8px;font-weight:600">${esc(x.warranty)}</span>`:""}
-      <div class="qbox">
+      ${x.out?`<div><span class="oosbig">${t("oos")}</span><p style="color:var(--sub);margin-top:8px">${t("oos_p")}</p></div>`:""}
+      <div class="qbox"${x.out?' style="display:none"':""}>
         ${type==="oil"&&ITEM.sizes.length?`<div style="font-size:14px;color:var(--sub)">${t("pack_l")}</div><div class="psel">${ITEM.sizes.map(s=>`<button data-ps="${esc(s)}" class="${s===ITEM.s?"on":""}">${esc(s)}</button>`).join("")}</div>`:""}
         <div style="font-size:14px;color:var(--sub);margin-bottom:6px">${t("qty_l")} (${unit})</div>
         <div class="qrow"><div class="qctl"><button data-qd="-1" aria-label="-">−</button><input id="iq" type="number" min="1" max="99" inputmode="numeric" value="${ITEM.q}"><button data-qd="1" aria-label="+">+</button></div>
           <div class="qpre">${pre.map(n=>`<button data-qp="${n}" class="${n===ITEM.q?"on":""}">${n} ${unit}</button>`).join("")}</div></div>
         <div class="pbtns"><button class="btn y" id="iadd">+ ${t("add")}</button><a class="btn wa" id="iwa" target="_blank" rel="noopener" href="${waURL(waTxt)}">${t("ask")}</a></div>
       </div>
+      ${x.out?`<a class="btn wa" style="margin-top:12px" target="_blank" rel="noopener" href="${waURL(t("wa_oos")+"\n"+x.brand+" "+title+" — "+sz)}">${t("ask")}</a>`:""}
       <table class="spec" style="margin-top:16px">${rows.filter(r=>r&&r[1]).map(([k,v])=>`<tr><td>${esc(k)}</td><td${/[A-Za-z0-9]/.test(v)&&!/[؀-ۿ]/.test(v)?' style="direction:ltr;text-align:start"':""}>${esc(v)}</td></tr>`).join("")}</table>
       ${type==="tire"&&x.vehicles&&x.vehicles.length?`<div style="margin-top:12px;font-size:14px;color:var(--sub)">${t("fits")}</div><div class="chips">${x.vehicles.map(v=>`<span class="chip">${esc(v)}</span>`).join("")}</div>`:""}
     </div>
@@ -1273,9 +1277,9 @@ document.addEventListener("click",e=>{
   const go=e.target.closest("[data-goto]");if(go){e.preventDefault();const el=document.getElementById(go.dataset.goto);if(el)el.scrollIntoView({behavior:"smooth"})}
 });
 const T3={
-fa:{oils_shop:"روغن‌های موجود در فروشگاه",u_tire:"حلقه",u_can:"عدد",qty_l:"تعداد",pattern_l:"مدل آج",size_l:"سایز",load_idx:"شاخص بار",speed_idx:"شاخص سرعت",per_tire:"برای هر حلقه",runflat:"ران‌فلت (Run-flat)",sku_l:"کد کالا",oil_grade_l:"گرید",spec_l:"استانداردها و تأییدیه‌ها",type_l:"نوع روغن",pack_l:"حجم بسته",desc_h:"توضیحات",same_size:"تایرهای دیگر در همین سایز",rev_h:"نظرات مشتریان",rev_none:"هنوز نظری ثبت نشده؛ اولین نفر باشید!",rev_first:"اولین نظر را بنویسید",rev_write:"نظر خود را بنویسید",rev_text:"نظر شما",rev_send:"ارسال نظر",rev_ok:"ممنون! نظر شما ثبت شد و پس از تأیید نمایش داده می‌شود.",rev_pick:"لطفاً امتیاز (ستاره) را انتخاب کنید.",rev_limit:"تعداد نظرات زیاد است؛ کمی بعد دوباره امتحان کنید.",back:"بازگشت"},
-ar:{oils_shop:"الزيوت المتوفرة في المتجر",u_tire:"إطار",u_can:"عبوة",qty_l:"الكمية",pattern_l:"النقشة",size_l:"المقاس",load_idx:"مؤشر الحمولة",speed_idx:"مؤشر السرعة",per_tire:"لكل إطار",runflat:"رن فلات (Run-flat)",sku_l:"رمز المنتج",oil_grade_l:"اللزوجة",spec_l:"المواصفات والاعتمادات",type_l:"نوع الزيت",pack_l:"حجم العبوة",desc_h:"الوصف",same_size:"إطارات أخرى بنفس المقاس",rev_h:"آراء العملاء",rev_none:"لا توجد آراء بعد؛ كن أول من يكتب!",rev_first:"اكتب أول تقييم",rev_write:"اكتب رأيك",rev_text:"رأيك",rev_send:"إرسال التقييم",rev_ok:"شكراً! تم استلام رأيك وسيظهر بعد المراجعة.",rev_pick:"يرجى اختيار التقييم (النجوم).",rev_limit:"محاولات كثيرة؛ حاول لاحقاً.",back:"رجوع"},
-en:{oils_shop:"Oils in stock",u_tire:"tire(s)",u_can:"pcs",qty_l:"Quantity",pattern_l:"Pattern",size_l:"Size",load_idx:"Load index",speed_idx:"Speed rating",per_tire:"per tire",runflat:"Run-flat",sku_l:"SKU",oil_grade_l:"Grade",spec_l:"Specs & approvals",type_l:"Oil type",pack_l:"Pack size",desc_h:"Description",same_size:"Other tires in this size",rev_h:"Customer reviews",rev_none:"No reviews yet — be the first!",rev_first:"Write the first review",rev_write:"Write a review",rev_text:"Your review",rev_send:"Submit review",rev_ok:"Thanks! Your review will appear after approval.",rev_pick:"Please choose a star rating.",rev_limit:"Too many reviews — please try later.",back:"Back"}};
+fa:{oos:"اتمام موجودی",oos_p:"این تایر فعلاً موجود نیست. در واتساپ بپرسید تا زمان رسیدن یا جایگزین مناسب را بگوییم.",wa_oos:"سلام، این تایر در سایت «اتمام موجودی» است؛ کی موجود می‌شود یا جایگزین دارید؟",oils_shop:"روغن‌های موجود در فروشگاه",u_tire:"حلقه",u_can:"عدد",qty_l:"تعداد",pattern_l:"مدل آج",size_l:"سایز",load_idx:"شاخص بار",speed_idx:"شاخص سرعت",per_tire:"برای هر حلقه",runflat:"ران‌فلت (Run-flat)",sku_l:"کد کالا",oil_grade_l:"گرید",spec_l:"استانداردها و تأییدیه‌ها",type_l:"نوع روغن",pack_l:"حجم بسته",desc_h:"توضیحات",same_size:"تایرهای دیگر در همین سایز",rev_h:"نظرات مشتریان",rev_none:"هنوز نظری ثبت نشده؛ اولین نفر باشید!",rev_first:"اولین نظر را بنویسید",rev_write:"نظر خود را بنویسید",rev_text:"نظر شما",rev_send:"ارسال نظر",rev_ok:"ممنون! نظر شما ثبت شد و پس از تأیید نمایش داده می‌شود.",rev_pick:"لطفاً امتیاز (ستاره) را انتخاب کنید.",rev_limit:"تعداد نظرات زیاد است؛ کمی بعد دوباره امتحان کنید.",back:"بازگشت"},
+ar:{oos:"نفدت الكمية",oos_p:"هذا الإطار غير متوفر حالياً. راسلنا على واتساب لمعرفة موعد توفره أو بديل مناسب.",wa_oos:"مرحباً، هذا الإطار نفدت كميته في الموقع؛ متى يتوفر أو هل يوجد بديل؟",oils_shop:"الزيوت المتوفرة في المتجر",u_tire:"إطار",u_can:"عبوة",qty_l:"الكمية",pattern_l:"النقشة",size_l:"المقاس",load_idx:"مؤشر الحمولة",speed_idx:"مؤشر السرعة",per_tire:"لكل إطار",runflat:"رن فلات (Run-flat)",sku_l:"رمز المنتج",oil_grade_l:"اللزوجة",spec_l:"المواصفات والاعتمادات",type_l:"نوع الزيت",pack_l:"حجم العبوة",desc_h:"الوصف",same_size:"إطارات أخرى بنفس المقاس",rev_h:"آراء العملاء",rev_none:"لا توجد آراء بعد؛ كن أول من يكتب!",rev_first:"اكتب أول تقييم",rev_write:"اكتب رأيك",rev_text:"رأيك",rev_send:"إرسال التقييم",rev_ok:"شكراً! تم استلام رأيك وسيظهر بعد المراجعة.",rev_pick:"يرجى اختيار التقييم (النجوم).",rev_limit:"محاولات كثيرة؛ حاول لاحقاً.",back:"رجوع"},
+en:{oos:"Out of stock",oos_p:"This tire is currently out of stock. Ask us on WhatsApp for restock date or an alternative.",wa_oos:"Hi, this tire shows out of stock on your site — when will it be back, or is there an alternative?",oils_shop:"Oils in stock",u_tire:"tire(s)",u_can:"pcs",qty_l:"Quantity",pattern_l:"Pattern",size_l:"Size",load_idx:"Load index",speed_idx:"Speed rating",per_tire:"per tire",runflat:"Run-flat",sku_l:"SKU",oil_grade_l:"Grade",spec_l:"Specs & approvals",type_l:"Oil type",pack_l:"Pack size",desc_h:"Description",same_size:"Other tires in this size",rev_h:"Customer reviews",rev_none:"No reviews yet — be the first!",rev_first:"Write the first review",rev_write:"Write a review",rev_text:"Your review",rev_send:"Submit review",rev_ok:"Thanks! Your review will appear after approval.",rev_pick:"Please choose a star rating.",rev_limit:"Too many reviews — please try later.",back:"Back"}};
 Object.keys(T3).forEach(l=>Object.assign(T[l],T3[l]));
 
 /* router */

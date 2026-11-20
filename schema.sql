@@ -109,3 +109,5 @@ CREATE TABLE IF NOT EXISTS reviews (
 );
 CREATE INDEX IF NOT EXISTS idx_reviews_item ON reviews(item_type, item_id, status);
 CREATE TABLE IF NOT EXISTS media (id INTEGER PRIMARY KEY AUTOINCREMENT, mime TEXT NOT NULL, data BLOB NOT NULL, created_at TEXT DEFAULT (datetime('now')));
+
+-- 2026-11-20: ALTER TABLE tires ADD COLUMN in_stock INTEGER DEFAULT 1  (applied; DOT <= 2023 set to 0)
