@@ -178,15 +178,18 @@ async function wsLookup(env, make, model, year) {
 }
 
 async function ensureFitImport(env, origin) {
-  const KEY = "fitments_import_v2";
+  await importFitFile(env, origin, "fitments_import_v2", "/data/fitments.json", "DELETE FROM fitments WHERE id <= 43");
+  await importFitFile(env, origin, "fitments_import_v3", "/data/fitments_v3.json", null);
+}
+async function importFitFile(env, origin, KEY, file, pre) {
   const lock = await env.DB.prepare("INSERT OR IGNORE INTO meta (k, v) VALUES (?, 'running')").bind(KEY).run();
   if (lock.meta.changes !== 1) return;
   try {
-    const res = await env.ASSETS.fetch(new Request(origin + "/data/fitments.json"));
+    const res = await env.ASSETS.fetch(new Request(origin + file));
     const rows = await res.json();
     const cols = ["make", "model", "year_from", "year_to", "engine", "oil_grade", "oil_capacity_l", "tire_sizes", "notes"];
     const q = v => v == null ? "NULL" : typeof v === "number" ? String(v) : "'" + String(v).replace(/'/g, "''") + "'";
-    const stmts = [env.DB.prepare("DELETE FROM fitments WHERE id <= 43")];
+    const stmts = pre ? [env.DB.prepare(pre)] : [];
     for (let i = 0; i < rows.length; i += 100) {
       const vals = rows.slice(i, i + 100).map(r => "(" + cols.map(c => q(r[c])).join(",") + ")");
       stmts.push(env.DB.prepare(`INSERT INTO fitments (${cols.join(",")}) VALUES ${vals.join(",")}`));
