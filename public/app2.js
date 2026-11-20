@@ -8,7 +8,7 @@ acct_h:"حساب کاربری",acct_p:"سوابق خودرو، سرویس‌ها
 my_vehicles:"خودروهای من",add_vehicle:"افزودن خودرو",plate:"پلاک",mileage:"کیلومتر",svc_history:"سابقه‌ی سرویس",my_orders:"سفارش‌ها",my_bookings:"نوبت‌ها",reminders:"سرویس‌های پیش رو",
 due_on:"موعد",no_items:"موردی ثبت نشده است.",save:"ذخیره",profile:"اطلاعات من",new_password:"رمز جدید (اختیاری)",del:"حذف",
 car_found:"خودروی شناسایی‌شده",oil_rec:"روغن پیشنهادی",tire_rec:"سایز تایرهای کارخانه",no_fit:"اطلاعات این مدل هنوز در سیستم نیست؛ در واتساپ بپرسید تا راهنمایی‌تان کنیم.",
-ws_h:"سایز دقیق بر اساس تیپ خودرو",ws_stock:"کارخانه",ws_opt:"اختیاری",ws_src:"منبع سایزها",ig_h:"از اینستاگرام ما",ig_f:"دنبال کنید",fit_note:"اطلاعات مرجع است؛ لطفاً با دفترچه‌ی خودرو و برچسب در راننده تطبیق دهید.",engine:"موتور",body:"بدنه",show_tires:"نمایش تایرها",ask_oil:"استعلام روغن",
+ws_h:"سایز دقیق بر اساس تیپ خودرو",ws_stock:"کارخانه",ws_opt:"اختیاری",ws_src:"منبع سایزها",ig_h:"از اینستاگرام ما",ig_f:"دنبال کنید",bk_wa:"ارسال نوبت در واتساپ",e_too_many_attempts:"تلاش زیاد؛ ۱۵ دقیقه دیگر دوباره امتحان کنید.",forgot:"رمز را فراموش کرده‌اید؟ در واتساپ پیام دهید تا رمز جدید بگیرید.",fit_note:"اطلاعات مرجع است؛ لطفاً با دفترچه‌ی خودرو و برچسب در راننده تطبیق دهید.",engine:"موتور",body:"بدنه",show_tires:"نمایش تایرها",ask_oil:"استعلام روغن",
 date:"تاریخ",type:"نوع",details:"جزئیات",price:"مبلغ",status:"وضعیت",items:"اقلام",admin_link:"پنل مدیریت",select:"انتخاب کنید",
 st_new:"جدید",st_confirmed:"تأییدشده",st_processing:"در حال انجام",st_done:"انجام‌شده",st_delivered:"تحویل‌شده",st_cancelled:"لغوشده",
 svc_tire:"تعویض / نصب تایر",svc_oil:"تعویض روغن",svc_balance:"بالانس و تنظیم فرمان",svc_check:"بازدید و مشاوره",svc_other:"سایر",
@@ -21,7 +21,7 @@ acct_h:"حسابي",acct_p:"سجل سياراتك وخدماتك وطلباتك 
 my_vehicles:"سياراتي",add_vehicle:"إضافة سيارة",plate:"اللوحة",mileage:"العداد (كم)",svc_history:"سجل الخدمات",my_orders:"الطلبات",my_bookings:"المواعيد",reminders:"الخدمات القادمة",
 due_on:"الموعد",no_items:"لا توجد بيانات.",save:"حفظ",profile:"بياناتي",new_password:"كلمة مرور جديدة (اختياري)",del:"حذف",
 car_found:"السيارة",oil_rec:"الزيت الموصى به",tire_rec:"مقاسات الإطارات الأصلية",no_fit:"بيانات هذا الطراز غير متوفرة بعد؛ اسألنا عبر واتساب.",
-ws_h:"المقاسات حسب فئة السيارة",ws_stock:"أصلي",ws_opt:"اختياري",ws_src:"مصدر المقاسات",ig_h:"من إنستغرامنا",ig_f:"تابعونا",fit_note:"البيانات مرجعية؛ يرجى مطابقتها مع دليل السيارة وملصق باب السائق.",engine:"المحرك",body:"الهيكل",show_tires:"عرض الإطارات",ask_oil:"استفسر عن الزيت",
+ws_h:"المقاسات حسب فئة السيارة",ws_stock:"أصلي",ws_opt:"اختياري",ws_src:"مصدر المقاسات",ig_h:"من إنستغرامنا",ig_f:"تابعونا",bk_wa:"إرسال الحجز عبر واتساب",e_too_many_attempts:"محاولات كثيرة؛ حاول بعد ١٥ دقيقة.",forgot:"نسيت كلمة المرور؟ راسلنا على واتساب لتعيينها.",fit_note:"البيانات مرجعية؛ يرجى مطابقتها مع دليل السيارة وملصق باب السائق.",engine:"المحرك",body:"الهيكل",show_tires:"عرض الإطارات",ask_oil:"استفسر عن الزيت",
 date:"التاريخ",type:"النوع",details:"التفاصيل",price:"المبلغ",status:"الحالة",items:"العناصر",admin_link:"لوحة الإدارة",select:"اختر",
 st_new:"جديد",st_confirmed:"مؤكد",st_processing:"قيد التنفيذ",st_done:"منجز",st_delivered:"تم التسليم",st_cancelled:"ملغى",
 svc_tire:"تغيير / تركيب إطارات",svc_oil:"تغيير الزيت",svc_balance:"ترصيص وضبط الأذرعة",svc_check:"فحص واستشارة",svc_other:"أخرى",
@@ -34,7 +34,7 @@ acct_h:"My account",acct_p:"Your vehicles, service history, orders and bookings.
 my_vehicles:"My vehicles",add_vehicle:"Add vehicle",plate:"Plate",mileage:"Mileage (km)",svc_history:"Service history",my_orders:"Orders",my_bookings:"Bookings",reminders:"Upcoming services",
 due_on:"Due",no_items:"Nothing yet.",save:"Save",profile:"My details",new_password:"New password (optional)",del:"Delete",
 car_found:"Vehicle",oil_rec:"Recommended oil",tire_rec:"Factory tire sizes",no_fit:"We don't have this model on file yet — ask us on WhatsApp.",
-ws_h:"Exact sizes by trim",ws_stock:"OE",ws_opt:"Option",ws_src:"Sizes source",ig_h:"From our Instagram",ig_f:"Follow us",fit_note:"Reference data — please check against your owner's manual and door-jamb sticker.",engine:"Engine",body:"Body",show_tires:"Show tires",ask_oil:"Ask about oil",
+ws_h:"Exact sizes by trim",ws_stock:"OE",ws_opt:"Option",ws_src:"Sizes source",ig_h:"From our Instagram",ig_f:"Follow us",bk_wa:"Send booking on WhatsApp",e_too_many_attempts:"Too many attempts — try again in 15 minutes.",forgot:"Forgot your password? Message us on WhatsApp to reset it.",fit_note:"Reference data — please check against your owner's manual and door-jamb sticker.",engine:"Engine",body:"Body",show_tires:"Show tires",ask_oil:"Ask about oil",
 date:"Date",type:"Type",details:"Details",price:"Amount",status:"Status",items:"Items",admin_link:"Admin panel",select:"Select",
 st_new:"New",st_confirmed:"Confirmed",st_processing:"In progress",st_done:"Done",st_delivered:"Delivered",st_cancelled:"Cancelled",
 svc_tire:"Tire change / fitting",svc_oil:"Oil change",svc_balance:"Balancing & alignment",svc_check:"Inspection & advice",svc_other:"Other",
@@ -102,7 +102,7 @@ function renderAuth(w){
       <div class="fld"><label>${t("phone")}</label><input name="phone" class="ltrin" inputmode="tel" required placeholder="9XXXXXXX"></div>
       <div class="fld"><label>${t("password")}</label><input name="password" type="password" required minlength="6" autocomplete="${mode==="login"?"current-password":"new-password"}"></div>
       ${mode==="register"?`<div class="fld"><label>${t("email")}</label><input name="email" type="email" class="ltrin"></div>`:""}
-    </div><button class="btn y" style="margin-top:12px;width:100%;justify-content:center">${t(mode)}</button><div class="msg" id="authMsg"></div></form></div>`;
+    </div><button class="btn y" style="margin-top:12px;width:100%;justify-content:center">${t(mode)}</button><div class="msg" id="authMsg"></div>${mode==="login"?`<p style="margin-top:10px;font-size:13px"><a target="_blank" rel="noopener" href="${waURL(t("wa_hi")+" — "+t("forgot"))}">${t("forgot")}</a></p>`:""}</form></div>`;
     w.querySelectorAll("[data-m]").forEach(b=>b.onclick=()=>{mode=b.dataset.m;draw()});
     $("#authForm").onsubmit=async e=>{e.preventDefault();try{await call("/api/auth/"+mode,{method:"POST",body:fd(e.target)});renderAccount()}catch(er){msg($("#authMsg"),0,errT(er.message))}};
   };draw();
@@ -177,8 +177,9 @@ window.initBooking=function(){
   $("#bkTime").innerHTML=times.map(x=>`<option>${x}</option>`).join("");
   const d=f.querySelector("[name=date]");d.min=new Date().toISOString().slice(0,10);if(!d.value)d.value=d.min;
   if(ME){const E=f.elements;E.name.value=E.name.value||ME.user.name;E.phone.value=E.phone.value||ME.user.phone}
-  f.onsubmit=async e=>{e.preventDefault();const b=fd(f);try{const r=await call("/api/bookings",{method:"POST",body:b});msg($("#bkMsg"),1,t("bk_ok"));
-    window.open(waURL(`${t("hero_cta4")} #${r.id}\n${b.name} — ${b.date} ${b.time}\n${t("svc_"+b.service)}${b.vehicle?"\n"+b.vehicle:""}`),"_blank")}catch(er){msg($("#bkMsg"),0,errT(er.message))}};
+  f.onsubmit=async e=>{e.preventDefault();const b=fd(f);try{const r=await call("/api/bookings",{method:"POST",body:b});const wu=waURL(`${t("hero_cta4")} #${r.id}\n${b.name} — ${b.date} ${b.time}\n${t("svc_"+b.service)}${b.vehicle?"\n"+b.vehicle:""}`);
+    const m=$("#bkMsg");m.className="msg ok";m.innerHTML=`${esc(t("bk_ok"))}<br><a class="btn wa" style="margin-top:10px" target="_blank" rel="noopener" href="${wu}">${esc(t("bk_wa"))}</a>`;
+    try{window.open(wu,"_blank")}catch(_){}}catch(er){msg($("#bkMsg"),0,errT(er.message))}};
 };
 
 loadMe();

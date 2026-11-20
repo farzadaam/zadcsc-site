@@ -294,10 +294,18 @@ async function api(req, env, url) {
   if (p === "/api/auth/login" && M === "POST") {
     const b = await body(req);
     const phone = normPhone(b.phone);
+    const LK = "lf:" + (phone || "x");
+    const lf = await DB.prepare("SELECT v FROM meta WHERE k=? AND at>datetime('now','-15 minutes')").bind(LK).first();
+    if (lf && +lf.v >= 5) return bad("too_many_attempts", 429);
+    const fail = async () => {
+      await DB.prepare("INSERT INTO meta (k,v,at) VALUES (?,1,datetime('now')) ON CONFLICT(k) DO UPDATE SET v=CASE WHEN at>datetime('now','-15 minutes') THEN v+1 ELSE 1 END, at=datetime('now')").bind(LK).run();
+      return bad("wrong_login", 401);
+    };
     const u = phone && await DB.prepare("SELECT id, pass_hash, pass_salt FROM users WHERE phone=?").bind(phone).first();
-    if (!u || !u.pass_hash) return bad("wrong_login", 401);
+    if (!u || !u.pass_hash) return fail();
     const { hash } = await hashPassword(String(b.password || ""), u.pass_salt);
-    if (!safeEqual(hash, u.pass_hash)) return bad("wrong_login", 401);
+    if (!safeEqual(hash, u.pass_hash)) return fail();
+    await DB.prepare("DELETE FROM meta WHERE k=?").bind(LK).run();
     await DB.prepare("DELETE FROM sessions WHERE expires_at<=datetime('now')").run();
     return json({ ok: true }, 200, { "set-cookie": await startSession(env, u.id) });
   }
@@ -455,6 +463,17 @@ async function admin(req, env, url, p, M, me) {
       DB.prepare("SELECT * FROM bookings WHERE user_id=? ORDER BY date DESC").bind(id).all()
     ]);
     return json({ user, vehicles: vehicles.results, services: services.results, orders: orders.results.map(o => ({ ...o, items: safeJSON(o.items, []) })), bookings: bookings.results });
+  }
+  const pm = p.match(/^\/api\/admin\/customers\/(\d+)\/password$/);
+  if (pm && M === "POST") {
+    const pw = String((await body(req)).password || "");
+    if (pw.length < 6) return bad("password_short");
+    const { hash, salt } = await hashPassword(pw);
+    await DB.batch([
+      DB.prepare("UPDATE users SET pass_hash=?, pass_salt=? WHERE id=?").bind(hash, salt, +pm[1]),
+      DB.prepare("DELETE FROM sessions WHERE user_id=?").bind(+pm[1])
+    ]);
+    return json({ ok: true });
   }
   if (p === "/api/admin/customers" && M === "POST") {
     const b = await body(req);
