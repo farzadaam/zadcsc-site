@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zad CSC | تایر، رینگ و مرجع فنی لاستیک در صلاله</title>
+<meta name="description" content="زاد CSC صلاله - فروش تایرهای اصلی با ضمانت رسمی، روغن و روانکار، و اخبار و مقالات فنی صنعت لاستیک.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --y:#FFC400; --y2:#FFD84D; --ink:#0E0E0E; --ink2:#1A1A1A; --ink3:#262626;
+  --line:#2E2E2E; --mut:#A3A3A3; --bg:#F6F5F1; --card:#FFFFFF; --txt:#151515; --sub:#5C5C5C;
+  --r:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Vazirmatn,system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;background:var(--bg);color:var(--txt);line-height:1.75;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+input,select{font:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(14,14,14,.94);backdrop-filter:blur(10px);color:#fff;border-bottom:1px solid var(--line)}
+.hbar{display:flex;align-items:center;gap:18px;height:66px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:20px;letter-spacing:.3px}
+.logo .mark{width:36px;height:36px;border-radius:50%;background:var(--y);display:grid;place-items:center}
+.logo .mark svg{width:26px;height:26px}
+.logo small{display:block;font-size:11px;font-weight:500;color:var(--mut);margin-top:-6px}
+nav.main{display:flex;gap:4px;margin-inline-start:auto}
+nav.main a{padding:8px 14px;border-radius:999px;font-weight:500;font-size:15px;color:#ddd}
+nav.main a:hover{color:#fff;background:var(--ink3)}
+nav.main a.on{background:var(--y);color:var(--ink)}
+.hact{display:flex;gap:8px;align-items:center}
+.lang{display:flex;background:var(--ink3);border-radius:999px;padding:3px}
+.lang button{padding:4px 10px;border-radius:999px;font-size:13px;color:#bbb}
+.lang button.on{background:#fff;color:var(--ink)}
+.cartbtn{position:relative;width:42px;height:42px;border-radius:50%;background:var(--ink3);display:grid;place-items:center}
+.cartbtn svg{width:20px;height:20px}
+.cartbtn .n{position:absolute;top:-3px;inset-inline-end:-3px;background:var(--y);color:var(--ink);font-size:11px;font-weight:900;min-width:19px;height:19px;border-radius:999px;display:grid;place-items:center;padding:0 4px}
+.burger{display:none;width:42px;height:42px;border-radius:50%;background:var(--ink3);place-items:center}
+@media (max-width:1120px){
+  nav.main{position:fixed;inset:66px 0 auto 0;flex-direction:column;background:var(--ink);padding:12px 20px 20px;gap:2px;display:none;border-bottom:1px solid var(--line)}
+  nav.main.open{display:flex}
+  nav.main a{padding:12px 14px;font-size:16px}
+  .burger{display:grid}
+  .hact{margin-inline-start:auto}
+}
+
+/* hero */
+.hero{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 38px,rgba(255,196,0,.05) 38px 46px);pointer-events:none}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center;padding-top:64px;padding-bottom:72px}
+.tag{display:inline-flex;align-items:center;gap:8px;background:rgba(255,196,0,.12);color:var(--y);border:1px solid rgba(255,196,0,.35);padding:5px 12px;border-radius:999px;font-size:13px;font-weight:700}
+.hero h1{font-size:clamp(30px,4.6vw,52px);line-height:1.25;font-weight:900;margin:18px 0 14px}
+.hero h1 em{font-style:normal;color:var(--y)}
+.hero p.lead{color:#cfcfcf;font-size:17px;max-width:560px}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:700;font-size:15px;transition:transform .15s}
+.btn:active{transform:scale(.97)}
+.btn.y{background:var(--y);color:var(--ink)}
+.btn.y:hover{background:var(--y2)}
+.btn.o{border:1.5px solid #555;color:#fff}
+.btn.o:hover{border-color:#fff}
+.btn.d{background:var(--ink);color:#fff}
+.btn.wa{background:#1FAF55;color:#fff}
+.btn svg{width:18px;height:18px}
+
+.finder{background:var(--ink2);border:1px solid var(--line);border-radius:22px;padding:22px}
+.finder h3{font-size:17px;margin-bottom:4px}
+.finder p{font-size:13px;color:var(--mut);margin-bottom:16px}
+.sizerow{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;direction:ltr}
+.sizerow label{font-size:11px;color:var(--mut);display:block;margin-bottom:4px;text-align:center}
+select.s{width:100%;background:var(--ink3);border:1px solid #3a3a3a;color:#fff;border-radius:12px;padding:11px 10px;font-size:16px;font-weight:700;text-align:center;appearance:none}
+.sizehint{direction:ltr;text-align:center;font-size:26px;font-weight:900;letter-spacing:1px;margin:14px 0;color:var(--y)}
+.finder .btn{width:100%;justify-content:center}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr;padding-top:40px;padding-bottom:48px}}
+
+/* sections */
+section.blk{padding:64px 0}
+.sh{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:26px;flex-wrap:wrap}
+.sh h2{font-size:clamp(24px,3vw,32px);font-weight:900;line-height:1.3}
+.sh p{color:var(--sub);margin-top:4px}
+.sh a.more{font-weight:700;border-bottom:2px solid var(--y)}
+
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cat{background:var(--card);border-radius:var(--r);padding:22px;border:1px solid #e9e7e0;transition:.2s;display:block}
+.cat:hover{transform:translateY(-3px);box-shadow:0 12px 30px -16px rgba(0,0,0,.25);border-color:var(--y)}
+.cat .ic{width:48px;height:48px;border-radius:14px;background:var(--ink);display:grid;place-items:center;margin-bottom:14px}
+.cat .ic svg{width:26px;height:26px;color:var(--y)}
+.cat h3{font-size:17px}
+.cat p{font-size:14px;color:var(--sub)}
+@media (max-width:860px){.cats{grid-template-columns:1fr 1fr}}
+
+.why{background:var(--ink);color:#fff;border-radius:28px;padding:44px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.why .it b{display:block;font-size:30px;font-weight:900;color:var(--y);line-height:1.2}
+.why .it span{color:#cfcfcf;font-size:14px}
+@media (max-width:860px){.why{grid-template-columns:1fr 1fr;padding:28px}}
+
+/* products */
+.shop{display:grid;grid-template-columns:270px 1fr;gap:24px;align-items:start}
+.filters{background:var(--card);border-radius:var(--r);padding:20px;border:1px solid #e9e7e0;position:sticky;top:84px}
+.filters h4{font-size:14px;margin:14px 0 8px;color:var(--sub)}
+.filters h4:first-child{margin-top:0}
+.fsel{width:100%;border:1px solid #ddd;border-radius:10px;padding:9px 10px;background:#fafafa}
+.fin{width:100%;border:1px solid #ddd;border-radius:10px;padding:9px 12px;background:#fafafa}
+.fgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;direction:ltr}
+.reset{margin-top:16px;font-size:14px;font-weight:700;color:var(--sub);text-decoration:underline}
+@media (max-width:860px){.shop{grid-template-columns:1fr}.filters{position:static}}
+.count{color:var(--sub);font-size:14px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.pc{background:var(--card);border-radius:var(--r);border:1px solid #e9e7e0;overflow:hidden;display:flex;flex-direction:column;transition:.2s}
+.pc:hover{box-shadow:0 14px 34px -18px rgba(0,0,0,.3)}
+.pc .img{aspect-ratio:4/3;background:linear-gradient(160deg,#f1efe8,#e5e2d8);display:grid;place-items:center;position:relative;cursor:pointer}
+.pc .img img{width:100%;height:100%;object-fit:cover}
+.pc .img .ph{width:46%;opacity:.85}
+.badge{position:absolute;top:10px;inset-inline-start:10px;background:var(--ink);color:var(--y);font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px}
+.pc .bd{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.pc .br{font-size:12px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:.6px}
+.pc h3{font-size:16px;line-height:1.45;cursor:pointer}
+.pc .sz{direction:ltr;text-align:start;font-weight:900;font-size:18px}
+.stars{color:#E8A400;font-size:13px}
+.stars small{color:var(--sub)}
+.pc .war{font-size:12px;background:#FFF6D6;color:#7a5a00;padding:4px 9px;border-radius:8px;align-self:flex-start;font-weight:600}
+.pc .act{display:flex;gap:8px;margin-top:auto;padding-top:8px}
+.pc .act .btn{padding:9px 14px;font-size:14px;flex:1;justify-content:center}
+.empty{background:var(--card);border-radius:var(--r);padding:40px;text-align:center;color:var(--sub);border:1px dashed #ccc}
+
+/* product modal + drawer */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:80;display:none}
+.ov.on{display:block}
+.modal{position:fixed;z-index:90;inset:auto 0 0 0;max-height:92vh;overflow:auto;background:var(--card);border-radius:24px 24px 0 0;padding:24px;display:none;max-width:760px;margin:0 auto}
+.modal.on{display:block}
+@media (min-width:860px){.modal{inset:50% auto auto 50%;transform:translate(-50%,-50%);border-radius:24px;width:760px}}
+.x{position:absolute;top:14px;inset-inline-end:14px;width:36px;height:36px;border-radius:50%;background:#f0f0f0;font-size:20px;line-height:1}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+@media (max-width:700px){.mgrid{grid-template-columns:1fr}}
+.spec{width:100%;border-collapse:collapse;font-size:14px;margin-top:10px}
+.spec td{padding:7px 0;border-bottom:1px solid #eee;vertical-align:top}
+.spec td:first-child{color:var(--sub);width:42%}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{background:#f1f1f1;border-radius:999px;padding:3px 10px;font-size:13px}
+.drawer{position:fixed;top:0;bottom:0;inset-inline-end:0;width:min(420px,100%);background:var(--card);z-index:90;transform:translateX(110%);transition:.25s;display:flex;flex-direction:column}
+[dir=rtl] .drawer{transform:translateX(-110%)}
+.drawer.on{transform:none!important}
+.drawer .hd{padding:20px;border-bottom:1px solid #eee;display:flex;justify-content:space-between;align-items:center}
+.drawer .ls{flex:1;overflow:auto;padding:12px 20px}
+.ci{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #f0f0f0;align-items:center}
+.ci .t{flex:1;font-size:14px}
+.ci .t b{display:block;direction:ltr;text-align:start}
+.qty{display:flex;align-items:center;border:1px solid #ddd;border-radius:999px}
+.qty button{width:30px;height:30px;font-size:16px}
+.qty span{min-width:22px;text-align:center;font-weight:700}
+.drawer .ft{padding:20px;border-top:1px solid #eee}
+.drawer .ft .btn{width:100%;justify-content:center}
+.drawer .note{font-size:12px;color:var(--sub);margin-top:8px;text-align:center}
+
+/* articles */
+.arts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media (max-width:860px){.arts{grid-template-columns:1fr}}
+.ac{background:var(--card);border-radius:var(--r);overflow:hidden;border:1px solid #e9e7e0;display:flex;flex-direction:column;transition:.2s}
+.ac:hover{transform:translateY(-3px);box-shadow:0 14px 34px -18px rgba(0,0,0,.3)}
+.ac .cv{aspect-ratio:16/9;display:grid;place-items:center;position:relative;overflow:hidden}
+.ac .cv svg{width:42%;opacity:.95}
+.ac .bd{padding:16px 18px 20px}
+.ac .meta{font-size:12px;color:var(--sub);display:flex;gap:10px;align-items:center}
+.ac .kind{background:var(--ink);color:var(--y);padding:2px 9px;border-radius:999px;font-weight:700}
+.ac h3{font-size:18px;line-height:1.5;margin:8px 0 6px}
+.ac p{font-size:14px;color:var(--sub)}
+.tabs{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
+.tabs button{padding:8px 16px;border-radius:999px;background:var(--card);border:1px solid #e0ded6;font-weight:600;font-size:14px}
+.tabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+article.post{max-width:760px;margin:0 auto;background:var(--card);border-radius:24px;padding:clamp(22px,5vw,48px);border:1px solid #e9e7e0}
+article.post h1{font-size:clamp(24px,3.4vw,34px);line-height:1.4;margin:12px 0 8px;font-weight:900}
+article.post .meta{color:var(--sub);font-size:14px;margin-bottom:22px}
+article.post h2{font-size:21px;margin:26px 0 8px}
+article.post p,article.post li{font-size:16.5px;color:#2a2a2a;margin-bottom:12px}
+article.post ul{padding-inline-start:22px}
+article.post .box{background:#FFF6D6;border-inline-start:4px solid var(--y);padding:14px 16px;border-radius:10px;margin:18px 0}
+article.post .ltr{direction:ltr;display:inline-block;font-weight:700}
+.back{display:inline-flex;gap:6px;font-weight:700;margin-bottom:18px}
+
+/* contact */
+.ct{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media (max-width:860px){.ct{grid-template-columns:1fr}}
+.cbox{background:var(--card);border-radius:var(--r);padding:26px;border:1px solid #e9e7e0}
+.crow{display:flex;gap:14px;align-items:center;padding:14px 0;border-bottom:1px solid #f0f0f0}
+.crow:last-child{border:0}
+.crow .ic{width:44px;height:44px;border-radius:12px;background:var(--ink);display:grid;place-items:center;flex-shrink:0}
+.crow .ic svg{width:20px;height:20px;color:var(--y)}
+.crow small{display:block;color:var(--sub);font-size:12px}
+.crow b{direction:ltr;display:inline-block}
+.map{border-radius:var(--r);overflow:hidden;min-height:320px;border:1px solid #e9e7e0}
+.map iframe{width:100%;height:100%;min-height:320px;border:0}
+
+footer{background:var(--ink);color:#bbb;padding:44px 0 26px;margin-top:40px}
+footer .fg{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}
+footer h5{color:#fff;font-size:15px;margin-bottom:10px}
+footer a{display:block;padding:3px 0;font-size:14px}
+footer a:hover{color:var(--y)}
+footer .cp{border-top:1px solid var(--line);margin-top:28px;padding-top:18px;font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media (max-width:860px){footer .fg{grid-template-columns:1fr}}
+
+.fab{position:fixed;bottom:20px;inset-inline-start:20px;z-index:40;width:56px;height:56px;border-radius:50%;background:#1FAF55;display:grid;place-items:center;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
+.fab svg{width:28px;height:28px;color:#fff}
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:14px;opacity:0;transition:.25s;z-index:100;pointer-events:none}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.page{display:none}
+.page.on{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.pagehead{background:var(--ink);color:#fff;padding:44px 0}
+.pagehead h1{font-size:clamp(26px,3.6vw,38px);font-weight:900}
+.pagehead p{color:#cfcfcf}
+
+/* brands & oils */
+.brands{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.bt{background:var(--card);border:1px solid #e9e7e0;border-radius:14px;padding:16px 12px;text-align:center;transition:.2s;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:8px}
+.bt:hover{border-color:var(--y);transform:translateY(-2px);box-shadow:0 10px 24px -16px rgba(0,0,0,.3)}
+.bt .mono{width:52px;height:52px;border-radius:50%;background:var(--ink);color:var(--y);display:grid;place-items:center;font-weight:900;font-size:20px;letter-spacing:-.5px;direction:ltr}
+.bt b{font-size:15px;direction:ltr;letter-spacing:.3px}
+.bt small{font-size:12px;color:var(--sub)}
+.bt.stock{border-color:var(--y);background:#FFFBEB}
+.bt .st{font-size:10px;background:var(--y);color:var(--ink);border-radius:999px;padding:1px 8px;font-weight:700}
+.grades{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}
+.gr{background:var(--card);border:1px solid #e9e7e0;border-radius:12px;padding:14px 10px;text-align:center;cursor:pointer;transition:.2s}
+.gr:hover{border-color:var(--y);background:#FFFBEB}
+.gr b{display:block;direction:ltr;font-size:19px;font-weight:900}
+.gr small{color:var(--sub);font-size:12px}
+.gsec{margin-bottom:34px}
+.gsec h3{font-size:19px;margin-bottom:4px}
+.gsec p.d{color:var(--sub);font-size:14px;margin-bottom:14px}
+.info{background:var(--ink);color:#e8e8e8;border-radius:20px;padding:26px;margin-bottom:34px}
+.info h3{color:var(--y);margin-bottom:8px}
+.info p{font-size:15px}
+.info .ltr{direction:ltr;display:inline-block;font-weight:700;color:#fff}
+.sizes-all{display:flex;flex-wrap:wrap;gap:6px;direction:ltr}
+.sizes-all button{background:var(--card);border:1px solid #e0ded6;border-radius:8px;padding:5px 9px;font-size:13px;font-weight:600}
+.sizes-all button:hover{border-color:var(--y);background:#FFFBEB}
+.sizes-all button.in{background:var(--y);border-color:var(--y)}
+.rimh{font-weight:900;font-size:15px;margin:14px 0 6px;direction:ltr;text-align:start}
+.note2{font-size:13px;color:var(--sub);margin-top:14px}
+/* forms & account */
+.box2{background:var(--card);border:1px solid #e9e7e0;border-radius:var(--r);padding:22px;margin-bottom:18px}
+.box2 h3{font-size:18px;margin-bottom:12px}
+.fg2{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.fld label{display:block;font-size:13px;color:var(--sub);margin-bottom:4px}
+.fld input,.fld select,.fld textarea{width:100%;border:1px solid #ddd;border-radius:10px;padding:10px 12px;background:#fafafa}
+.fld textarea{min-height:70px}
+.ltrin{direction:ltr;text-align:left}
+.msg{margin-top:12px;padding:10px 14px;border-radius:10px;font-size:14px;display:none}
+.msg.ok{display:block;background:#E8F7EE;color:#14632f}
+.msg.err{display:block;background:#FDECEC;color:#8a1c1c}
+.vinbox{display:flex;gap:8px;flex-wrap:wrap}
+.vinbox input{flex:1;min-width:220px;font-size:18px;font-weight:700;letter-spacing:1px;direction:ltr;text-transform:uppercase;border:2px solid var(--ink);border-radius:12px;padding:12px 14px}
+.car-res{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px}
+@media (max-width:760px){.car-res{grid-template-columns:1fr}}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:15px}
+.kv dt{color:var(--sub)}
+.kv dd{font-weight:700;direction:ltr;text-align:start}
+.chipbtn{display:inline-block;margin:4px;padding:6px 12px;border-radius:999px;border:1.5px solid var(--ink);font-weight:700;direction:ltr;cursor:pointer;background:#fff}
+.chipbtn:hover{background:var(--y);border-color:var(--y)}
+.tabs2{display:flex;gap:6px;margin-bottom:16px}
+.tabs2 button{padding:8px 16px;border-radius:999px;border:1px solid #ddd;background:#fff;font-weight:700}
+.tabs2 button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+table.lst{width:100%;border-collapse:collapse;font-size:14px}
+table.lst th,table.lst td{padding:8px 6px;border-bottom:1px solid #eee;text-align:start;vertical-align:top}
+table.lst th{color:var(--sub);font-weight:600;font-size:12px}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:700;background:#eee}
+.pill.new{background:#FFF1C2}.pill.confirmed,.pill.processing{background:#DCEBFF}.pill.done,.pill.delivered{background:#DDF5E4}.pill.cancelled{background:#F5DADA}
+.due{background:#FFF6D6;border-inline-start:4px solid var(--y);padding:10px 12px;border-radius:8px;margin-bottom:8px;font-size:14px}
+.empty2{color:var(--sub);font-size:14px;padding:8px 0}
+.disclaim{font-size:12px;color:var(--sub);margin-top:10px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hbar">
+    <a href="#/" class="logo">
+      <span class="mark"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="#0E0E0E" stroke-width="4"/><circle cx="16" cy="16" r="5" fill="#0E0E0E"/><path d="M16 3v6M16 23v6M3 16h6M23 16h6" stroke="#0E0E0E" stroke-width="2"/></svg></span>
+      <span>ZAD CSC<small data-t="tagline"></small></span>
+    </a>
+    <nav class="main" id="nav">
+      <a href="#/" data-r="home" data-t="nav_home"></a>
+      <a href="#/tires" data-r="tires" data-t="nav_tires"></a>
+      <a href="#/oils" data-r="oils" data-t="nav_oils"></a>
+      <a href="#/car" data-r="car" data-t="nav_car"></a>
+      <a href="#/brands" data-r="brands" data-t="nav_brands"></a>
+      <a href="#/services" data-r="services" data-t="nav_services"></a>
+      <a href="#/news" data-r="news" data-t="nav_news"></a>
+      <a href="#/contact" data-r="contact" data-t="nav_contact"></a>
+    </nav>
+    <div class="hact">
+      <div class="lang" id="lang">
+        <button data-l="fa">فا</button><button data-l="ar">ع</button><button data-l="en">EN</button>
+      </div>
+      <a class="cartbtn" href="#/account" id="acctBtn" aria-label="account"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><span class="n" id="acctDot" style="display:none">✓</span></a>
+      <button class="cartbtn" id="cartOpen" aria-label="cart">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 8H6"/><circle cx="10" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/></svg>
+        <span class="n" id="cartN">0</span>
+      </button>
+      <button class="burger" id="burger" aria-label="menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+<!-- HOME -->
+<div class="page" id="p-home">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <span class="tag">● <span data-t="hero_tag"></span></span>
+        <h1 data-t="hero_h" data-html></h1>
+        <p class="lead" data-t="hero_p"></p>
+        <div class="btns">
+          <a href="#/tires" class="btn y" data-t="hero_cta1"></a>
+          <a href="#/car" class="btn o"><span data-t="hero_cta3"></span></a>
+          <a href="#/booking" class="btn o"><span data-t="hero_cta4"></span></a>
+        </div>
+      </div>
+      <div class="finder">
+        <h3 data-t="finder_h"></h3>
+        <p data-t="finder_p"></p>
+        <div class="sizerow">
+          <div><label data-t="width"></label><select class="s" id="hw"></select></div>
+          <div><label data-t="profile"></label><select class="s" id="hp"></select></div>
+          <div><label data-t="rim"></label><select class="s" id="hr"></select></div>
+        </div>
+        <div class="sizehint" id="hsz">— / — R—</div>
+        <button class="btn y" id="hgo" data-t="finder_btn"></button>
+      </div>
+    </div>
+  </div>
+
+  <section class="blk">
+    <div class="wrap">
+      <div class="sh"><div><h2 data-t="cats_h"></h2><p data-t="cats_p"></p></div></div>
+      <div class="cats">
+        <a href="#/tires" class="cat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/></svg></div><h3 data-t="c1"></h3><p data-t="c1p"></p></a>
+        <a href="#/oils" class="cat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg></div><h3 data-t="c2"></h3><p data-t="c2p"></p></a>
+        <a href="#/services" class="cat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17l4-8 4 5 3-3 7 6"/><path d="M3 21h18"/></svg></div><h3 data-t="c3"></h3><p data-t="c3p"></p></a>
+        <a href="#/news" class="cat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div><h3 data-t="c4"></h3><p data-t="c4p"></p></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" style="padding-top:0">
+    <div class="wrap">
+      <div class="sh"><div><h2 data-t="feat_h"></h2><p data-t="feat_p"></p></div><a href="#/tires" class="more" data-t="see_all"></a></div>
+      <div class="grid" id="featGrid"></div>
+    </div>
+  </section>
+
+  <section class="blk" style="padding-top:0">
+    <div class="wrap">
+      <div class="sh"><div><h2 data-t="tb_h"></h2><p data-t="tb_p"></p></div><a href="#/brands" class="more" data-t="see_all"></a></div>
+      <div class="brands" id="homeBrands"></div>
+    </div>
+  </section>
+
+  <section class="blk" style="padding-top:0">
+    <div class="wrap">
+      <div class="why">
+        <div class="it"><b data-t="w1"></b><span data-t="w1p"></span></div>
+        <div class="it"><b data-t="w2"></b><span data-t="w2p"></span></div>
+        <div class="it"><b data-t="w3"></b><span data-t="w3p"></span></div>
+        <div class="it"><b data-t="w4"></b><span data-t="w4p"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk" style="padding-top:0">
+    <div class="wrap">
+      <div class="sh"><div><h2 data-t="news_h"></h2><p data-t="news_p"></p></div><a href="#/news" class="more" data-t="see_all"></a></div>
+      <div class="arts" id="homeArts"></div>
+    </div>
+  </section>
+</div>
+
+<!-- TIRES -->
+<div class="page" id="p-tires">
+  <div class="pagehead"><div class="wrap"><h1 data-t="nav_tires"></h1><p data-t="tires_p"></p></div></div>
+  <section class="blk" style="padding-top:28px">
+    <div class="wrap shop">
+      <aside class="filters">
+        <h4 data-t="search"></h4>
+        <input class="fin" id="fq" data-ph="search_ph">
+        <h4 data-t="size"></h4>
+        <div class="fgrid">
+          <select class="fsel" id="fw"></select>
+          <select class="fsel" id="fp"></select>
+          <select class="fsel" id="fr"></select>
+        </div>
+        <h4 data-t="brand"></h4>
+        <select class="fsel" id="fb"></select>
+        <h4 data-t="vehicle"></h4>
+        <select class="fsel" id="fv"></select>
+        <button class="reset" id="freset" data-t="reset"></button>
+      </aside>
+      <div>
+        <div class="count" id="fcount"></div>
+        <div class="grid" id="tireGrid"></div>
+      </div>
+    </div>
+  </section>
+  <section class="blk" style="padding-top:0">
+    <div class="wrap">
+      <div class="sh"><div><h2 data-t="allsz_h"></h2><p data-t="allsz_p"></p></div></div>
+      <div id="allSizes"></div>
+    </div>
+  </section>
+</div>
+
+<!-- OILS -->
+<div class="page" id="p-oils">
+  <div class="pagehead"><div class="wrap"><h1 data-t="nav_oils"></h1><p data-t="oils_p"></p></div></div>
+  <section class="blk" style="padding-top:28px">
+    <div class="wrap">
+      <div class="info"><h3 data-t="sae_h"></h3><p data-t="sae_p" data-html></p></div>
+      <div id="oilGrades"></div>
+      <div class="gsec"><h3 data-t="ob_h"></h3><p class="d" data-t="ob_p"></p><div class="brands" id="oilBrands"></div></div>
+    </div>
+  </section>
+</div>
+
+<!-- BRANDS -->
+<div class="page" id="p-brands">
+  <div class="pagehead"><div class="wrap"><h1 data-t="nav_brands"></h1><p data-t="br_p"></p></div></div>
+  <section class="blk" style="padding-top:28px">
+    <div class="wrap">
+      <div class="gsec"><h3 data-t="tb_h"></h3><p class="d" data-t="tb_p2"></p><div class="brands" id="allTireBrands"></div></div>
+      <div class="gsec"><h3 data-t="ob_h"></h3><p class="d" data-t="ob_p"></p><div class="brands" id="allOilBrands"></div></div>
+      <p class="note2" data-t="tm_note"></p>
+    </div>
+  </section>
+</div>
+
+<!-- SERVICES -->
+<div class="page" id="p-services">
+  <div class="pagehead"><div class="wrap"><h1 data-t="nav_services"></h1><p data-t="svc_p"></p></div></div>
+  <section class="blk">
+    <div class="wrap">
+      <div class="cats" id="svcGrid"></div>
+      <div style="margin-top:28px;text-align:center;display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a class="btn y" href="#/booking" data-t="hero_cta4"></a><a class="btn wa waLink" target="_blank" rel="noopener"><span data-t="svc_cta"></span></a></div>
+    </div>
+  </section>
+</div>
+
+<!-- NEWS -->
+<div class="page" id="p-news">
+  <div class="pagehead"><div class="wrap"><h1 data-t="news_h"></h1><p data-t="news_p"></p></div></div>
+  <section class="blk" style="padding-top:28px">
+    <div class="wrap">
+      <div class="tabs" id="ntabs">
+        <button data-k="all" class="on" data-t="k_all"></button>
+        <button data-k="news" data-t="k_news"></button>
+        <button data-k="guide" data-t="k_guide"></button>
+      </div>
+      <div class="arts" id="newsGrid"></div>
+    </div>
+  </section>
+</div>
+
+<!-- ARTICLE -->
+<div class="page" id="p-article">
+  <section class="blk" style="padding-top:28px">
+    <div class="wrap">
+      <a href="#/news" class="back">← <span data-t="back"></span></a>
+      <article class="post" id="post"></article>
+    </div>
+  </section>
+</div>
+
+<!-- CAR FINDER -->
+<div class="page" id="p-car">
+  <div class="pagehead"><div class="wrap"><h1 data-t="nav_car"></h1><p data-t="car_p"></p></div></div>
+  <section class="blk" style="padding-top:28px">
+    <div class="wrap">
+      <div class="box2">
+        <h3 data-t="vin_h"></h3>
+        <div class="vinbox"><input id="vinIn" maxlength="17" placeholder="JTMHV05J..." autocomplete="off"><button class="btn y" id="vinGo" data-t="search"></button></div>
+        <p class="disclaim" data-t="vin_hint"></p>
+      </div>
+      <div class="box2">
+        <h3 data-t="mm_h"></h3>
+        <div class="fg2">
+          <div class="fld"><label data-t="make"></label><select id="mkSel"></select></div>
+          <div class="fld"><label data-t="model"></label><select id="mdSel"></select></div>
+          <div class="fld"><label data-t="year"></label><select id="yrSel"></select></div>
+        </div>
+        <div style="margin-top:12px"><button class="btn y" id="mmGo" data-t="search"></button></div>
+      </div>
+      <div id="carRes"></div>
+    </div>
+  </section>
+</div>
+
+<!-- BOOKING -->
+<div class="page" id="p-booking">
+  <div class="pagehead"><div class="wrap"><h1 data-t="hero_cta4"></h1><p data-t="bk_p"></p></div></div>
+  <section class="blk" style="padding-top:28px">
+    <div class="wrap">
+      <form class="box2" id="bkForm">
+        <div class="fg2">
+          <div class="fld"><label data-t="f_name"></label><input name="name" required></div>
+          <div class="fld"><label data-t="phone"></label><input name="phone" class="ltrin" inputmode="tel" required placeholder="9XXXXXXX"></div>
+          <div class="fld"><label data-t="vehicle"></label><input name="vehicle" placeholder="Land Cruiser 2022"></div>
+          <div class="fld"><label data-t="f_service"></label><select name="service" id="bkSvc"></select></div>
+          <div class="fld"><label data-t="f_date"></label><input name="date" type="date" required></div>
+          <div class="fld"><label data-t="f_time"></label><select name="time" id="bkTime"></select></div>
+        </div>
+        <div class="fld" style="margin-top:12px"><label data-t="f_note"></label><textarea name="note"></textarea></div>
+        <div style="margin-top:14px"><button class="btn y" type="submit" data-t="bk_send"></button></div>
+        <div class="msg" id="bkMsg"></div>
+      </form>
+    </div>
+  </section>
+</div>
+
+<!-- ACCOUNT -->
+<div class="page" id="p-account">
+  <div class="pagehead"><div class="wrap"><h1 data-t="acct_h"></h1><p id="acctSub" data-t="acct_p"></p></div></div>
+  <section class="blk" style="padding-top:28px">
+    <div class="wrap" id="acctWrap"></div>
+  </section>
+</div>
+
+<!-- CONTACT -->
+<div class="page" id="p-contact">
+  <div class="pagehead"><div class="wrap"><h1 data-t="nav_contact"></h1><p data-t="ct_p"></p></div></div>
+  <section class="blk">
+    <div class="wrap ct">
+      <div class="cbox">
+        <a class="crow waLink" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l2 .9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></span><span><small data-t="whatsapp"></small><b>+968 9656 9646</b></span></a>
+        <a class="crow" href="tel:+96896569646"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg></span><span><small data-t="phone"></small><b>+968 9656 9646</b></span></a>
+        <a class="crow" href="https://instagram.com/zad_tires" target="_blank" rel="noopener"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span><span><small>Instagram</small><b>@zad_tires</b></span></a>
+        <div class="crow"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span><small data-t="address"></small><span data-t="addr"></span></span></div>
+      </div>
+      <div class="map"><iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Salalah,Oman&output=embed" title="map"></iframe></div>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fg">
+      <div><h5>ZAD CSC</h5><p style="font-size:14px;max-width:380px" data-t="foot_p"></p></div>
+      <div><h5 data-t="links"></h5><a href="#/tires" data-t="nav_tires"></a><a href="#/oils" data-t="nav_oils"></a><a href="#/brands" data-t="nav_brands"></a><a href="#/services" data-t="nav_services"></a><a href="#/news" data-t="nav_news"></a><a href="#/contact" data-t="nav_contact"></a></div>
+      <div><h5 data-t="nav_contact"></h5><a class="waLink" target="_blank" rel="noopener">WhatsApp</a><a href="tel:+96896569646" style="direction:ltr;text-align:start">+968 9656 9646</a><a href="https://instagram.com/zad_tires" target="_blank" rel="noopener">Instagram</a></div>
+    </div>
+    <div class="cp"><span>© <span id="yr"></span> Zad CSC — Salalah, Oman</span><span>zadcsc.com</span></div>
+  </div>
+</footer>
+
+<a class="fab waLink" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l2 .9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
+
+<div class="ov" id="ov"></div>
+<div class="modal" id="modal"></div>
+<aside class="drawer" id="drawer">
+  <div class="hd"><h3 data-t="cart_h"></h3><button class="x" style="position:static" id="cartClose">×</button></div>
+  <div class="ls" id="cartList"></div>
+  <div class="ft">
+    <button class="btn wa" id="cartSend"><span data-t="cart_send"></span></button>
+    <div class="note" data-t="cart_note"></div>
+  </div>
+</aside>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   تنظیمات — SETTINGS
+   API_URL: آدرس Worker «zadcsc-api» در Cloudflare
+   (Workers & Pages ← zadcsc-api ← بخش Domains/Preview URL)
+   اگر خالی بماند یا در دسترس نباشد، داده‌های پشتیبان پایین نمایش داده می‌شوند.
+   ============================================================ */
+const API_URL = "/api/tires";
+const WA = "96896569646";
+
+/* داده‌ی پشتیبان (همان رکورد موجود در دیتابیس zadcsc-db) */
+const FALLBACK_TIRES = [{
+  id:1, brand:"Bridgestone", pattern:"Alenza 001 (AL01 T4)", sizeText:"275/50R21 113V XL - Bridgestone Alenza",
+  width:"275", profile:"50", rim:"R21", system:"metric", utqg:"Extra Load (1,150 kg) | GCC Approved #56403",
+  warranty:"ضمانت ۵ ساله رسمی زاد", rating:5, reviews:29, dotYear:"2025/2026", oeType:"Flagship Luxury 21\" SUV Fitment",
+  vehicles:["Lexus LX570","Lexus LX600","Toyota Land Cruiser 300","Infiniti QX80"], images:[],
+  desc_fa:"تایر پرچمدار و فوق‌لوکس رینگ ۲۱ بریجستون ژاپن مناسب لکسوس LX570 و LX600. چسبندگی عالی در آسفالت داغ عمان با ۵ سال ضمانت تعویض رسمی زاد در صلاله.",
+  desc_ar:"إطار بريدجستون الأصلي الفاخر مقاس 21 إنش المعتمد لسيارات لكزس LX570 وLX600 ولاندكروزر مع ضمان 5 سنوات في صلالة.",
+  desc_en:"Genuine Bridgestone Alenza 001 21\" luxury SUV tire backed by Zad CSC 5-Year Warranty."
+}];
+
+/* ============================================================
+   کاتالوگ سایزها — SIZE CATALOGUE (سایزهای رایج بازار)
+   ============================================================ */
+const SIZE_CATALOG = {
+  R13:["155/65","155/70","155/80","165/65","165/70","165/80","175/70"],
+  R14:["165/60","165/65","175/65","175/70","185/60","185/65","185/70","195/60","195/70","195/80"],
+  R15:["175/65","185/55","185/60","185/65","195/50","195/55","195/60","195/65","205/60","205/65","205/70","215/65","215/70","225/70","235/75","265/70"],
+  R16:["195/50","195/55","195/60","205/45","205/50","205/55","205/60","205/65","215/55","215/60","215/65","215/70","215/85","225/55","225/60","225/70","225/75","235/60","235/70","235/85","245/70","245/75","255/65","255/70","265/70","265/75","275/70","285/75"],
+  R17:["205/45","205/50","215/45","215/50","215/55","215/60","225/45","225/50","225/55","225/60","225/65","235/45","235/55","235/60","235/65","245/45","245/65","245/70","255/60","255/65","265/65","265/70","275/65","285/65","285/70"],
+  R18:["215/55","225/40","225/45","225/55","225/60","235/40","235/50","235/55","235/60","245/40","245/45","245/50","245/60","255/35","255/45","255/55","255/60","265/60","265/65","275/65","285/60","285/65"],
+  R19:["225/40","225/45","235/35","235/40","235/55","245/35","245/40","245/45","245/55","255/35","255/40","255/50","255/55","265/50","275/35","275/40","275/45","285/45"],
+  R20:["235/35","245/35","245/40","245/45","255/35","255/40","255/45","255/50","265/50","275/35","275/40","275/45","275/50","275/55","275/60","285/50","285/55","295/35","305/50","315/35"],
+  R21:["255/40","265/40","275/45","275/50","285/40","285/45","295/35","315/40"],
+  R22:["265/35","275/40","285/35","285/40","285/45","295/30","305/40","305/45","315/35"],
+  R23:["285/35","315/30"],
+  R24:["295/35","305/35"]
+};
+const INCH_SIZES = ["31x10.50R15","33x12.50R15","33x12.50R17","33x12.50R18","33x12.50R20","35x12.50R17","35x12.50R18","35x12.50R20","35x12.50R22","37x12.50R17","37x12.50R20","37x13.50R20","40x13.50R17"];
+const SIZES = Object.entries(SIZE_CATALOG).flatMap(([r,arr])=>arr.map(s=>{const [w,p]=s.split("/");return {w,p,r}}));
+
+/* ============================================================
+   برندهای تایر — TIRE BRANDS   (c = کشور)
+   ============================================================ */
+const TIRE_BRANDS = [
+  {n:"Bridgestone",c:"JP"},{n:"Michelin",c:"FR"},{n:"Continental",c:"DE"},{n:"Pirelli",c:"IT"},{n:"Goodyear",c:"US"},
+  {n:"Dunlop",c:"JP"},{n:"Yokohama",c:"JP"},{n:"Toyo",c:"JP"},{n:"Falken",c:"JP"},{n:"Nitto",c:"JP"},
+  {n:"Hankook",c:"KR"},{n:"Kumho",c:"KR"},{n:"Nexen",c:"KR"},{n:"BFGoodrich",c:"US"},{n:"Cooper",c:"US"},
+  {n:"General Tire",c:"US"},{n:"Firestone",c:"US"},{n:"Maxxis",c:"TW"},{n:"Nankang",c:"TW"},{n:"Federal",c:"TW"},
+  {n:"Giti",c:"SG"},{n:"GT Radial",c:"SG"},{n:"Apollo",c:"IN"},{n:"MRF",c:"IN"},{n:"Petlas",c:"TR"},
+  {n:"Lassa",c:"TR"},{n:"Achilles",c:"ID"},{n:"Triangle",c:"CN"},{n:"Linglong",c:"CN"},{n:"Sailun",c:"CN"},
+  {n:"Double Coin",c:"CN"},{n:"Westlake",c:"CN"},{n:"Annaite",c:"CN"},{n:"Habilead",c:"CN"},{n:"Sunny",c:"CN"},
+  {n:"Blackhawk",c:"CN"},{n:"Mazzini",c:"CN"},{n:"Doublestar",c:"CN"}
+];
+
+/* ============================================================
+   روغن — OIL GRADES & BRANDS
+   ============================================================ */
+const OIL_GRADES = [
+  {k:"eng", g:["0W-8","0W-12","0W-16","0W-20","0W-30","0W-40","5W-20","5W-30","5W-40","5W-50","10W-30","10W-40","10W-50","10W-60","15W-40","15W-50","20W-50","25W-60"]},
+  {k:"dsl", g:["5W-30","5W-40","10W-30","10W-40","15W-40","20W-50"]},
+  {k:"gear", g:["75W-80","75W-85","75W-90","75W-140","80W-90","85W-90","85W-140"]},
+  {k:"atf", g:["ATF Dexron III","ATF Dexron VI","ATF Mercon V","ATF WS (Toyota)","CVT Fluid","DCT/DSG Fluid"]}
+];
+const OIL_BRANDS = [
+  {n:"Mobil 1",c:"US"},{n:"Castrol",c:"UK"},{n:"Shell Helix",c:"UK"},{n:"TotalEnergies",c:"FR"},{n:"Motul",c:"FR"},
+  {n:"Liqui Moly",c:"DE"},{n:"Ravenol",c:"DE"},{n:"Fuchs",c:"DE"},{n:"Valvoline",c:"US"},{n:"Pennzoil",c:"US"},
+  {n:"Havoline",c:"US"},{n:"Petronas",c:"MY"},{n:"ENEOS",c:"JP"},{n:"Idemitsu",c:"JP"},{n:"Toyota Genuine",c:"JP"},
+  {n:"ADNOC",c:"AE"},{n:"ENOC",c:"AE"},{n:"OQ",c:"OM"},{n:"Gulf",c:"UK"}
+];
+
+/* ============================================================
+   اخبار و مقالات — NEWS & ARTICLES
+   برای افزودن مطلب جدید، یک آیتم به این لیست اضافه کنید.
+   kind: "news" (خبر) یا "guide" (مقاله‌ی آموزشی)
+   ============================================================ */
+const ARTICLES = [
+{
+  slug:"read-tire-size", kind:"guide", date:"2026-11-10", color:"#0E0E0E", min:4,
+  fa:{t:"چطور سایز تایر را بخوانیم؟ راهنمای کامل ۲۷۵/۵۰R21 113V XL",
+      s:"هر عدد و حرف روی دیواره‌ی تایر معنایی دارد. با یاد گرفتن آن‌ها، تایر اشتباه نمی‌خرید.",
+      b:`<p>روی دیواره‌ی هر تایر رشته‌ای مثل <span class="ltr">275/50R21 113V XL</span> نوشته شده است. این رشته تمام مشخصات اصلی تایر را می‌گوید.</p>
+<h2>بخش به بخش</h2>
+<ul><li><b class="ltr">275</b>: پهنای تایر به میلی‌متر.</li>
+<li><b class="ltr">50</b>: نسبت ارتفاع دیواره به پهنا (۵۰٪). عدد کمتر یعنی دیواره‌ی کوتاه‌تر و فرمان‌پذیری دقیق‌تر.</li>
+<li><b class="ltr">R</b>: ساختار رادیال؛ تقریباً همه‌ی تایرهای امروزی رادیال‌اند.</li>
+<li><b class="ltr">21</b>: قطر رینگ به اینچ.</li>
+<li><b class="ltr">113</b>: شاخص بار؛ ۱۱۳ یعنی حداکثر ۱۱۵۰ کیلوگرم برای هر تایر.</li>
+<li><b class="ltr">V</b>: شاخص سرعت؛ V یعنی حداکثر ۲۴۰ کیلومتر بر ساعت.</li>
+<li><b class="ltr">XL</b>: Extra Load؛ ساختار تقویت‌شده برای تحمل بار بیشتر، مناسب شاسی‌بلندهای سنگین.</li></ul>
+<div class="box">نکته: شاخص بار و سرعت تایر جدید هرگز نباید از مقداری که کارخانه‌ی خودرو توصیه کرده کمتر باشد. این مقادیر روی برچسب ستون در راننده نوشته شده است.</div>
+<h2>سایز اینچی آفرود</h2>
+<p>در تایرهای آفرود ممکن است سایزی مثل <span class="ltr">35x12.50R20</span> ببینید: قطر کلی ۳۵ اینچ، پهنای ۱۲٫۵ اینچ و رینگ ۲۰ اینچ.</p>`},
+  ar:{t:"كيف تقرأ مقاس الإطار؟ دليل كامل لـ 275/50R21 113V XL",
+      s:"لكل رقم وحرف على جدار الإطار معنى. تعلّمها ولن تشتري الإطار الخطأ.",
+      b:`<p>على جدار كل إطار سلسلة مثل <span class="ltr">275/50R21 113V XL</span> تلخّص مواصفاته الأساسية.</p>
+<h2>جزءاً جزءاً</h2>
+<ul><li><b class="ltr">275</b>: عرض الإطار بالمليمتر.</li>
+<li><b class="ltr">50</b>: نسبة ارتفاع الجدار إلى العرض (50٪).</li>
+<li><b class="ltr">R</b>: بنية شعاعية (راديال).</li>
+<li><b class="ltr">21</b>: قطر الجنط بالإنش.</li>
+<li><b class="ltr">113</b>: مؤشر الحمولة؛ 113 تعني 1150 كغ كحد أقصى لكل إطار.</li>
+<li><b class="ltr">V</b>: مؤشر السرعة؛ حتى 240 كم/س.</li>
+<li><b class="ltr">XL</b>: حمولة إضافية؛ بنية مقوّاة لسيارات الدفع الرباعي الثقيلة.</li></ul>
+<div class="box">تنبيه: لا تختر إطاراً بمؤشر حمولة أو سرعة أقل مما توصي به الشركة المصنّعة، والموجود على ملصق باب السائق.</div>
+<h2>المقاسات بالإنش للطرق الوعرة</h2>
+<p>مثل <span class="ltr">35x12.50R20</span>: قطر كلي 35 إنش، عرض 12.5 إنش، وجنط 20 إنش.</p>`},
+  en:{t:"How to read a tire size: a complete guide to 275/50R21 113V XL",
+      s:"Every number and letter on the sidewall means something. Learn them and you won't buy the wrong tire.",
+      b:`<p>Every tire carries a code like <span class="ltr">275/50R21 113V XL</span> on its sidewall. It sums up the tire's key specs.</p>
+<h2>Piece by piece</h2>
+<ul><li><b>275</b>: section width in millimetres.</li>
+<li><b>50</b>: aspect ratio — sidewall height is 50% of the width.</li>
+<li><b>R</b>: radial construction.</li>
+<li><b>21</b>: rim diameter in inches.</li>
+<li><b>113</b>: load index — up to 1,150 kg per tire.</li>
+<li><b>V</b>: speed rating — up to 240 km/h.</li>
+<li><b>XL</b>: Extra Load — a reinforced build for heavy SUVs.</li></ul>
+<div class="box">Tip: never fit a tire with a lower load index or speed rating than your vehicle maker specifies. You'll find it on the driver's door-jamb sticker.</div>
+<h2>Off-road inch sizes</h2>
+<p>Off-road tires may read <span class="ltr">35x12.50R20</span>: 35" overall diameter, 12.5" wide, on a 20" rim.</p>`}
+},
+{
+  slug:"dot-tire-age", kind:"guide", date:"2026-11-03", color:"#1F3A2E", min:3,
+  fa:{t:"کد DOT: تایر شما چند سال دارد؟",
+      s:"تایر حتی در انبار هم پیر می‌شود. چهار رقم آخر کد DOT تاریخ تولید را نشان می‌دهد.",
+      b:`<p>روی دیواره‌ی تایر کدی با حروف <b>DOT</b> شروع می‌شود. <b>چهار رقم آخر</b> آن، هفته و سال تولید است.</p>
+<div class="box">مثال: <span class="ltr">DOT ... 2325</span> یعنی هفته‌ی ۲۳ سال ۲۰۲۵.</div>
+<h2>چرا مهم است؟</h2>
+<p>لاستیک با گذشت زمان، به‌خصوص در گرما و آفتاب شدید، سخت می‌شود و ترک‌های ریز برمی‌دارد؛ حتی اگر آج آن سالم به نظر برسد.</p>
+<ul><li>بیشتر سازندگان توصیه می‌کنند تایرهای بالای ۵ سال سالانه توسط متخصص بازرسی شوند.</li>
+<li>تایرهای بالای ۱۰ سال، صرف‌نظر از ظاهر، باید تعویض شوند.</li>
+<li>در اقلیم گرم عمان، بازرسی منظم اهمیت بیشتری دارد.</li></ul>
+<p>در زاد، تاریخ تولید هر تایر را پیش از خرید به شما نشان می‌دهیم.</p>`},
+  ar:{t:"رمز DOT: كم عمر إطارك؟",
+      s:"الإطار يشيخ حتى في المخزن. آخر أربعة أرقام من رمز DOT تكشف تاريخ الإنتاج.",
+      b:`<p>على جدار الإطار رمز يبدأ بـ <b>DOT</b>، و<b>آخر أربعة أرقام</b> هي أسبوع وسنة الإنتاج.</p>
+<div class="box">مثال: <span class="ltr">DOT ... 2325</span> تعني الأسبوع 23 من عام 2025.</div>
+<h2>لماذا يهم ذلك؟</h2>
+<p>يتصلّب المطاط مع الوقت، خاصة مع الحرارة والشمس القوية، وتظهر فيه شقوق دقيقة حتى لو بدا النقش سليماً.</p>
+<ul><li>توصي معظم الشركات بفحص سنوي للإطارات التي تجاوز عمرها 5 سنوات.</li>
+<li>الإطارات التي تجاوزت 10 سنوات يجب استبدالها مهما كان شكلها.</li>
+<li>في مناخ عُمان الحار، يصبح الفحص الدوري أكثر أهمية.</li></ul>
+<p>في زاد نُريك تاريخ إنتاج كل إطار قبل الشراء.</p>`},
+  en:{t:"The DOT code: how old is your tire?",
+      s:"Tires age even in storage. The last four digits of the DOT code reveal the production date.",
+      b:`<p>Look for a code starting with <b>DOT</b> on the sidewall. Its <b>last four digits</b> are the production week and year.</p>
+<div class="box">Example: <span class="ltr">DOT ... 2325</span> means week 23 of 2025.</div>
+<h2>Why it matters</h2>
+<p>Rubber hardens over time — faster in heat and strong sun — and develops fine cracks even when the tread looks fine.</p>
+<ul><li>Most manufacturers recommend a yearly professional inspection once a tire is over 5 years old.</li>
+<li>Tires older than 10 years should be replaced regardless of appearance.</li>
+<li>In Oman's hot climate, regular checks matter even more.</li></ul>
+<p>At Zad, we show you the production date of every tire before you buy.</p>`}
+},
+{
+  slug:"tires-oman-heat", kind:"guide", date:"2026-10-27", color:"#7A3B00", min:4,
+  fa:{t:"انتخاب تایر برای آسفالت داغ عمان و ظفار",
+      s:"دمای سطح جاده در تابستان می‌تواند از ۶۰ درجه بگذرد. این‌ها را هنگام خرید تایر بررسی کنید.",
+      b:`<p>گرمای شدید جاده، فشار باد را بالا می‌برد و سایش آج را سریع‌تر می‌کند. انتخاب درست تایر، هم ایمنی و هم هزینه را بهتر می‌کند.</p>
+<h2>۱. رتبه‌ی دمایی (Temperature)</h2>
+<p>در سیستم UTQG، رتبه‌ی دمایی با <b>A</b>، <b>B</b> یا <b>C</b> مشخص می‌شود. <b>A</b> بالاترین مقاومت در برابر حرارت است و برای رانندگی طولانی در گرمای عمان بهترین انتخاب است.</p>
+<h2>۲. رتبه‌ی سایش (Treadwear)</h2>
+<p>عدد بالاتر یعنی عمر آج بیشتر در شرایط آزمون. برای مسیرهای طولانی صلاله–مسقط، عدد بالاتر به‌صرفه‌تر است.</p>
+<h2>۳. شاخص بار مناسب</h2>
+<p>شاسی‌بلندهای سنگین مثل لندکروزر و لکسوس LX به تایرهای <b>XL</b> یا <b>LT</b> با شاخص بار کافی نیاز دارند.</p>
+<div class="box">باد تایر را صبح و در حالت سرد اندازه بگیرید؛ بعد از رانندگی در گرما، عدد گیج به‌طور طبیعی بالاتر است و نباید باد را کم کنید.</div>`},
+  ar:{t:"اختيار الإطار للأسفلت الحار في عُمان وظفار",
+      s:"قد تتجاوز حرارة سطح الطريق 60 درجة صيفاً. افحص هذه النقاط عند شراء الإطار.",
+      b:`<p>الحرارة الشديدة ترفع ضغط الهواء وتسرّع تآكل النقشة. الاختيار الصحيح يحسّن السلامة والتكلفة معاً.</p>
+<h2>1. تصنيف الحرارة</h2>
+<p>في نظام UTQG يُصنَّف الإطار بـ <b>A</b> أو <b>B</b> أو <b>C</b>، و<b>A</b> هو الأعلى مقاومةً للحرارة والأنسب لعُمان.</p>
+<h2>2. تصنيف التآكل</h2>
+<p>الرقم الأعلى يعني عمراً أطول للنقشة في ظروف الاختبار، وهو أوفر للرحلات الطويلة بين صلالة ومسقط.</p>
+<h2>3. مؤشر الحمولة المناسب</h2>
+<p>سيارات الدفع الرباعي الثقيلة مثل لاندكروزر ولكزس LX تحتاج إطارات <b>XL</b> أو <b>LT</b> بحمولة كافية.</p>
+<div class="box">قِس ضغط الهواء صباحاً والإطار بارد؛ بعد القيادة في الحر ترتفع القراءة طبيعياً فلا تُنقص الهواء.</div>`},
+  en:{t:"Choosing tires for Oman's hot asphalt",
+      s:"Summer road surfaces can exceed 60°C. Check these points when you buy tires.",
+      b:`<p>Extreme road heat raises tire pressure and speeds up tread wear. The right choice improves both safety and cost.</p>
+<h2>1. Temperature grade</h2>
+<p>Under UTQG, tires are graded <b>A</b>, <b>B</b> or <b>C</b> for heat resistance. <b>A</b> is the highest and the best pick for long drives in Oman.</p>
+<h2>2. Treadwear grade</h2>
+<p>A higher number means longer tread life under test conditions — better value on long Salalah–Muscat runs.</p>
+<h2>3. The right load index</h2>
+<p>Heavy SUVs like the Land Cruiser and Lexus LX need <b>XL</b> or <b>LT</b> tires with enough load capacity.</p>
+<div class="box">Check pressure in the morning while tires are cold. After driving in the heat the gauge will read higher — that's normal, so don't let air out.</div>`}
+},
+{
+  slug:"sand-pressure", kind:"guide", date:"2026-10-18", color:"#8A6A1F", min:3,
+  fa:{t:"باد تایر برای رانندگی در شن و صحرا",
+      s:"کم کردن باد، سطح تماس تایر را بزرگ‌تر می‌کند و خودرو در شن فرو نمی‌رود. اما قوانینی دارد.",
+      b:`<p>در شن نرم، تایر با باد کامل مثل چاقو در شن فرو می‌رود. با کم کردن باد، رد تایر پهن‌تر می‌شود و خودرو روی شن «شناور» می‌ماند.</p>
+<h2>قوانین طلایی</h2>
+<ul><li>باد را به‌تدریج و با گیج دقیق کم کنید؛ بسیاری از رانندگان باتجربه برای شن نرم حدود ۱۵ تا ۲۰ PSI استفاده می‌کنند، بسته به خودرو و تایر.</li>
+<li>با باد کم، آرام برانید و از پیچ‌های تند پرهیز کنید تا تایر از رینگ جدا نشود.</li>
+<li><b>پیش از برگشت به آسفالت</b>، باد را به مقدار استاندارد برگردانید؛ رانندگی سریع با باد کم، تایر را داغ و خراب می‌کند.</li>
+<li>همیشه پمپ باد ۱۲ ولت و گیج همراه داشته باشید.</li></ul>
+<div class="box">تایرهای All-Terrain با دیواره‌ی محکم، برای سفرهای صحرایی ظفار انتخاب مطمئن‌تری هستند.</div>`},
+  ar:{t:"ضغط الإطارات للقيادة في الرمال والصحراء",
+      s:"تخفيف الهواء يوسّع مساحة تلامس الإطار فلا تغرز السيارة. لكن لذلك قواعد.",
+      b:`<p>في الرمل الناعم يغرز الإطار المنفوخ بالكامل، وتخفيف الهواء يجعل الأثر أعرض فتطفو السيارة فوق الرمل.</p>
+<h2>القواعد الذهبية</h2>
+<ul><li>خفّف الهواء تدريجياً بمقياس دقيق؛ يستخدم كثير من السائقين ذوي الخبرة حوالي 15 إلى 20 PSI للرمل الناعم بحسب السيارة والإطار.</li>
+<li>قُد ببطء وتجنّب المنعطفات الحادة كي لا ينفصل الإطار عن الجنط.</li>
+<li><b>قبل العودة إلى الأسفلت</b> أعد الضغط إلى القيمة القياسية؛ القيادة السريعة بضغط منخفض تُسخّن الإطار وتتلفه.</li>
+<li>احمل دائماً منفاخ 12 فولت ومقياس ضغط.</li></ul>
+<div class="box">إطارات All-Terrain ذات الجدار القوي خيار أكثر أماناً لرحلات صحراء ظفار.</div>`},
+  en:{t:"Tire pressure for sand and desert driving",
+      s:"Airing down enlarges the contact patch so you float instead of sinking. But there are rules.",
+      b:`<p>In soft sand a fully inflated tire digs in. Lowering pressure widens the footprint so the vehicle floats on top.</p>
+<h2>Golden rules</h2>
+<ul><li>Air down gradually with an accurate gauge; many experienced drivers use around 15–20 PSI in soft sand, depending on vehicle and tire.</li>
+<li>Drive slowly and avoid sharp turns at low pressure so the tire doesn't unseat from the rim.</li>
+<li><b>Before returning to asphalt</b>, re-inflate to the standard pressure — fast driving on low pressure overheats and damages the tire.</li>
+<li>Always carry a 12V compressor and a gauge.</li></ul>
+<div class="box">All-Terrain tires with strong sidewalls are a safer choice for desert trips in Dhofar.</div>`}
+}
+];
+
+/* ============================================================ */
+const T = {
+fa:{tagline:"تایر · رینگ · روانکار — صلاله",nav_home:"خانه",nav_tires:"تایرها",nav_services:"خدمات",nav_news:"اخبار و مقالات",nav_contact:"تماس",
+hero_tag:"نماینده‌ی تایرهای اصلی در صلاله",hero_h:"تایر <em>اصل</em>، ضمانت <em>واقعی</em>،<br>مشاوره‌ی فنی رایگان",
+hero_p:"تایرهای برندهای معتبر با تاریخ تولید جدید و ضمانت رسمی زاد، به‌همراه روغن و روانکار و تجهیزات آفرود. سایز تایرتان را پیدا کنید و پیش‌فاکتور را در واتساپ بگیرید.",
+hero_cta1:"مشاهده‌ی تایرها",hero_cta2:"مشاوره در واتساپ",finder_h:"جستجوی سریع سایز",finder_p:"سایز را از روی دیواره‌ی تایر فعلی‌تان بخوانید.",finder_btn:"نمایش تایرهای این سایز",
+width:"پهنا",profile:"ارتفاع",rim:"رینگ",any:"همه",cats_h:"هرچه خودرویتان لازم دارد",cats_p:"از تایر تا روغن، با مشاوره‌ی تخصصی.",
+c1:"تایر",c1p:"سواری، شاسی‌بلند و آفرود",c2:"روغن و روانکار",c2p:"روغن موتور و گیربکس معتبر",c3:"قطعات و آفرود",c3p:"رینگ، لوازم و تجهیزات صحرا",c4:"اخبار و مقالات",c4p:"دانستنی‌های فنی صنعت لاستیک",
+feat_h:"تایرهای ویژه",feat_p:"مستقیم از انبار زاد",see_all:"مشاهده‌ی همه",
+w1:"۵ سال",w1p:"ضمانت رسمی تعویض زاد",w2:"GCC",w2p:"تایرهای تأییدشده‌ی استاندارد خلیج",w3:"DOT جدید",w3p:"تاریخ تولید ۲۰۲۵ و ۲۰۲۶",w4:"صلاله",w4p:"نصب و مشاوره در محل",
+news_h:"اخبار و مقالات صنعت لاستیک",news_p:"راهنماهای فنی و تازه‌های دنیای تایر، مخصوص رانندگی در عمان.",
+tires_p:"سایز، برند یا خودروی خود را انتخاب کنید.",search:"جستجو",search_ph:"برند، مدل یا خودرو…",size:"سایز",brand:"برند",vehicle:"خودرو",reset:"پاک کردن فیلترها",
+found:"تایر یافت شد",none:"تایری با این مشخصات پیدا نشد. در واتساپ بپرسید، احتمالاً موجود است.",add:"افزودن",details:"جزئیات",added:"به سبد اضافه شد",ask:"استعلام",
+reviews:"نظر",dot:"سال تولید",load:"بار / تأییدیه",fit:"کاربری",fits:"مناسب برای",warranty:"ضمانت",pattern:"مدل آج",
+cart_h:"سبد سفارش",cart_send:"دریافت پیش‌فاکتور در واتساپ",cart_note:"قیمت و موجودی در واتساپ اعلام می‌شود.",cart_empty:"سبد شما خالی است.",
+svc_p:"خدمات تخصصی زاد در صلاله",svc_cta:"رزرو یا استعلام در واتساپ",
+s1:"نصب و بالانس",s1p:"نصب تایر با دستگاه‌های مدرن و بالانس دقیق.",s2:"روغن و روانکار",s2p:"روغن موتور با گرانروی‌های 0W-20، 5W-30 و 5W-40.",s3:"رینگ و آفرود",s3p:"تایرهای ۳۳ و ۳۵ اینچی آفرود و رینگ‌های مناسب.",s4:"مشاوره‌ی فنی",s4p:"انتخاب سایز، شاخص بار و تایر مناسب برای خودروی شما.",
+k_all:"همه",k_news:"اخبار",k_guide:"راهنما",kind_news:"خبر",kind_guide:"راهنما",min:"دقیقه مطالعه",back:"بازگشت به اخبار و مقالات",
+ct_p:"برای استعلام قیمت، موجودی و رزرو نصب با ما در تماس باشید.",whatsapp:"واتساپ",phone:"تلفن",address:"آدرس",addr:"عمان، صلاله",
+links:"دسترسی سریع",foot_p:"زاد CSC — مرجع تایر، رینگ و روانکار استاندارد در صلاله، عمان.",
+wa_hi:"سلام، از سایت zadcsc.com پیام می‌دهم.",wa_cart:"سلام، از سایت zadcsc.com پیش‌فاکتور این تایرها را می‌خواهم:",wa_ask:"سلام، قیمت و موجودی این تایر را می‌خواهم:",qty:"عدد",
+nav_oils:"روغن‌ها",nav_brands:"برندها",tb_h:"برندهای تایر",tb_p:"تأمین تایر از معتبرترین برندهای جهان",tb_p2:"برندهای دارای برچسب «موجود» در انبار هستند؛ بقیه را سفارشی تأمین می‌کنیم.",
+ob_h:"برندهای روغن",ob_p:"روغن موتور، گیربکس و دیفرانسیل از برندهای معتبر.",br_p:"همه‌ی برندهای تایر و روغنی که تأمین می‌کنیم.",oils_p:"همه‌ی گریدهای روغن موتور، دیزل، گیربکس و دیفرانسیل.",
+sae_h:"معنی گرید روغن چیست؟",sae_p:"در گریدی مثل <span class=\"ltr\">5W-30</span>، عدد قبل از <b>W</b> (Winter) روانی روغن در هوای سرد و هنگام روشن شدن موتور را نشان می‌دهد؛ عدد کمتر یعنی روان‌تر. عدد دوم غلظت روغن در دمای کارکرد موتور است. همیشه گریدی را انتخاب کنید که در دفترچه‌ی خودرو توصیه شده؛ در گرمای عمان، کیفیت و استاندارد روغن (API / ACEA) اهمیت زیادی دارد.",
+g_eng:"روغن موتور بنزینی",g_dsl:"روغن موتور دیزل",g_gear:"روغن گیربکس دستی و دیفرانسیل",g_atf:"روغن گیربکس اتوماتیک و CVT",
+gd_eng:"برای خودروهای سواری و شاسی‌بلند بنزینی.",gd_dsl:"برای موتورهای دیزل سبک و سنگین.",gd_gear:"برای گیربکس دستی، دیفرانسیل و جعبه‌دنده‌ی کمکی.",gd_atf:"مطابق استاندارد سازنده‌ی گیربکس.",
+allsz_h:"همه‌ی سایزها",allsz_p:"روی هر سایز بزنید؛ اگر موجود نباشد، در واتساپ برایتان تأمین می‌کنیم. سایزهای زرد در انبار موجودند.",
+inch:"اینچی آفرود",in_stock:"موجود",tm_note:"نام‌ها و نشان‌های تجاری متعلق به صاحبان آن‌هاست.",
+wa_size:"سلام، این سایز تایر را می‌خواهم:",wa_brand:"سلام، تایر یا روغن این برند را می‌خواهم:",wa_oil:"سلام، روغن با این گرید را می‌خواهم:",sz_none:"این سایز الان در فهرست سایت نیست، ولی می‌توانیم تأمین کنیم.",ask_size:"استعلام این سایز در واتساپ"},
+ar:{tagline:"إطارات · جنوط · زيوت — صلالة",nav_home:"الرئيسية",nav_tires:"الإطارات",nav_services:"الخدمات",nav_news:"الأخبار والمقالات",nav_contact:"اتصل بنا",
+hero_tag:"إطارات أصلية في صلالة",hero_h:"إطار <em>أصلي</em>، ضمان <em>حقيقي</em>،<br>واستشارة فنية مجانية",
+hero_p:"إطارات من علامات موثوقة بتاريخ إنتاج حديث وضمان زاد الرسمي، مع الزيوت ومستلزمات الطرق الوعرة. اعثر على مقاسك واحصل على عرض السعر عبر واتساب.",
+hero_cta1:"تصفّح الإطارات",hero_cta2:"استشارة عبر واتساب",finder_h:"بحث سريع بالمقاس",finder_p:"اقرأ المقاس من جدار إطارك الحالي.",finder_btn:"عرض إطارات هذا المقاس",
+width:"العرض",profile:"الارتفاع",rim:"الجنط",any:"الكل",cats_h:"كل ما تحتاجه سيارتك",cats_p:"من الإطارات إلى الزيوت، مع استشارة متخصصة.",
+c1:"الإطارات",c1p:"سيدان، دفع رباعي وطرق وعرة",c2:"الزيوت",c2p:"زيوت محرك وناقل حركة موثوقة",c3:"قطع وطرق وعرة",c3p:"جنوط ومستلزمات الصحراء",c4:"أخبار ومقالات",c4p:"معلومات فنية عن صناعة الإطارات",
+feat_h:"إطارات مميزة",feat_p:"مباشرة من مخزن زاد",see_all:"عرض الكل",
+w1:"5 سنوات",w1p:"ضمان زاد الرسمي للاستبدال",w2:"GCC",w2p:"إطارات معتمدة خليجياً",w3:"DOT حديث",w3p:"إنتاج 2025 و2026",w4:"صلالة",w4p:"تركيب واستشارة في الموقع",
+news_h:"أخبار ومقالات صناعة الإطارات",news_p:"أدلة فنية وجديد عالم الإطارات، مخصّصة للقيادة في عُمان.",
+tires_p:"اختر المقاس أو العلامة أو سيارتك.",search:"بحث",search_ph:"العلامة، الطراز أو السيارة…",size:"المقاس",brand:"العلامة",vehicle:"السيارة",reset:"مسح الفلاتر",
+found:"إطار",none:"لا توجد إطارات بهذه المواصفات. اسألنا عبر واتساب، فقد يكون متوفراً.",add:"إضافة",details:"التفاصيل",added:"أُضيف إلى السلة",ask:"استفسار",
+reviews:"تقييم",dot:"سنة الإنتاج",load:"الحمولة / الاعتماد",fit:"الاستخدام",fits:"مناسب لـ",warranty:"الضمان",pattern:"النقشة",
+cart_h:"سلة الطلب",cart_send:"احصل على عرض السعر عبر واتساب",cart_note:"يتم إبلاغ السعر والتوفر عبر واتساب.",cart_empty:"السلة فارغة.",
+svc_p:"خدمات زاد المتخصصة في صلالة",svc_cta:"احجز أو استفسر عبر واتساب",
+s1:"تركيب وترصيص",s1p:"تركيب بأجهزة حديثة وترصيص دقيق.",s2:"الزيوت",s2p:"زيوت محرك بلزوجة 0W-20 و5W-30 و5W-40.",s3:"جنوط وطرق وعرة",s3p:"إطارات 33 و35 إنش وجنوط مناسبة.",s4:"استشارة فنية",s4p:"اختيار المقاس ومؤشر الحمولة والإطار المناسب لسيارتك.",
+k_all:"الكل",k_news:"أخبار",k_guide:"أدلة",kind_news:"خبر",kind_guide:"دليل",min:"دقائق قراءة",back:"العودة إلى الأخبار والمقالات",
+ct_p:"تواصل معنا للاستفسار عن السعر والتوفر وحجز التركيب.",whatsapp:"واتساب",phone:"الهاتف",address:"العنوان",addr:"عُمان، صلالة",
+links:"روابط سريعة",foot_p:"زاد CSC — مرجع الإطارات والجنوط والزيوت القياسية في صلالة، عُمان.",
+wa_hi:"مرحباً، أتواصل من موقع zadcsc.com.",wa_cart:"مرحباً، أريد عرض سعر لهذه الإطارات من موقع zadcsc.com:",wa_ask:"مرحباً، أريد سعر وتوفر هذا الإطار:",qty:"عدد",
+nav_oils:"الزيوت",nav_brands:"العلامات",tb_h:"علامات الإطارات",tb_p:"إطارات من أشهر العلامات العالمية",tb_p2:"العلامات المميزة بـ «متوفر» موجودة في المخزن؛ والبقية نوفّرها حسب الطلب.",
+ob_h:"علامات الزيوت",ob_p:"زيوت المحرك وناقل الحركة والدفرنس من علامات موثوقة.",br_p:"جميع علامات الإطارات والزيوت التي نوفّرها.",oils_p:"جميع درجات زيوت المحرك والديزل وناقل الحركة والدفرنس.",
+sae_h:"ماذا تعني درجة الزيت؟",sae_p:"في درجة مثل <span class=\"ltr\">5W-30</span>، الرقم قبل <b>W</b> (Winter) يدل على سيولة الزيت في البرد وعند تشغيل المحرك؛ الأقل أكثر سيولة. والرقم الثاني هو لزوجة الزيت عند حرارة تشغيل المحرك. اختر دائماً الدرجة الموصى بها في دليل السيارة؛ وفي حرارة عُمان تهمّ جودة الزيت ومعياره (API / ACEA) كثيراً.",
+g_eng:"زيت محرك البنزين",g_dsl:"زيت محرك الديزل",g_gear:"زيت ناقل الحركة اليدوي والدفرنس",g_atf:"زيت ناقل الحركة الأوتوماتيكي وCVT",
+gd_eng:"لسيارات الركاب والدفع الرباعي بالبنزين.",gd_dsl:"لمحركات الديزل الخفيفة والثقيلة.",gd_gear:"لناقل الحركة اليدوي والدفرنس وعلبة التحويل.",gd_atf:"حسب مواصفات الشركة المصنّعة لناقل الحركة.",
+allsz_h:"جميع المقاسات",allsz_p:"اضغط على أي مقاس؛ إن لم يكن متوفراً نوفّره لك عبر واتساب. المقاسات الصفراء متوفرة في المخزن.",
+inch:"إنش للطرق الوعرة",in_stock:"متوفر",tm_note:"الأسماء والعلامات التجارية مملوكة لأصحابها.",
+wa_size:"مرحباً، أريد هذا المقاس من الإطارات:",wa_brand:"مرحباً، أريد إطاراً أو زيتاً من هذه العلامة:",wa_oil:"مرحباً، أريد زيتاً بهذه الدرجة:",sz_none:"هذا المقاس غير معروض حالياً، لكن يمكننا توفيره.",ask_size:"استفسر عن هذا المقاس عبر واتساب"},
+en:{tagline:"Tires · Wheels · Lubricants — Salalah",nav_home:"Home",nav_tires:"Tires",nav_services:"Services",nav_news:"News & Articles",nav_contact:"Contact",
+hero_tag:"Genuine tires in Salalah",hero_h:"<em>Genuine</em> tires, <em>real</em> warranty,<br>free technical advice",
+hero_p:"Trusted brands with fresh production dates and the official Zad warranty — plus oils, lubricants and off-road gear. Find your size and get a quote on WhatsApp.",
+hero_cta1:"Browse tires",hero_cta2:"Ask on WhatsApp",finder_h:"Quick size search",finder_p:"Read the size off your current tire's sidewall.",finder_btn:"Show tires in this size",
+width:"Width",profile:"Profile",rim:"Rim",any:"Any",cats_h:"Everything your vehicle needs",cats_p:"From tires to oil, with expert advice.",
+c1:"Tires",c1p:"Sedan, SUV and off-road",c2:"Oil & lubricants",c2p:"Trusted engine and gear oils",c3:"Parts & off-road",c3p:"Wheels and desert gear",c4:"News & articles",c4p:"Tire-industry know-how",
+feat_h:"Featured tires",feat_p:"Straight from the Zad warehouse",see_all:"See all",
+w1:"5 years",w1p:"Official Zad replacement warranty",w2:"GCC",w2p:"Gulf-standard approved tires",w3:"Fresh DOT",w3p:"Made in 2025 and 2026",w4:"Salalah",w4p:"On-site fitting and advice",
+news_h:"Tire industry news & articles",news_p:"Technical guides and tire-world updates, written for driving in Oman.",
+tires_p:"Pick your size, brand or vehicle.",search:"Search",search_ph:"Brand, model or vehicle…",size:"Size",brand:"Brand",vehicle:"Vehicle",reset:"Clear filters",
+found:"tires found",none:"No tires match. Ask us on WhatsApp — we may still have it.",add:"Add",details:"Details",added:"Added to cart",ask:"Enquire",
+reviews:"reviews",dot:"Production year",load:"Load / approval",fit:"Fitment",fits:"Fits",warranty:"Warranty",pattern:"Pattern",
+cart_h:"Order cart",cart_send:"Get a quote on WhatsApp",cart_note:"Price and availability are confirmed on WhatsApp.",cart_empty:"Your cart is empty.",
+svc_p:"Zad's specialist services in Salalah",svc_cta:"Book or enquire on WhatsApp",
+s1:"Fitting & balancing",s1p:"Modern fitting machines and precise balancing.",s2:"Oil & lubricants",s2p:"Engine oil in 0W-20, 5W-30 and 5W-40.",s3:"Wheels & off-road",s3p:"33\" and 35\" off-road tires with matching wheels.",s4:"Technical advice",s4p:"Choosing the right size, load index and tire for your vehicle.",
+k_all:"All",k_news:"News",k_guide:"Guides",kind_news:"News",kind_guide:"Guide",min:"min read",back:"Back to news & articles",
+ct_p:"Contact us for prices, availability and fitting appointments.",whatsapp:"WhatsApp",phone:"Phone",address:"Address",addr:"Salalah, Oman",
+links:"Quick links",foot_p:"Zad CSC — your reference for tires, wheels and standard lubricants in Salalah, Oman.",
+wa_hi:"Hello, I'm messaging from zadcsc.com.",wa_cart:"Hello, I'd like a quote for these tires from zadcsc.com:",wa_ask:"Hello, I'd like the price and availability of this tire:",qty:"pcs",
+nav_oils:"Oils",nav_brands:"Brands",tb_h:"Tire brands",tb_p:"Tires from the world's leading brands",tb_p2:"Brands marked “In stock” are in our warehouse; we source the rest to order.",
+ob_h:"Oil brands",ob_p:"Engine, gearbox and differential oils from trusted brands.",br_p:"Every tire and oil brand we supply.",oils_p:"Every grade of engine, diesel, gear and differential oil.",
+sae_h:"What does an oil grade mean?",sae_p:"In a grade like <span class=\"ltr\">5W-30</span>, the number before <b>W</b> (Winter) shows how easily the oil flows when cold and at start-up — lower means thinner. The second number is the oil's viscosity at engine operating temperature. Always use the grade in your owner's manual; in Oman's heat, oil quality and specification (API / ACEA) matter a lot.",
+g_eng:"Petrol engine oil",g_dsl:"Diesel engine oil",g_gear:"Manual gearbox & differential oil",g_atf:"Automatic & CVT transmission fluid",
+gd_eng:"For petrol cars and SUVs.",gd_dsl:"For light and heavy-duty diesel engines.",gd_gear:"For manual gearboxes, differentials and transfer cases.",gd_atf:"Matched to the transmission maker's specification.",
+allsz_h:"All sizes",allsz_p:"Tap any size — if it isn't in stock we'll source it via WhatsApp. Yellow sizes are in stock.",
+inch:"Off-road inch",in_stock:"In stock",tm_note:"Brand names and trademarks belong to their respective owners.",
+wa_size:"Hello, I need this tire size:",wa_brand:"Hello, I'd like tires or oil from this brand:",wa_oil:"Hello, I'd like oil in this grade:",sz_none:"This size isn't listed on the site yet, but we can source it.",ask_size:"Ask about this size on WhatsApp"}
+};
+
+/* ============================================================ */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let L = store.get("zad_lang","fa");
+let TIRES = [];
+let cart = store.get("zad_cart",[]);
+const t=k=>(T[L]&&T[L][k])||T.fa[k]||k;
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const waURL=msg=>`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`;
+const fmtDate=d=>{try{return new Date(d).toLocaleDateString(L==="fa"?"fa-IR":L==="ar"?"ar-OM":"en-GB",{year:"numeric",month:"long",day:"numeric"})}catch(e){return d}};
+const tireSVG=`<svg class="ph" viewBox="0 0 100 100"><circle cx="50" cy="50" r="44" fill="#151515"/><circle cx="50" cy="50" r="44" fill="none" stroke="#2b2b2b" stroke-width="10" stroke-dasharray="4 5"/><circle cx="50" cy="50" r="24" fill="#cfcfcf"/><circle cx="50" cy="50" r="7" fill="#151515"/><g fill="#9a9a9a">${[0,72,144,216,288].map(a=>`<circle cx="${50+15*Math.cos(a*Math.PI/180)}" cy="${50+15*Math.sin(a*Math.PI/180)}" r="3"/>`).join("")}</g></svg>`;
+
+/* normalise a tire row from API */
+function norm(x){
+  const arr=v=>Array.isArray(v)?v:(()=>{try{return JSON.parse(v||"[]")}catch(e){return[]}})();
+  return {...x, vehicles:arr(x.vehicles), images:arr(x.images), rim:String(x.rim||"").toUpperCase().replace(/^(?!R)/,"R")};
+}
+function dedupe(list){
+  const seen=new Set();
+  return list.filter(x=>{const k=[x.brand,x.pattern,x.width,x.profile,x.rim].join("|");if(seen.has(k))return false;seen.add(k);return true});
+}
+async function loadTires(){
+  let data=null;
+  if(API_URL){
+    try{const r=await fetch(API_URL,{cache:"no-store"});if(r.ok){const j=await r.json();if(Array.isArray(j))data=j}}catch(e){}
+  }
+  TIRES=dedupe((data&&data.length?data:FALLBACK_TIRES).map(norm));
+}
+
+/* i18n apply */
+function applyLang(){
+  document.documentElement.lang=L;
+  document.documentElement.dir=L==="en"?"ltr":"rtl";
+  $$("[data-t]").forEach(el=>{const v=t(el.dataset.t); if(el.hasAttribute("data-html"))el.innerHTML=v; else el.textContent=v});
+  $$("[data-ph]").forEach(el=>el.placeholder=t(el.dataset.ph));
+  $$("#lang button").forEach(b=>b.classList.toggle("on",b.dataset.l===L));
+  $$(".waLink").forEach(a=>a.href=waURL(t("wa_hi")));
+  document.title = L==="en"?"Zad CSC | Tires, Wheels & Tire-Industry News — Salalah":L==="ar"?"زاد CSC | إطارات وجنوط وأخبار صناعة الإطارات — صلالة":"Zad CSC | تایر، رینگ و اخبار صنعت لاستیک — صلاله";
+  buildSelects(); renderAll();
+}
+
+/* selects */
+const uniq=(k)=>[...new Set(TIRES.map(x=>x[k]).filter(Boolean))].sort((a,b)=>parseFloat(String(a).replace(/\D/g,""))-parseFloat(String(b).replace(/\D/g,"")));
+function fillSel(el,vals,label){const cur=el.value;el.innerHTML=`<option value="">${label}</option>`+vals.map(v=>`<option>${esc(v)}</option>`).join("");if(vals.includes(cur))el.value=cur}
+/* all sizes = catalogue + whatever is in stock */
+function allSizes(){
+  const m=new Map();
+  [...SIZES,...TIRES.map(x=>({w:String(x.width),p:String(x.profile),r:x.rim}))].forEach(s=>{if(s.w&&s.p&&s.r)m.set(`${s.w}/${s.p}${s.r}`,s)});
+  return [...m.values()];
+}
+const numSort=a=>[...new Set(a)].sort((x,y)=>parseFloat(String(x).replace(/[^\d.]/g,""))-parseFloat(String(y).replace(/[^\d.]/g,"")));
+/* cascading width → profile → rim */
+function cascade(wSel,pSel,rSel,lbl){
+  const S=allSizes();
+  const w=wSel.value,p=pSel.value;
+  fillSel(wSel,numSort(S.map(s=>s.w)),lbl[0]);
+  const S1=wSel.value?S.filter(s=>s.w==wSel.value):S;
+  fillSel(pSel,numSort(S1.map(s=>s.p)),lbl[1]);
+  const S2=pSel.value?S1.filter(s=>s.p==pSel.value):S1;
+  fillSel(rSel,numSort(S2.map(s=>s.r)),lbl[2]);
+}
+function buildSelects(){
+  cascade($("#hw"),$("#hp"),$("#hr"),["—","—","—"]);
+  cascade($("#fw"),$("#fp"),$("#fr"),[t("width"),t("profile"),t("rim")]);
+  fillSel($("#fb"),[...new Set([...TIRE_BRANDS.map(b=>b.n),...TIRES.map(x=>x.brand)])].sort(),t("any"));
+  fillSel($("#fv"),[...new Set(TIRES.flatMap(x=>x.vehicles))].sort(),t("any"));
+  updHint();
+}
+function updHint(){$("#hsz").textContent=`${$("#hw").value||"—"} / ${$("#hp").value||"—"} ${$("#hr").value||"R—"}`}
+
+/* brands, oils, size list */
+const inStockBrands=()=>new Set(TIRES.map(x=>x.brand));
+const country=c=>{try{return new Intl.DisplayNames([L==="fa"?"fa":L==="ar"?"ar":"en"],{type:"region"}).of(c==="UK"?"GB":c)}catch(e){return c}};
+const mono=n=>n.replace(/[^A-Za-z0-9 ]/g,"").split(" ").filter(Boolean).map(w=>w[0]).join("").slice(0,2).toUpperCase()||n[0];
+function brandTile(b,kind){
+  const st=kind==="tire"&&inStockBrands().has(b.n);
+  return `<a class="bt${st?" stock":""}" ${kind==="tire"?`data-brand="${esc(b.n)}"`:`target="_blank" rel="noopener" href="${waURL(t("wa_brand")+" "+b.n)}"`}>
+    <span class="mono">${esc(mono(b.n))}</span><b>${esc(b.n)}</b><small>${esc(country(b.c))}</small>${st?`<span class="st">${t("in_stock")}</span>`:""}</a>`;
+}
+function renderBrands(){
+  const tb=[...TIRE_BRANDS].sort((a,b)=>inStockBrands().has(b.n)-inStockBrands().has(a.n));
+  $("#homeBrands").innerHTML=tb.slice(0,12).map(b=>brandTile(b,"tire")).join("");
+  $("#allTireBrands").innerHTML=tb.map(b=>brandTile(b,"tire")).join("");
+  const ob=OIL_BRANDS.map(b=>brandTile(b,"oil")).join("");
+  $("#oilBrands").innerHTML=ob; $("#allOilBrands").innerHTML=ob;
+}
+function renderOils(){
+  $("#oilGrades").innerHTML=OIL_GRADES.map(s=>`<div class="gsec"><h3>${t("g_"+s.k)}</h3><p class="d">${t("gd_"+s.k)}</p>
+    <div class="grades">${s.g.map(g=>`<a class="gr" target="_blank" rel="noopener" href="${waURL(t("wa_oil")+" "+g+" ("+t("g_"+s.k)+")")}"><b>${esc(g)}</b><small>${t("ask")}</small></a>`).join("")}</div></div>`).join("");
+}
+function renderAllSizes(){
+  const stock=new Set(TIRES.map(sizeOf));
+  const byRim={};allSizes().forEach(s=>{(byRim[s.r]=byRim[s.r]||[]).push(s)});
+  const rims=numSort(Object.keys(byRim));
+  $("#allSizes").innerHTML=rims.map(r=>`<div class="rimh">${r}</div><div class="sizes-all">${numSort(byRim[r].map(s=>s.w+"/"+s.p)).map(wp=>{const lab=wp+r;return `<button class="${stock.has(lab)?"in":""}" data-size="${lab}">${lab}</button>`}).join("")}</div>`).join("")
+   +`<div class="rimh">${t("inch")}</div><div class="sizes-all">${INCH_SIZES.map(s=>`<a class="btn" style="padding:5px 9px;font-size:13px;border:1px solid #e0ded6;border-radius:8px;background:#fff" target="_blank" rel="noopener" href="${waURL(t("wa_size")+" "+s)}">${s}</a>`).join("")}</div>`;
+}
+
+/* product card */
+const desc=x=>x["desc_"+L]||x.desc_en||x.desc_fa||"";
+const sizeOf=x=>`${x.width}/${x.profile}${x.rim}`;
+function card(x){
+  const img=x.images&&x.images[0]?`<img src="${esc(x.images[0])}" alt="${esc(x.brand)}" loading="lazy" onerror="this.replaceWith(document.createRange().createContextualFragment(tireSVG))">`:tireSVG;
+  return `<div class="pc">
+    <div class="img" data-open="${x.id}">${img}${x.dotYear?`<span class="badge">DOT ${esc(x.dotYear)}</span>`:""}</div>
+    <div class="bd">
+      <div class="br">${esc(x.brand)}</div>
+      <h3 data-open="${x.id}">${esc(x.pattern||x.sizeText)}</h3>
+      <div class="sz">${esc(sizeOf(x))}</div>
+      <div class="stars">${"★".repeat(Math.round(x.rating||5))} <small>(${x.reviews||0} ${t("reviews")})</small></div>
+      ${x.warranty?`<span class="war">${esc(x.warranty)}</span>`:""}
+      <div class="act"><button class="btn y" data-add="${x.id}">+ ${t("add")}</button><button class="btn o" style="color:var(--txt);border-color:#ccc" data-open="${x.id}">${t("details")}</button></div>
+    </div></div>`;
+}
+function filtered(){
+  const q=$("#fq").value.trim().toLowerCase(),w=$("#fw").value,p=$("#fp").value,r=$("#fr").value,b=$("#fb").value,v=$("#fv").value;
+  return TIRES.filter(x=>(!w||x.width==w)&&(!p||x.profile==p)&&(!r||x.rim==r)&&(!b||x.brand==b)&&(!v||x.vehicles.includes(v))&&
+    (!q||[x.brand,x.pattern,x.sizeText,sizeOf(x),...x.vehicles].join(" ").toLowerCase().includes(q)));
+}
+function renderTires(){
+  const list=filtered();
+  $("#fcount").textContent = L==="en"?`${list.length} ${t("found")}`:`${list.length} ${t("found")}`;
+  const w=$("#fw").value,p=$("#fp").value,r=$("#fr").value,b=$("#fb").value;
+  const want=[b,(w||p||r)?`${w||"?"}/${p||"?"}${r||""}`:""].filter(Boolean).join(" ");
+  $("#tireGrid").innerHTML = list.length?list.map(card).join(""):`<div class="empty" style="grid-column:1/-1">${want?`<b style="direction:ltr;display:block;font-size:22px;color:var(--txt)">${esc(want)}</b>${t("sz_none")}`:t("none")}<br><br><a class="btn wa" target="_blank" rel="noopener" href="${waURL((want?t("wa_size")+" "+want:t("wa_hi")))}">${want?t("ask_size"):"WhatsApp"}</a></div>`;
+}
+function artCard(a){
+  const c=a[L]||a.en;
+  return `<a class="ac" href="#/article/${a.slug}">
+    <div class="cv" style="background:${a.color}"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="#FFC400" stroke-width="9" stroke-dasharray="5 4"/><circle cx="50" cy="50" r="18" fill="none" stroke="#fff" stroke-width="3"/></svg></div>
+    <div class="bd"><div class="meta"><span class="kind">${t("kind_"+a.kind)}</span><span>${fmtDate(a.date)}</span></div>
+    <h3>${esc(c.t)}</h3><p>${esc(c.s)}</p></div></a>`;
+}
+let ntab="all";
+function renderNews(){
+  const list=[...ARTICLES].sort((a,b)=>b.date.localeCompare(a.date));
+  $("#homeArts").innerHTML=list.slice(0,3).map(artCard).join("");
+  const fl=list.filter(a=>ntab==="all"||a.kind===ntab);
+  $("#newsGrid").innerHTML=fl.length?fl.map(artCard).join(""):`<div class="empty" style="grid-column:1/-1">—</div>`;
+}
+function renderPost(slug){
+  const a=ARTICLES.find(x=>x.slug===slug); if(!a){location.hash="#/news";return}
+  const c=a[L]||a.en;
+  $("#post").innerHTML=`<span class="kind" style="background:var(--ink);color:var(--y);padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700">${t("kind_"+a.kind)}</span>
+  <h1>${esc(c.t)}</h1><div class="meta">${fmtDate(a.date)} · ${a.min} ${t("min")}</div>${c.b}
+  <div style="margin-top:28px"><a class="btn wa" target="_blank" rel="noopener" href="${waURL(t("wa_hi"))}">${t("hero_cta2")}</a></div>`;
+  document.title=c.t+" | Zad CSC";
+}
+function renderServices(){
+  const ic=['<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/>','<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>','<path d="M3 17l4-8 4 5 3-3 7 6"/><path d="M3 21h18"/>','<circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/>'];
+  $("#svcGrid").innerHTML=[1,2,3,4].map(i=>`<div class="cat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${ic[i-1]}</svg></div><h3>${t("s"+i)}</h3><p>${t("s"+i+"p")}</p></div>`).join("");
+}
+function renderAll(){
+  $("#featGrid").innerHTML=TIRES.slice(0,4).map(card).join("")||`<div class="empty">${t("none")}</div>`;
+  renderTires(); renderNews(); renderServices(); renderCart(); renderBrands(); renderOils(); renderAllSizes();
+  const m=location.hash.match(/^#\/article\/(.+)$/); if(m)renderPost(m[1]);
+}
+
+/* modal */
+function openTire(id){
+  const x=TIRES.find(y=>y.id==id); if(!x)return;
+  const img=x.images&&x.images[0]?`<img src="${esc(x.images[0])}" style="width:100%;border-radius:14px" onerror="this.outerHTML=tireSVG">`:`<div style="background:linear-gradient(160deg,#f1efe8,#e5e2d8);border-radius:14px;aspect-ratio:1;display:grid;place-items:center">${tireSVG}</div>`;
+  $("#modal").innerHTML=`<button class="x" id="mx">×</button><div class="mgrid"><div>${img}</div><div>
+    <div class="br" style="font-size:12px;font-weight:700;color:var(--sub)">${esc(x.brand)}</div>
+    <h2 style="font-size:22px;line-height:1.4">${esc(x.pattern||"")}</h2>
+    <div class="sz" style="direction:ltr;text-align:start;font-size:22px;font-weight:900">${esc(x.sizeText||sizeOf(x))}</div>
+    <p style="color:var(--sub);margin:8px 0">${esc(desc(x))}</p>
+    <table class="spec">
+      ${x.warranty?`<tr><td>${t("warranty")}</td><td>${esc(x.warranty)}</td></tr>`:""}
+      ${x.dotYear?`<tr><td>${t("dot")}</td><td>${esc(x.dotYear)}</td></tr>`:""}
+      ${x.utqg?`<tr><td>${t("load")}</td><td>${esc(x.utqg)}</td></tr>`:""}
+      ${x.oeType?`<tr><td>${t("fit")}</td><td>${esc(x.oeType)}</td></tr>`:""}
+    </table>
+    ${x.vehicles.length?`<div style="margin-top:12px;font-size:14px;color:var(--sub)">${t("fits")}</div><div class="chips">${x.vehicles.map(v=>`<span class="chip">${esc(v)}</span>`).join("")}</div>`:""}
+    <div class="btns" style="margin-top:18px"><button class="btn y" data-add="${x.id}">+ ${t("add")}</button><a class="btn wa" target="_blank" rel="noopener" href="${waURL(t("wa_ask")+"\n"+(x.sizeText||sizeOf(x)))}">${t("ask")}</a></div>
+  </div></div>`;
+  $("#modal").classList.add("on");$("#ov").classList.add("on");
+}
+function closeAll(){$("#modal").classList.remove("on");$("#drawer").classList.remove("on");$("#ov").classList.remove("on")}
+
+/* cart */
+function saveCart(){store.set("zad_cart",cart);renderCart()}
+function addCart(id){const c=cart.find(z=>z.id==id);if(c)c.q++;else cart.push({id:+id,q:4});saveCart();toast(t("added"))}
+function renderCart(){
+  cart=cart.filter(c=>TIRES.some(x=>x.id==c.id)&&c.q>0);
+  $("#cartN").textContent=cart.reduce((s,c)=>s+c.q,0);
+  $("#cartList").innerHTML=cart.length?cart.map(c=>{const x=TIRES.find(y=>y.id==c.id);return `<div class="ci"><div class="t">${esc(x.brand)} ${esc(x.pattern||"")}<b>${esc(sizeOf(x))}</b></div><div class="qty"><button data-q="${c.id}" data-d="-1">−</button><span>${c.q}</span><button data-q="${c.id}" data-d="1">+</button></div></div>`}).join(""):`<p style="color:var(--sub);padding:20px 0">${t("cart_empty")}</p>`;
+  $("#cartSend").disabled=!cart.length;$("#cartSend").style.opacity=cart.length?1:.5;
+}
+function sendCart(){
+  if(!cart.length)return;
+  const lines=cart.map(c=>{const x=TIRES.find(y=>y.id==c.id);return `• ${x.brand} ${x.pattern||""} — ${x.sizeText||sizeOf(x)} × ${c.q} ${t("qty")}`});
+  const items=cart.map(c=>{const x=TIRES.find(y=>y.id==c.id);return {id:x.id,name:x.brand+" "+(x.pattern||""),size:x.sizeText||sizeOf(x),qty:c.q}});
+  const w=window.open("about:blank","_blank");
+  fetch("/api/orders",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({items})}).then(r=>r.json()).catch(()=>({})).then(j=>{
+    const msg=t("wa_cart")+(j&&j.id?` (#${j.id})`:"")+"\n"+lines.join("\n");
+    if(w)w.location.href=waURL(msg);else window.open(waURL(msg),"_blank");
+  });
+}
+let tt;function toast(m){const e=$("#toast");e.textContent=m;e.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>e.classList.remove("on"),1800)}
+
+/* router */
+function route(){
+  const h=location.hash||"#/";
+  let p="home",m;
+  if(h.startsWith("#/tires"))p="tires";else if(h.startsWith("#/car"))p="car";else if(h.startsWith("#/booking"))p="booking";else if(h.startsWith("#/account"))p="account";else if(h.startsWith("#/oils"))p="oils";else if(h.startsWith("#/brands"))p="brands";else if(h.startsWith("#/services"))p="services";else if(h.startsWith("#/news"))p="news";else if(h.startsWith("#/contact"))p="contact";
+  else if(m=h.match(/^#\/article\/(.+)$/)){p="article";renderPost(m[1])}
+  $$(".page").forEach(e=>e.classList.toggle("on",e.id==="p-"+p));
+  $$("nav.main a").forEach(a=>a.classList.toggle("on",a.dataset.r===p||(p==="article"&&a.dataset.r==="news")));
+  $("#nav").classList.remove("open");
+  if(p==="account")renderAccount();if(p==="car")initCar();if(p==="booking")initBooking();
+  if(p!=="article")applyTitle();
+  window.scrollTo(0,0);
+}
+function applyTitle(){document.title = L==="en"?"Zad CSC | Tires, Wheels & Tire-Industry News — Salalah":L==="ar"?"زاد CSC | إطارات وجنوط وأخبار صناعة الإطارات — صلالة":"Zad CSC | تایر، رینگ و اخبار صنعت لاستیک — صلاله"}
+
+/* events */
+document.addEventListener("click",e=>{
+  const a=e.target.closest("[data-add]");if(a){addCart(a.dataset.add);return}
+  const o=e.target.closest("[data-open]");if(o){openTire(o.dataset.open);return}
+  const q=e.target.closest("[data-q]");if(q){const c=cart.find(z=>z.id==q.dataset.q);c.q+=+q.dataset.d;saveCart();return}
+  const sz=e.target.closest("[data-size]");if(sz){const m=sz.dataset.size.match(/^(\d+)\/(\d+)(R\d+)$/);if(m){["#fq","#fb","#fv"].forEach(s=>$(s).value="");setFilterSize(m[1],m[2],m[3]);renderTires();window.scrollTo({top:0,behavior:"smooth"})}return}
+  const br=e.target.closest("[data-brand]");if(br){["#fq","#fw","#fp","#fr","#fv"].forEach(s=>$(s).value="");buildSelects();$("#fb").value=br.dataset.brand;location.hash="#/tires";setTimeout(renderTires,0);return}
+  if(e.target.id==="mx")closeAll();
+});
+$("#ov").onclick=closeAll;
+$("#cartOpen").onclick=()=>{renderCart();$("#drawer").classList.add("on");$("#ov").classList.add("on")};
+$("#cartClose").onclick=closeAll;
+$("#cartSend").onclick=sendCart;
+$("#burger").onclick=()=>$("#nav").classList.toggle("open");
+$$("#lang button").forEach(b=>b.onclick=()=>{L=b.dataset.l;store.set("zad_lang",L);applyLang()});
+["#hw","#hp","#hr"].forEach(s=>$(s).onchange=()=>{if(s!=="#hr")cascade($("#hw"),$("#hp"),$("#hr"),["—","—","—"]);updHint()});
+["#fw","#fp"].forEach(s=>$(s).addEventListener("change",()=>{cascade($("#fw"),$("#fp"),$("#fr"),[t("width"),t("profile"),t("rim")]);renderTires()}));
+function setFilterSize(w,p,r){const L3=[t("width"),t("profile"),t("rim")];$("#fw").value=w;cascade($("#fw"),$("#fp"),$("#fr"),L3);$("#fp").value=p;cascade($("#fw"),$("#fp"),$("#fr"),L3);$("#fr").value=r}
+$("#hgo").onclick=()=>{setFilterSize($("#hw").value,$("#hp").value,$("#hr").value);$("#fq").value="";$("#fb").value="";$("#fv").value="";location.hash="#/tires";renderTires()};
+["#fq","#fw","#fp","#fr","#fb","#fv"].forEach(s=>$(s).addEventListener("input",renderTires));
+$("#freset").onclick=()=>{["#fq","#fw","#fp","#fr","#fb","#fv"].forEach(s=>$(s).value="");buildSelects();renderTires()};
+$$("#ntabs button").forEach(b=>b.onclick=()=>{ntab=b.dataset.k;$$("#ntabs button").forEach(x=>x.classList.toggle("on",x===b));renderNews()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAll()});
+window.addEventListener("hashchange",route);
+$("#yr").textContent=new Date().getFullYear();
+
+(async()=>{await loadTires();applyLang();route()})();
+</script>
+<script src="/app2.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "noisy-sunset-bc62",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-09-22",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "zadcsc-db",
+      "database_id": "a5d75520-52eb-4a9d-b4fc-574a5a5d388a"
+    }
+  ],
+  "routes": [
+    { "pattern": "zadcsc.com", "custom_domain": true },
+    { "pattern": "www.zadcsc.com", "custom_domain": true }
+  ],
+  "observability": { "enabled": true }
+}

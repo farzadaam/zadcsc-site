@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>پنل مدیریت | Zad CSC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--y:#FFC400;--ink:#0E0E0E;--ink3:#262626;--bg:#F4F3EF;--card:#fff;--sub:#666;--line:#e6e3da}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Vazirmatn,system-ui,sans-serif;background:var(--bg);color:#151515;font-size:14px;line-height:1.6}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer;border:0;background:none}
+a{color:inherit}
+header{background:var(--ink);color:#fff;display:flex;align-items:center;gap:14px;padding:0 18px;height:58px;position:sticky;top:0;z-index:10}
+header b{font-weight:900}
+header .who{margin-inline-start:auto;font-size:13px;color:#bbb}
+header a{color:#ddd;font-size:13px}
+nav{display:flex;gap:4px;padding:10px 18px;background:#fff;border-bottom:1px solid var(--line);overflow-x:auto;position:sticky;top:58px;z-index:9}
+nav button{padding:8px 14px;border-radius:999px;font-weight:700;white-space:nowrap;color:#444}
+nav button.on{background:var(--ink);color:#fff}
+main{padding:18px;max-width:1280px;margin:0 auto}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px}
+.card b{display:block;font-size:28px;font-weight:900}
+.card span{color:var(--sub);font-size:13px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+.panel h3{font-size:16px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+table{width:100%;border-collapse:collapse}
+th,td{padding:8px 6px;border-bottom:1px solid #f0eee8;text-align:start;vertical-align:top}
+th{font-size:12px;color:var(--sub);font-weight:600;white-space:nowrap}
+tr.click{cursor:pointer}tr.click:hover{background:#FFFBEB}
+.ltr{direction:ltr;text-align:left;unicode-bidi:plaintext}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:999px;font-weight:700;font-size:13px;background:#eee}
+.btn.y{background:var(--y)}.btn.d{background:var(--ink);color:#fff}.btn.r{background:#fbe3e3;color:#8a1c1c}.btn.g{background:#1FAF55;color:#fff}
+.btn.s{padding:4px 10px;font-size:12px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+input,select,textarea{border:1px solid #ddd;border-radius:9px;padding:7px 10px;background:#fafafa;width:100%}
+textarea{min-height:60px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.fld label{display:block;font-size:12px;color:var(--sub);margin-bottom:3px}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:700;background:#eee}
+.pill.new{background:#FFF1C2}.pill.confirmed,.pill.processing{background:#DCEBFF}.pill.done,.pill.delivered{background:#DDF5E4}.pill.cancelled{background:#F5DADA}
+.muted{color:var(--sub)}
+.gate{max-width:440px;margin:80px auto;text-align:center}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:9px 18px;border-radius:999px;opacity:0;transition:.2s;pointer-events:none;z-index:50}
+.toast.on{opacity:1}
+dialog{border:0;border-radius:16px;padding:20px;max-width:720px;width:94vw}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+.search{max-width:320px}
+</style>
+</head>
+<body>
+<header><b>ZAD CSC</b><span class="muted">پنل مدیریت</span><span class="who" id="who"></span><a href="/">↩ سایت</a></header>
+<nav id="tabs">
+  <button data-tab="dash" class="on">داشبورد</button>
+  <button data-tab="customers">مشتریان</button>
+  <button data-tab="bookings">نوبت‌ها</button>
+  <button data-tab="orders">سفارش‌ها</button>
+  <button data-tab="tires">تایرها</button>
+  <button data-tab="fitments">مشخصات خودروها</button>
+</nav>
+<main id="main"></main>
+<dialog id="dlg"></dialog>
+<div class="toast" id="toast"></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fa=d=>{if(!d)return"";try{return new Date(d.replace(" ","T")).toLocaleDateString("fa-IR")}catch(e){return d}};
+const WA="96896569646";
+const wa=(phone,msg)=>`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+const ST={new:"جدید",confirmed:"تأییدشده",processing:"در حال انجام",done:"انجام‌شده",delivered:"تحویل‌شده",cancelled:"لغوشده"};
+const SV={tire:"تایر",oil:"روغن",balance:"بالانس و تنظیم",check:"بازدید",other:"سایر"};
+const pill=s=>`<span class="pill ${esc(s)}">${esc(ST[s]||s)}</span>`;
+let tt;const toast=m=>{const e=$("#toast");e.textContent=m;e.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>e.classList.remove("on"),1800)};
+async function api(path,opt={}){
+  const r=await fetch("/api/admin"+path,{credentials:"same-origin",headers:{"content-type":"application/json"},...opt,body:opt.body?JSON.stringify(opt.body):undefined});
+  let j={};try{j=await r.json()}catch(e){}
+  if(!r.ok){toast("خطا: "+(j.error||r.status));throw new Error(j.error)}
+  return j;
+}
+const form=f=>Object.fromEntries(new FormData(f).entries());
+function fields(defs,v={}){return `<div class="grid">${defs.map(([k,label,type="text",opts])=>{
+  const val=v[k]??"";
+  if(type==="select")return `<div class="fld"><label>${label}</label><select name="${k}">${opts.map(([ov,ol])=>`<option value="${esc(ov)}"${String(ov)===String(val)?" selected":""}>${esc(ol)}</option>`).join("")}</select></div>`;
+  if(type==="textarea")return `<div class="fld" style="grid-column:1/-1"><label>${label}</label><textarea name="${k}">${esc(typeof val==="object"?JSON.stringify(val):val)}</textarea></div>`;
+  return `<div class="fld"><label>${label}</label><input name="${k}" type="${type}" value="${esc(val)}"${type==="text"&&/vin|phone|size|grade|sizes/i.test(k)?' class="ltr"':""}></div>`}).join("")}</div>`}
+function openDlg(title,html,onSubmit){
+  const d=$("#dlg");
+  d.innerHTML=`<form method="dialog" id="dlgF"><h3 style="margin-bottom:12px">${title}</h3>${html}<div class="row" style="margin-top:14px"><button class="btn y" value="ok">ذخیره</button><button class="btn" value="cancel" formnovalidate>انصراف</button></div></form>`;
+  d.showModal();
+  $("#dlgF").onsubmit=async e=>{if(e.submitter&&e.submitter.value==="cancel")return;e.preventDefault();try{await onSubmit(form(e.target));d.close()}catch(er){}};
+}
+
+/* ---------- tabs ---------- */
+const TABS={dash,customers,bookings,orders,tires,fitments};
+let cur="dash";
+document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{cur=b.dataset.tab;document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("on",x===b));TABS[cur]()});
+
+/* ---------- dashboard ---------- */
+async function dash(){
+  const s=await api("/stats");
+  $("#main").innerHTML=`<div class="cards">
+    <div class="card"><b>${s.customers}</b><span>مشتری</span></div>
+    <div class="card"><b>${s.openOrders}</b><span>سفارش باز</span></div>
+    <div class="card"><b>${s.upcomingBookings}</b><span>نوبت پیش رو</span></div>
+    <div class="card"><b>${s.services30}</b><span>سرویس در ۳۰ روز اخیر</span></div>
+    <div class="card"><b>${s.dueSoon}</b><span>سرویس با موعد ۱۴ روز آینده</span></div></div>
+  <div class="panel"><h3>نوبت‌های پیش رو</h3>${s.upcoming.length?`<table><tr><th>تاریخ</th><th>ساعت</th><th>نام</th><th>تلفن</th><th>خدمت</th><th>خودرو</th><th>وضعیت</th></tr>${s.upcoming.map(b=>`<tr><td>${fa(b.date)}</td><td class="ltr">${esc(b.time)}</td><td>${esc(b.name)}</td><td class="ltr"><a href="${wa(b.phone,"")}" target="_blank">+${esc(b.phone)}</a></td><td>${esc(SV[b.service]||b.service)}</td><td>${esc(b.vehicle||"")}</td><td>${pill(b.status)}</td></tr>`).join("")}</table>`:`<p class="muted">نوبتی نیست.</p>`}</div>
+  <div class="panel"><h3>یادآور سرویس (موعد گذشته یا تا ۱۴ روز آینده)</h3>${s.reminders.length?`<table><tr><th>مشتری</th><th>خدمت قبلی</th><th>موعد</th><th></th></tr>${s.reminders.map(r=>`<tr><td>${esc(r.name)}</td><td>${esc(SV[r.type]||r.type)} — ${fa(r.date)}</td><td>${fa(r.next_due_date)}${r.next_due_km?` · ${r.next_due_km} km`:""}</td><td><a class="btn g s" target="_blank" href="${wa(r.phone,`سلام ${r.name} عزیز، موعد سرویس ${SV[r.type]||r.type} خودروی شما نزدیک است. برای رزرو نوبت: https://zadcsc.com/#/booking — زاد CSC`)}">ارسال یادآوری</a></td></tr>`).join("")}</table>`:`<p class="muted">موردی نیست.</p>`}</div>`;
+}
+
+/* ---------- customers ---------- */
+async function customers(q=""){
+  const list=await api("/customers?q="+encodeURIComponent(q));
+  $("#main").innerHTML=`<div class="panel"><h3><span>مشتریان (${list.length})</span><span class="row"><input class="search" id="cq" placeholder="جستجو: نام، تلفن، VIN، پلاک" value="${esc(q)}"><button class="btn y" id="addC">+ مشتری جدید</button></span></h3>
+  <table><tr><th>#</th><th>نام</th><th>تلفن</th><th>خودرو</th><th>آخرین سرویس</th><th>نقش</th><th>عضویت</th></tr>
+  ${list.map(u=>`<tr class="click" data-u="${u.id}"><td>${u.id}</td><td>${esc(u.name)}</td><td class="ltr">+${esc(u.phone)}</td><td>${u.vehicles}</td><td>${fa(u.last_service)}</td><td>${u.role==="admin"?"مدیر":"مشتری"}</td><td>${fa(u.created_at)}</td></tr>`).join("")}</table></div>`;
+  let to;$("#cq").oninput=e=>{clearTimeout(to);to=setTimeout(()=>customers(e.target.value),350)};
+  $("#addC").onclick=()=>openDlg("مشتری جدید",fields([["name","نام"],["phone","موبایل"],["email","ایمیل"],["notes","یادداشت","textarea"]]),async b=>{const r=await api("/customers",{method:"POST",body:b});toast(r.existed?"این شماره قبلاً ثبت شده بود":"ثبت شد");customer(r.id)});
+  document.querySelectorAll("[data-u]").forEach(tr=>tr.onclick=()=>customer(tr.dataset.u));
+}
+async function customer(id){
+  const d=await api("/customers/"+id), u=d.user;
+  const vname=vid=>{const v=d.vehicles.find(x=>x.id==vid);return v?[v.make,v.model,v.year].filter(Boolean).join(" ")+(v.plate?` (${v.plate})`:""):""};
+  const vopts=[["",""],...d.vehicles.map(v=>[v.id,vname(v.id)])];
+  $("#main").innerHTML=`<p style="margin-bottom:10px"><a href="#" id="back">→ بازگشت به مشتریان</a></p>
+  <div class="panel"><h3><span>${esc(u.name)} <span class="ltr muted">+${esc(u.phone)}</span></span><span class="row">
+    <a class="btn g s" target="_blank" href="${wa(u.phone,"")}">واتساپ</a><button class="btn s" id="editU">ویرایش</button><button class="btn r s" id="delU">حذف</button></span></h3>
+    <p class="muted">${u.email?esc(u.email)+" · ":""}عضویت: ${fa(u.created_at)} · ${u.has_password?"حساب آنلاین فعال":"هنوز ثبت‌نام آنلاین نکرده"} · ${u.role==="admin"?"مدیر":"مشتری"}</p>${u.notes?`<p style="margin-top:6px">${esc(u.notes)}</p>`:""}</div>
+  <div class="panel"><h3><span>خودروها</span><button class="btn y s" id="addV">+ خودرو</button></h3>${d.vehicles.length?`<table><tr><th>خودرو</th><th>VIN</th><th>پلاک</th><th>کیلومتر</th><th></th></tr>${d.vehicles.map(v=>`<tr><td>${esc([v.make,v.model,v.year].filter(Boolean).join(" "))}</td><td class="ltr">${esc(v.vin||"")}</td><td>${esc(v.plate||"")}</td><td>${v.mileage??""}</td><td><button class="btn s" data-ev="${v.id}">ویرایش</button> <button class="btn r s" data-dv="${v.id}">حذف</button></td></tr>`).join("")}</table>`:`<p class="muted">خودرویی ثبت نشده.</p>`}</div>
+  <div class="panel"><h3><span>سابقه‌ی سرویس</span><button class="btn y s" id="addS">+ ثبت سرویس</button></h3>${d.services.length?`<table><tr><th>تاریخ</th><th>خودرو</th><th>نوع</th><th>کیلومتر</th><th>جزئیات</th><th>مبلغ</th><th>موعد بعدی</th><th></th></tr>${d.services.map(s=>`<tr><td>${fa(s.date)}</td><td>${esc(vname(s.vehicle_id))}</td><td>${esc(SV[s.type]||s.type)}</td><td>${s.mileage??""}</td><td>${esc(s.details||"")}</td><td>${s.price??""}</td><td>${fa(s.next_due_date)}${s.next_due_km?` / ${s.next_due_km} km`:""}</td><td><button class="btn r s" data-ds="${s.id}">حذف</button></td></tr>`).join("")}</table>`:`<p class="muted">سرویسی ثبت نشده.</p>`}</div>
+  <div class="panel"><h3>سفارش‌ها</h3>${d.orders.length?ordersTable(d.orders):`<p class="muted">سفارشی نیست.</p>`}</div>
+  <div class="panel"><h3>نوبت‌ها</h3>${d.bookings.length?bookingsTable(d.bookings):`<p class="muted">نوبتی نیست.</p>`}</div>`;
+  $("#back").onclick=e=>{e.preventDefault();customers()};
+  $("#editU").onclick=()=>openDlg("ویرایش مشتری",fields([["name","نام"],["phone","موبایل"],["email","ایمیل"],["role","نقش","select",[["customer","مشتری"],["admin","مدیر"]]],["notes","یادداشت","textarea"]],u),async b=>{await api("/users/"+id,{method:"PUT",body:b});toast("ذخیره شد");customer(id)});
+  $("#delU").onclick=async()=>{if(!confirm("مشتری و همه‌ی خودروها و سرویس‌هایش حذف شود؟ این کار برگشت‌پذیر نیست."))return;await api("/users/"+id,{method:"DELETE"});toast("حذف شد");customers()};
+  const vdefs=[["vin","VIN"],["make","برند"],["model","مدل"],["year","سال","number"],["plate","پلاک"],["mileage","کیلومتر","number"]];
+  $("#addV").onclick=()=>openDlg("خودروی جدید",fields(vdefs),async b=>{b.user_id=id;await api("/vehicles",{method:"POST",body:b});customer(id)});
+  document.querySelectorAll("[data-ev]").forEach(x=>x.onclick=()=>{const v=d.vehicles.find(y=>y.id==x.dataset.ev);openDlg("ویرایش خودرو",fields(vdefs,v),async b=>{await api("/vehicles/"+v.id,{method:"PUT",body:b});customer(id)})});
+  document.querySelectorAll("[data-dv]").forEach(x=>x.onclick=async()=>{if(confirm("خودرو حذف شود؟")){await api("/vehicles/"+x.dataset.dv,{method:"DELETE"});customer(id)}});
+  document.querySelectorAll("[data-ds]").forEach(x=>x.onclick=async()=>{if(confirm("سرویس حذف شود؟")){await api("/services/"+x.dataset.ds,{method:"DELETE"});customer(id)}});
+  const today=new Date().toISOString().slice(0,10);
+  $("#addS").onclick=()=>openDlg("ثبت سرویس",fields([["vehicle_id","خودرو","select",vopts],["date","تاریخ","date"],["type","نوع","select",Object.entries(SV)],["mileage","کیلومتر فعلی","number"],["details","جزئیات (مثلاً: ۴ حلقه Bridgestone 275/50R21 / روغن 0W-20)","textarea"],["price","مبلغ (ریال عمان)","number"],["next_due_date","موعد سرویس بعدی","date"],["next_due_km","کیلومتر سرویس بعدی","number"]],{date:today}),async b=>{b.user_id=id;await api("/services",{method:"POST",body:b});
+    if(b.vehicle_id&&b.mileage){await api("/vehicles/"+b.vehicle_id,{method:"PUT",body:{mileage:b.mileage}}).catch(()=>{})}
+    toast("ثبت شد");customer(id)});
+  bindStatus(()=>customer(id));
+}
+
+/* ---------- bookings / orders ---------- */
+const stOpts=keys=>keys.map(k=>`<option value="${k}">${ST[k]}</option>`).join("");
+function bookingsTable(list){return `<table><tr><th>#</th><th>تاریخ</th><th>ساعت</th><th>نام</th><th>تلفن</th><th>خدمت</th><th>خودرو</th><th>توضیح</th><th>وضعیت</th><th></th></tr>${list.map(b=>`<tr><td>${b.id}</td><td>${fa(b.date)}</td><td class="ltr">${esc(b.time)}</td><td>${esc(b.name)}</td><td class="ltr">+${esc(b.phone)}</td><td>${esc(SV[b.service]||b.service)}</td><td>${esc(b.vehicle||"")}</td><td>${esc(b.note||"")}</td><td><select data-st="bookings/${b.id}" style="width:auto">${stOpts(["new","confirmed","done","cancelled"]).replace(`value="${b.status}"`,`value="${b.status}" selected`)}</select></td><td><a class="btn g s" target="_blank" href="${wa(b.phone,`سلام ${b.name}، نوبت شما برای ${fa(b.date)} ساعت ${b.time} در زاد CSC تأیید شد.`)}">تأیید در واتساپ</a></td></tr>`).join("")}</table>`}
+function ordersTable(list){return `<table><tr><th>#</th><th>تاریخ</th><th>مشتری</th><th>اقلام</th><th>مبلغ</th><th>وضعیت</th><th></th></tr>${list.map(o=>`<tr><td>${o.id}</td><td>${fa(o.created_at)}</td><td>${esc(o.name||"")}<div class="ltr muted">${o.phone?"+"+esc(o.phone):""}</div></td><td class="ltr">${(Array.isArray(o.items)?o.items:JSON.parse(o.items||"[]")).map(i=>esc(`${i.name} ${i.size} ×${i.qty}`)).join("<br>")}</td><td><input data-total="${o.id}" type="number" step="0.001" value="${o.total??""}" style="width:90px"></td><td><select data-st="orders/${o.id}" style="width:auto">${stOpts(["new","processing","delivered","cancelled"]).replace(`value="${o.status}"`,`value="${o.status}" selected`)}</select></td><td>${o.phone?`<a class="btn g s" target="_blank" href="${wa(o.phone,`سلام، درباره‌ی سفارش #${o.id} از زاد CSC:`)}">واتساپ</a>`:""}</td></tr>`).join("")}</table>`}
+function bindStatus(after){
+  document.querySelectorAll("[data-st]").forEach(s=>s.onchange=async()=>{await api("/"+s.dataset.st,{method:"PUT",body:{status:s.value}});toast("وضعیت ذخیره شد")});
+  document.querySelectorAll("[data-total]").forEach(i=>i.onchange=async()=>{await api("/orders/"+i.dataset.total,{method:"PUT",body:{total:i.value}});toast("مبلغ ذخیره شد")});
+}
+async function bookings(){const l=await api("/bookings");$("#main").innerHTML=`<div class="panel"><h3>نوبت‌ها (${l.length})</h3>${l.length?bookingsTable(l):`<p class="muted">نوبتی نیست.</p>`}</div>`;bindStatus()}
+async function orders(){const l=await api("/orders");$("#main").innerHTML=`<div class="panel"><h3>سفارش‌ها (${l.length})</h3>${l.length?ordersTable(l):`<p class="muted">سفارشی نیست.</p>`}</div>`;bindStatus()}
+
+/* ---------- tires & fitments ---------- */
+const TIRE_F=[["brand","برند"],["pattern","مدل آج"],["width","پهنا","number"],["profile","ارتفاع","number"],["rim","رینگ (مثلاً R21)"],["sizeText","عنوان کامل سایز (مثلاً 275/50R21 113V XL)"],["dotYear","سال تولید DOT"],["warranty","ضمانت"],["utqg","بار / تأییدیه"],["oeType","کاربری"],["rating","امتیاز","number"],["reviews","تعداد نظر","number"],["vehicles","خودروهای مناسب (JSON، مثلاً [\"Lexus LX600\"])","textarea"],["images","آدرس عکس‌ها (JSON)","textarea"],["desc_fa","توضیح فارسی","textarea"],["desc_ar","توضیح عربی","textarea"],["desc_en","توضیح انگلیسی","textarea"]];
+const FIT_F=[["make","برند"],["model","مدل"],["year_from","از سال","number"],["year_to","تا سال","number"],["engine","موتور"],["oil_grade","گرید روغن"],["oil_capacity_l","حجم روغن (لیتر)","number"],["tire_sizes","سایز تایرها (JSON، مثلاً [\"265/65R18\"])","textarea"],["notes","یادداشت"]];
+async function tires(){
+  const l=await api("/tires");
+  $("#main").innerHTML=`<div class="panel"><h3><span>تایرهای سایت (${l.length})</span><button class="btn y" id="addT">+ تایر جدید</button></h3>
+  <table><tr><th>#</th><th>برند</th><th>مدل</th><th>سایز</th><th>DOT</th><th>ضمانت</th><th></th></tr>${l.map(x=>`<tr><td>${x.id}</td><td>${esc(x.brand)}</td><td>${esc(x.pattern||"")}</td><td class="ltr">${esc(x.width)}/${esc(x.profile)}${esc(x.rim)}</td><td>${esc(x.dotYear||"")}</td><td>${esc(x.warranty||"")}</td><td><button class="btn s" data-et="${x.id}">ویرایش</button> <button class="btn r s" data-dt="${x.id}">حذف</button></td></tr>`).join("")}</table></div>`;
+  $("#addT").onclick=()=>openDlg("تایر جدید",fields(TIRE_F,{system:"metric",rating:5,reviews:0,vehicles:"[]",images:"[]"}),async b=>{await api("/tires",{method:"POST",body:b});toast("اضافه شد — روی سایت هم نمایش داده می‌شود");tires()});
+  document.querySelectorAll("[data-et]").forEach(x=>x.onclick=()=>{const v=l.find(y=>y.id==x.dataset.et);openDlg("ویرایش تایر",fields(TIRE_F,v),async b=>{await api("/tires/"+v.id,{method:"PUT",body:b});tires()})});
+  document.querySelectorAll("[data-dt]").forEach(x=>x.onclick=async()=>{if(confirm("این تایر از سایت حذف شود؟")){await api("/tires/"+x.dataset.dt,{method:"DELETE"});tires()}});
+}
+async function fitments(){
+  const l=await api("/fitments");
+  $("#main").innerHTML=`<div class="panel"><h3><span>مشخصات روغن و تایر خودروها (${l.length})</span><button class="btn y" id="addF">+ خودرو</button></h3>
+  <p class="muted" style="margin-bottom:8px">این اطلاعات در جستجوی VIN و مدل به مشتری نمایش داده می‌شود. لطفاً موارد را بررسی و حجم روغن را کامل کنید.</p>
+  <table><tr><th>برند</th><th>مدل</th><th>سال</th><th>موتور</th><th>روغن</th><th>حجم</th><th>تایرها</th><th></th></tr>${l.map(f=>`<tr><td>${esc(f.make)}</td><td>${esc(f.model)} <span class="muted">${esc(f.notes||"")}</span></td><td>${f.year_from}–${f.year_to}</td><td>${esc(f.engine||"")}</td><td class="ltr">${esc(f.oil_grade||"")}</td><td>${f.oil_capacity_l??""}</td><td class="ltr">${esc((()=>{try{return JSON.parse(f.tire_sizes||"[]").join(", ")}catch(e){return f.tire_sizes}})())}</td><td><button class="btn s" data-ef="${f.id}">ویرایش</button> <button class="btn r s" data-df="${f.id}">حذف</button></td></tr>`).join("")}</table></div>`;
+  $("#addF").onclick=()=>openDlg("خودروی جدید",fields(FIT_F,{tire_sizes:"[]"}),async b=>{await api("/fitments",{method:"POST",body:b});fitments()});
+  document.querySelectorAll("[data-ef]").forEach(x=>x.onclick=()=>{const v=l.find(y=>y.id==x.dataset.ef);openDlg("ویرایش",fields(FIT_F,v),async b=>{await api("/fitments/"+v.id,{method:"PUT",body:b});fitments()})});
+  document.querySelectorAll("[data-df]").forEach(x=>x.onclick=async()=>{if(confirm("حذف شود؟")){await api("/fitments/"+x.dataset.df,{method:"DELETE"});fitments()}});
+}
+
+/* ---------- gate ---------- */
+(async()=>{
+  let me=null;try{const r=await fetch("/api/me",{credentials:"same-origin"});if(r.ok)me=(await r.json()).user}catch(e){}
+  if(!me||me.role!=="admin"){
+    $("#tabs").style.display="none";
+    $("#main").innerHTML=`<div class="gate panel"><h3 style="justify-content:center">دسترسی مدیریت</h3><p class="muted">${me?"حساب شما دسترسی مدیر ندارد.":"ابتدا با حساب مدیر وارد شوید."}</p><p style="margin-top:12px"><a class="btn y" href="/#/account">ورود</a></p></div>`;
+    return;
+  }
+  $("#who").textContent=me.name;
+  dash();
+})();
+</script>
+</body>
+</html>
