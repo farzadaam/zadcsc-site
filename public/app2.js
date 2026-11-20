@@ -152,7 +152,7 @@ window.initBooking=function(){
   const times=[];for(let h=8;h<=21;h++)for(const m of["00","30"])times.push(String(h).padStart(2,"0")+":"+m);
   $("#bkTime").innerHTML=times.map(x=>`<option>${x}</option>`).join("");
   const d=f.querySelector("[name=date]");d.min=new Date().toISOString().slice(0,10);if(!d.value)d.value=d.min;
-  if(ME){f.name.value=f.name.value||ME.user.name;f.phone.value=f.phone.value||ME.user.phone}
+  if(ME){const E=f.elements;E.name.value=E.name.value||ME.user.name;E.phone.value=E.phone.value||ME.user.phone}
   f.onsubmit=async e=>{e.preventDefault();const b=fd(f);try{const r=await call("/api/bookings",{method:"POST",body:b});msg($("#bkMsg"),1,t("bk_ok"));
     window.open(waURL(`${t("hero_cta4")} #${r.id}\n${b.name} — ${b.date} ${b.time}\n${t("svc_"+b.service)}${b.vehicle?"\n"+b.vehicle:""}`),"_blank")}catch(er){msg($("#bkMsg"),0,errT(er.message))}};
 };
