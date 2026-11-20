@@ -201,6 +201,21 @@ async function importFitFile(env, origin, KEY, file, pre) {
   }
 }
 
+/* stock: in_stock 1 = automatic (old DOT -> out of stock), 2 = always in stock, 0 = out of stock */
+async function stockCutoff(DB) {
+  const r = await DB.prepare("SELECT v FROM meta WHERE k='stock_max_age'").first();
+  const age = r ? +r.v : 3;
+  return age > 0 ? new Date().getFullYear() - age : 0;
+}
+function dotNewest(d) { const ys = String(d || "").match(/\d{4}/g); return ys ? Math.max(...ys.map(Number)) : 0; }
+function effStock(t, cut) {
+  const s = t.in_stock == null ? 1 : +t.in_stock;
+  if (s === 0) return 0;
+  if (s === 2 || !cut) return 1;
+  const y = dotNewest(t.dotYear);
+  return y && y <= cut ? 0 : 1;
+}
+
 async function ensureTireImport(env, origin) {
   const KEY = "tires_import_v1";
   const lock = await env.DB.prepare("INSERT OR IGNORE INTO meta (k, v) VALUES (?, 'running')").bind(KEY).run();
@@ -231,7 +246,8 @@ async function api(req, env, url) {
     await ensureTireImport(env, url.origin);
     await ensureFitImport(env, url.origin);
     const { results } = await DB.prepare("SELECT * FROM tires ORDER BY id DESC").all();
-    return json(results.map(t => ({ ...t, vehicles: safeJSON(t.vehicles, []), images: safeJSON(t.images, []) })));
+    const cut = await stockCutoff(DB);
+    return json(results.map(t => ({ ...t, in_stock: effStock(t, cut), vehicles: safeJSON(t.vehicles, []), images: safeJSON(t.images, []) })));
   }
   if (p === "/api/makes" && M === "GET") {
     const { results } = await DB.prepare("SELECT make, model, MIN(year_from) y1, MAX(year_to) y2 FROM fitments GROUP BY make, model ORDER BY make, model").all();
@@ -502,6 +518,16 @@ async function admin(req, env, url, p, M, me) {
       DB.prepare("SELECT * FROM bookings WHERE user_id=? ORDER BY date DESC").bind(id).all()
     ]);
     return json({ user, vehicles: vehicles.results, services: services.results, orders: orders.results.map(o => ({ ...o, items: safeJSON(o.items, []) })), bookings: bookings.results });
+  }
+  if (p === "/api/admin/settings" && M === "GET") {
+    const r = await DB.prepare("SELECT v FROM meta WHERE k='stock_max_age'").first();
+    return json({ stock_max_age: r ? +r.v : 3, year: new Date().getFullYear() });
+  }
+  if (p === "/api/admin/settings" && M === "PUT") {
+    const b = await body(req);
+    const age = Math.max(0, Math.min(20, int(b.stock_max_age) ?? 3));
+    await DB.prepare("INSERT INTO meta (k,v,at) VALUES ('stock_max_age',?,datetime('now')) ON CONFLICT(k) DO UPDATE SET v=excluded.v, at=excluded.at").bind(String(age)).run();
+    return json({ ok: true, stock_max_age: age });
   }
   if (p === "/api/admin/upload" && M === "POST") {
     const mime = (req.headers.get("content-type") || "").split(";")[0];
