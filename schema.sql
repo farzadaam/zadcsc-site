@@ -89,3 +89,7 @@ CREATE TABLE IF NOT EXISTS fitments (
   notes TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_fitments_mm ON fitments(make, model);
+
+-- 2026-11-20: SKU column on the existing tires table, and a small key/value table
+-- ALTER TABLE tires ADD COLUMN sku TEXT;   (already applied)
+CREATE TABLE IF NOT EXISTS meta (k TEXT PRIMARY KEY, v TEXT, at TEXT DEFAULT (datetime('now')));

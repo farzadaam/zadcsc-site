@@ -1,6 +1,8 @@
 // Zad CSC — API worker (Cloudflare Workers + D1)
 // Static pages (public/) are served by Workers Assets; this script answers /api/*.
 
+import { GCC_MODELS, MAKES } from "./vehicles.js";
+
 const SESSION_DAYS = 30;
 const PBKDF2_ITER = 25000;
 
@@ -125,6 +127,42 @@ async function findFitments(env, make, model, year) {
 }
 const safeJSON = (s, d) => { try { return JSON.parse(s); } catch { return d; } };
 
+/* all models for a make: GCC list + shop fitments + NHTSA (US) list */
+async function carModels(env, make) {
+  const key = make.toLowerCase();
+  const gccKey = Object.keys(GCC_MODELS).find(k => k.toLowerCase() === key);
+  const out = new Map();
+  const add = m => { const n = String(m || "").trim(); if (n && !out.has(n.toLowerCase())) out.set(n.toLowerCase(), n); };
+  (GCC_MODELS[gccKey] || []).forEach(add);
+  const { results } = await env.DB.prepare("SELECT DISTINCT model FROM fitments WHERE lower(make)=?").bind(key).all();
+  results.forEach(r => add(r.model));
+  try {
+    const r = await fetch(`https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMake/${encodeURIComponent(make)}?format=json`, { cf: { cacheTtl: 604800, cacheEverything: true } });
+    if (r.ok) ((await r.json()).Results || []).forEach(x => add(x.Model_Name));
+  } catch (e) { /* GCC list is enough */ }
+  return [...out.values()].sort((a, b) => a.localeCompare(b, "en", { numeric: true }));
+}
+
+/* one-time import of the shop's tire list (public/data/tires.json) into D1 */
+async function ensureTireImport(env, origin) {
+  const KEY = "tires_import_v1";
+  const lock = await env.DB.prepare("INSERT OR IGNORE INTO meta (k, v) VALUES (?, 'running')").bind(KEY).run();
+  if (lock.meta.changes !== 1) return;
+  try {
+    const res = await env.ASSETS.fetch(new Request(origin + "/data/tires.json"));
+    const rows = await res.json();
+    const cols = ["brand", "pattern", "sizeText", "width", "profile", "rim", "system", "dotYear", "oeType", "sku", "desc_en", "vehicles", "images", "rating", "reviews"];
+    const q = v => v == null ? "NULL" : typeof v === "number" ? String(v) : "'" + String(v).replace(/'/g, "''") + "'";
+    for (let i = 0; i < rows.length; i += 150) {
+      const vals = rows.slice(i, i + 150).map(r => "(" + cols.map(c => q(c === "vehicles" || c === "images" ? "[]" : c === "rating" ? 5 : c === "reviews" ? 0 : r[c])).join(",") + ")");
+      await env.DB.prepare(`INSERT INTO tires (${cols.join(",")}) VALUES ${vals.join(",")}`).run();
+    }
+    await env.DB.prepare("UPDATE meta SET v=?, at=datetime('now') WHERE k=?").bind(`done:${rows.length}`, KEY).run();
+  } catch (e) {
+    await env.DB.prepare("DELETE FROM meta WHERE k=?").bind(KEY).run();
+  }
+}
+
 /* ---------------- routes ---------------- */
 async function api(req, env, url) {
   const p = url.pathname.replace(/\/+$/, "");
@@ -133,12 +171,23 @@ async function api(req, env, url) {
 
   /* public catalogue */
   if (p === "/api/tires" && M === "GET") {
+    await ensureTireImport(env, url.origin);
     const { results } = await DB.prepare("SELECT * FROM tires ORDER BY id DESC").all();
     return json(results.map(t => ({ ...t, vehicles: safeJSON(t.vehicles, []), images: safeJSON(t.images, []) })));
   }
   if (p === "/api/makes" && M === "GET") {
     const { results } = await DB.prepare("SELECT make, model, MIN(year_from) y1, MAX(year_to) y2 FROM fitments GROUP BY make, model ORDER BY make, model").all();
     return json(results);
+  }
+  if (p === "/api/car-makes" && M === "GET") {
+    const { results } = await DB.prepare("SELECT DISTINCT make FROM fitments").all();
+    const all = [...new Set([...MAKES, ...results.map(r => r.make)])].sort((a, b) => a.localeCompare(b));
+    return json(all, 200, { "cache-control": "public, max-age=3600" });
+  }
+  if (p === "/api/car-models" && M === "GET") {
+    const make = str(url.searchParams.get("make"), 60);
+    if (!make) return json([]);
+    return json(await carModels(env, make), 200, { "cache-control": "public, max-age=3600" });
   }
   if (p === "/api/fitments" && M === "GET") {
     const make = str(url.searchParams.get("make"), 60), model = str(url.searchParams.get("model"), 60), year = int(url.searchParams.get("year"));
@@ -264,7 +313,7 @@ async function api(req, env, url) {
 
 /* ---------------- admin ---------------- */
 const TABLES = {
-  tires: ["brand", "pattern", "sizeText", "width", "profile", "rim", "system", "utqg", "warranty", "rating", "reviews", "dotYear", "oeType", "vehicles", "images", "desc_fa", "desc_ar", "desc_en"],
+  tires: ["brand", "pattern", "sizeText", "width", "profile", "rim", "system", "utqg", "warranty", "rating", "reviews", "dotYear", "oeType", "sku", "vehicles", "images", "desc_fa", "desc_ar", "desc_en"],
   fitments: ["make", "model", "year_from", "year_to", "engine", "oil_grade", "oil_capacity_l", "tire_sizes", "notes"],
   vehicles: ["user_id", "vin", "make", "model", "year", "plate", "mileage"],
   services: ["user_id", "vehicle_id", "date", "type", "mileage", "details", "price", "next_due_date", "next_due_km"],
@@ -354,7 +403,7 @@ async function admin(req, env, url, p, M, me) {
       let sql = `SELECT * FROM ${table}`, args = [];
       if (status && ["orders", "bookings"].includes(table)) { sql += " WHERE status=?"; args.push(status); }
       sql += table === "bookings" ? " ORDER BY date DESC, time DESC" : " ORDER BY id DESC";
-      sql += " LIMIT 500";
+      sql += table === "tires" || table === "fitments" ? " LIMIT 5000" : " LIMIT 500";
       let { results } = await DB.prepare(sql).bind(...args).all();
       if (table === "users") results = results.map(({ pass_hash, pass_salt, ...u }) => u);
       return json(results);

@@ -109,23 +109,24 @@ function renderAuth(w){
 }
 
 /* ---------- car finder ---------- */
-let MAKES=null;
+let MAKES=null;const MODELS={};
+const YEARS=(()=>{const a=[];for(let y=new Date().getFullYear()+1;y>=1980;y--)a.push(y);return a})();
+async function modelsFor(make){if(!make)return[];if(!MODELS[make]){try{MODELS[make]=await call("/api/car-models?make="+encodeURIComponent(make))}catch(e){MODELS[make]=[]}}return MODELS[make]}
 window.initCar=async function(){
-  if(!MAKES){try{MAKES=await call("/api/makes")}catch(e){MAKES=[]}}
+  if(!MAKES){try{MAKES=await call("/api/car-makes")}catch(e){MAKES=[]}}
   const mk=$("#mkSel"),md=$("#mdSel"),yr=$("#yrSel");
-  const makes=[...new Set(MAKES.map(m=>m.make))];
   const fill=(el,arr,cur)=>{el.innerHTML=`<option value="">${t("select")}</option>`+arr.map(v=>`<option${v==cur?" selected":""}>${esc(v)}</option>`).join("")};
-  const upd=()=>{const ms=MAKES.filter(m=>m.make===mk.value);fill(md,ms.map(m=>m.model),md.value);
-    const sel=ms.find(m=>m.model===md.value);const ys=[];if(sel)for(let y=sel.y2;y>=sel.y1;y--)ys.push(y);fill(yr,ys,yr.value)};
-  if(!mk.options.length||mk.dataset.l!==L){fill(mk,makes,mk.value);mk.dataset.l=L;upd()}
-  mk.onchange=()=>{md.value="";upd()};md.onchange=upd;
+  const upd=async()=>{const cur=md.value;fill(md,[],"");if(mk.value){md.disabled=true;fill(md,await modelsFor(mk.value),cur);md.disabled=false}};
+  if(!mk.options.length||mk.dataset.l!==L){fill(mk,MAKES,mk.value);fill(yr,YEARS,yr.value);mk.dataset.l=L;await upd()}
+  mk.onchange=()=>{md.value="";upd()};
   $("#mmGo").onclick=async()=>{if(!mk.value)return;const q=new URLSearchParams({make:mk.value,model:md.value,year:yr.value});const f=await call("/api/fitments?"+q).catch(()=>[]);showCar({make:mk.value,model:md.value,year:+yr.value||null},f)};
   $("#vinGo").onclick=async()=>{const v=$("#vinIn").value.trim().toUpperCase();$("#carRes").innerHTML="…";try{const r=await call("/api/vin/"+encodeURIComponent(v));
-    if(!r.car.model&&r.fitments.length>3){if(r.car.make&&MAKES.some(m=>m.make===r.car.make)){mk.value=r.car.make;upd()}
+    if(r.car.make&&MAKES.includes(r.car.make)){mk.value=r.car.make;await upd();if(r.car.model){const ms=await modelsFor(r.car.make);const hit=ms.find(m=>m.toLowerCase()===String(r.car.model).toLowerCase());if(hit)md.value=hit}if(r.car.year)yr.value=r.car.year}
+    if(!r.car.model&&r.fitments.length>3){
       $("#carRes").innerHTML=`<div class="box2"><h3>${t("car_found")}: <span style="direction:ltr;display:inline-block">${esc([r.car.make,r.car.year].filter(Boolean).join(" ")||"—")}</span></h3><p class="empty2">${t("vin_pick")}</p></div>`;mk.scrollIntoView({behavior:"smooth",block:"center"});return}
     showCar(r.car,r.fitments)}catch(er){$("#carRes").innerHTML=`<div class="msg err">${esc(errT(er.message))}</div>`}};
   $("#vinIn").onkeydown=e=>{if(e.key==="Enter")$("#vinGo").click()};
-  if(window.__carPrefill){const v=window.__carPrefill;window.__carPrefill=null;if(v.vin){$("#vinIn").value=v.vin;$("#vinGo").click()}else if(v.make){mk.value=v.make;upd();md.value=v.model||"";upd();yr.value=v.year||"";$("#mmGo").click()}}
+  if(window.__carPrefill){const v=window.__carPrefill;window.__carPrefill=null;if(v.vin){$("#vinIn").value=v.vin;$("#vinGo").click()}else if(v.make){mk.value=v.make;await upd();md.value=v.model||"";yr.value=v.year||"";$("#mmGo").click()}}
 };
 function showCar(car,fits){
   const name=[car.make,car.model,car.year].filter(Boolean).join(" ");

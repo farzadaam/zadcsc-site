@@ -396,6 +396,8 @@ table.lst th{color:var(--sub);font-weight:600;font-size:12px}
         </div>
         <h4 data-t="brand"></h4>
         <select class="fsel" id="fb"></select>
+        <h4 data-t="category"></h4>
+        <select class="fsel" id="fc"></select>
         <h4 data-t="vehicle"></h4>
         <select class="fsel" id="fv"></select>
         <button class="reset" id="freset" data-t="reset"></button>
@@ -810,7 +812,7 @@ s1:"نصب و بالانس",s1p:"نصب تایر با دستگاه‌های مد
 k_all:"همه",k_news:"اخبار",k_guide:"راهنما",kind_news:"خبر",kind_guide:"راهنما",min:"دقیقه مطالعه",back:"بازگشت به اخبار و مقالات",
 ct_p:"برای استعلام قیمت، موجودی و رزرو نصب با ما در تماس باشید.",whatsapp:"واتساپ",phone:"تلفن",address:"آدرس",addr:"عمان، صلاله",
 links:"دسترسی سریع",foot_p:"زاد CSC — مرجع تایر، رینگ و روانکار استاندارد در صلاله، عمان.",
-wa_hi:"سلام، از سایت zadcsc.com پیام می‌دهم.",wa_cart:"سلام، از سایت zadcsc.com پیش‌فاکتور این تایرها را می‌خواهم:",wa_ask:"سلام، قیمت و موجودی این تایر را می‌خواهم:",qty:"عدد",
+wa_hi:"سلام، از سایت zadcsc.com پیام می‌دهم.",wa_cart:"سلام، از سایت zadcsc.com پیش‌فاکتور این تایرها را می‌خواهم:",wa_ask:"سلام، قیمت و موجودی این تایر را می‌خواهم:",qty:"عدد",category:"دسته",more:"نمایش بیشتر",
 nav_oils:"روغن‌ها",nav_brands:"برندها",tb_h:"برندهای تایر",tb_p:"تأمین تایر از معتبرترین برندهای جهان",tb_p2:"برندهای دارای برچسب «موجود» در انبار هستند؛ بقیه را سفارشی تأمین می‌کنیم.",
 ob_h:"برندهای روغن",ob_p:"روغن موتور، گیربکس و دیفرانسیل از برندهای معتبر.",br_p:"همه‌ی برندهای تایر و روغنی که تأمین می‌کنیم.",oils_p:"همه‌ی گریدهای روغن موتور، دیزل، گیربکس و دیفرانسیل.",
 sae_h:"معنی گرید روغن چیست؟",sae_p:"در گریدی مثل <span class=\"ltr\">5W-30</span>، عدد قبل از <b>W</b> (Winter) روانی روغن در هوای سرد و هنگام روشن شدن موتور را نشان می‌دهد؛ عدد کمتر یعنی روان‌تر. عدد دوم غلظت روغن در دمای کارکرد موتور است. همیشه گریدی را انتخاب کنید که در دفترچه‌ی خودرو توصیه شده؛ در گرمای عمان، کیفیت و استاندارد روغن (API / ACEA) اهمیت زیادی دارد.",
@@ -837,7 +839,7 @@ s1:"تركيب وترصيص",s1p:"تركيب بأجهزة حديثة وترصي�
 k_all:"الكل",k_news:"أخبار",k_guide:"أدلة",kind_news:"خبر",kind_guide:"دليل",min:"دقائق قراءة",back:"العودة إلى الأخبار والمقالات",
 ct_p:"تواصل معنا للاستفسار عن السعر والتوفر وحجز التركيب.",whatsapp:"واتساب",phone:"الهاتف",address:"العنوان",addr:"عُمان، صلالة",
 links:"روابط سريعة",foot_p:"زاد CSC — مرجع الإطارات والجنوط والزيوت القياسية في صلالة، عُمان.",
-wa_hi:"مرحباً، أتواصل من موقع zadcsc.com.",wa_cart:"مرحباً، أريد عرض سعر لهذه الإطارات من موقع zadcsc.com:",wa_ask:"مرحباً، أريد سعر وتوفر هذا الإطار:",qty:"عدد",
+wa_hi:"مرحباً، أتواصل من موقع zadcsc.com.",wa_cart:"مرحباً، أريد عرض سعر لهذه الإطارات من موقع zadcsc.com:",wa_ask:"مرحباً، أريد سعر وتوفر هذا الإطار:",qty:"عدد",category:"الفئة",more:"عرض المزيد",
 nav_oils:"الزيوت",nav_brands:"العلامات",tb_h:"علامات الإطارات",tb_p:"إطارات من أشهر العلامات العالمية",tb_p2:"العلامات المميزة بـ «متوفر» موجودة في المخزن؛ والبقية نوفّرها حسب الطلب.",
 ob_h:"علامات الزيوت",ob_p:"زيوت المحرك وناقل الحركة والدفرنس من علامات موثوقة.",br_p:"جميع علامات الإطارات والزيوت التي نوفّرها.",oils_p:"جميع درجات زيوت المحرك والديزل وناقل الحركة والدفرنس.",
 sae_h:"ماذا تعني درجة الزيت؟",sae_p:"في درجة مثل <span class=\"ltr\">5W-30</span>، الرقم قبل <b>W</b> (Winter) يدل على سيولة الزيت في البرد وعند تشغيل المحرك؛ الأقل أكثر سيولة. والرقم الثاني هو لزوجة الزيت عند حرارة تشغيل المحرك. اختر دائماً الدرجة الموصى بها في دليل السيارة؛ وفي حرارة عُمان تهمّ جودة الزيت ومعياره (API / ACEA) كثيراً.",
@@ -864,7 +866,7 @@ s1:"Fitting & balancing",s1p:"Modern fitting machines and precise balancing.",s2
 k_all:"All",k_news:"News",k_guide:"Guides",kind_news:"News",kind_guide:"Guide",min:"min read",back:"Back to news & articles",
 ct_p:"Contact us for prices, availability and fitting appointments.",whatsapp:"WhatsApp",phone:"Phone",address:"Address",addr:"Salalah, Oman",
 links:"Quick links",foot_p:"Zad CSC — your reference for tires, wheels and standard lubricants in Salalah, Oman.",
-wa_hi:"Hello, I'm messaging from zadcsc.com.",wa_cart:"Hello, I'd like a quote for these tires from zadcsc.com:",wa_ask:"Hello, I'd like the price and availability of this tire:",qty:"pcs",
+wa_hi:"Hello, I'm messaging from zadcsc.com.",wa_cart:"Hello, I'd like a quote for these tires from zadcsc.com:",wa_ask:"Hello, I'd like the price and availability of this tire:",qty:"pcs",category:"Category",more:"Show more",
 nav_oils:"Oils",nav_brands:"Brands",tb_h:"Tire brands",tb_p:"Tires from the world's leading brands",tb_p2:"Brands marked “In stock” are in our warehouse; we source the rest to order.",
 ob_h:"Oil brands",ob_p:"Engine, gearbox and differential oils from trusted brands.",br_p:"Every tire and oil brand we supply.",oils_p:"Every grade of engine, diesel, gear and differential oil.",
 sae_h:"What does an oil grade mean?",sae_p:"In a grade like <span class=\"ltr\">5W-30</span>, the number before <b>W</b> (Winter) shows how easily the oil flows when cold and at start-up — lower means thinner. The second number is the oil's viscosity at engine operating temperature. Always use the grade in your owner's manual; in Oman's heat, oil quality and specification (API / ACEA) matter a lot.",
@@ -894,7 +896,7 @@ function norm(x){
 }
 function dedupe(list){
   const seen=new Set();
-  return list.filter(x=>{const k=[x.brand,x.pattern,x.width,x.profile,x.rim].join("|");if(seen.has(k))return false;seen.add(k);return true});
+  return list.filter(x=>{const k=[x.brand,x.pattern,x.sizeText,x.width,x.profile,x.rim,x.dotYear].join("|");if(seen.has(k))return false;seen.add(k);return true});
 }
 async function loadTires(){
   let data=null;
@@ -941,6 +943,7 @@ function buildSelects(){
   cascade($("#fw"),$("#fp"),$("#fr"),[t("width"),t("profile"),t("rim")]);
   fillSel($("#fb"),[...new Set([...TIRE_BRANDS.map(b=>b.n),...TIRES.map(x=>x.brand)])].sort(),t("any"));
   fillSel($("#fv"),[...new Set(TIRES.flatMap(x=>x.vehicles))].sort(),t("any"));
+  {const el=$("#fc"),cur=el.value,cs=Object.keys(CATS).filter(c=>TIRES.some(x=>x.oeType===c));el.innerHTML=`<option value="">${t("any")}</option>`+cs.map(c=>`<option value="${esc(c)}">${esc(catT(c))}</option>`).join("");el.value=cur}
   updHint();
 }
 function updHint(){$("#hsz").textContent=`${$("#hw").value||"—"} / ${$("#hp").value||"—"} ${$("#hr").value||"R—"}`}
@@ -975,13 +978,16 @@ function renderAllSizes(){
 
 /* product card */
 const desc=x=>x["desc_"+L]||x.desc_en||x.desc_fa||"";
-const sizeOf=x=>`${x.width}/${x.profile}${x.rim}`;
+const sizeOf=x=>x.profile&&x.width?`${x.width}/${x.profile}${x.rim}`:(x.sizeText||"");
+const CATS={"Passenger / SUV":{fa:"سواری و شاسی‌بلند",ar:"سيارات ودفع رباعي",en:"Passenger / SUV"},"Light truck / Van":{fa:"وانت و ون",ar:"بيك أب وفان",en:"Light truck / Van"},"Off-road":{fa:"آفرود",ar:"طرق وعرة",en:"Off-road"},"Truck & Bus":{fa:"کامیون و اتوبوس",ar:"شاحنات وحافلات",en:"Truck & Bus"},"OTR / Industrial":{fa:"صنعتی و معدنی",ar:"معدات صناعية",en:"OTR / Industrial"}};
+const catT=c=>CATS[c]?CATS[c][L]:(c||"");
+let SHOWN=48;
 function card(x){
   const img=x.images&&x.images[0]?`<img src="${esc(x.images[0])}" alt="${esc(x.brand)}" loading="lazy" onerror="this.replaceWith(document.createRange().createContextualFragment(tireSVG))">`:tireSVG;
   return `<div class="pc">
     <div class="img" data-open="${x.id}">${img}${x.dotYear?`<span class="badge">DOT ${esc(x.dotYear)}</span>`:""}</div>
     <div class="bd">
-      <div class="br">${esc(x.brand)}</div>
+      <div class="br">${esc(x.brand)}${x.oeType&&CATS[x.oeType]?` · <span style="text-transform:none;font-weight:500">${esc(catT(x.oeType))}</span>`:""}</div>
       <h3 data-open="${x.id}">${esc(x.pattern||x.sizeText)}</h3>
       <div class="sz">${esc(sizeOf(x))}</div>
       <div class="stars">${"★".repeat(Math.round(x.rating||5))} <small>(${x.reviews||0} ${t("reviews")})</small></div>
@@ -990,16 +996,18 @@ function card(x){
     </div></div>`;
 }
 function filtered(){
-  const q=$("#fq").value.trim().toLowerCase(),w=$("#fw").value,p=$("#fp").value,r=$("#fr").value,b=$("#fb").value,v=$("#fv").value;
-  return TIRES.filter(x=>(!w||x.width==w)&&(!p||x.profile==p)&&(!r||x.rim==r)&&(!b||x.brand==b)&&(!v||x.vehicles.includes(v))&&
-    (!q||[x.brand,x.pattern,x.sizeText,sizeOf(x),...x.vehicles].join(" ").toLowerCase().includes(q)));
+  const q=$("#fq").value.trim().toLowerCase(),w=$("#fw").value,p=$("#fp").value,r=$("#fr").value,b=$("#fb").value,v=$("#fv").value,c=$("#fc").value;
+  const qn=/^[\d\s\/.rR-]+$/.test(q)?q.replace(/\D/g,""):"";
+  return TIRES.filter(x=>(!w||x.width==w)&&(!p||x.profile==p)&&(!r||x.rim==r)&&(!b||x.brand==b)&&(!c||x.oeType==c)&&(!v||x.vehicles.includes(v))&&
+    (!q||[x.brand,x.pattern,x.sizeText,sizeOf(x),x.sku,...x.vehicles].join(" ").toLowerCase().includes(q)||(qn.length>=5&&String(x.sizeText||"").replace(/\D/g,"").includes(qn))));
 }
-function renderTires(){
+function renderTires(keep){
+  if(keep!==true)SHOWN=48;
   const list=filtered();
   $("#fcount").textContent = L==="en"?`${list.length} ${t("found")}`:`${list.length} ${t("found")}`;
   const w=$("#fw").value,p=$("#fp").value,r=$("#fr").value,b=$("#fb").value;
   const want=[b,(w||p||r)?`${w||"?"}/${p||"?"}${r||""}`:""].filter(Boolean).join(" ");
-  $("#tireGrid").innerHTML = list.length?list.map(card).join(""):`<div class="empty" style="grid-column:1/-1">${want?`<b style="direction:ltr;display:block;font-size:22px;color:var(--txt)">${esc(want)}</b>${t("sz_none")}`:t("none")}<br><br><a class="btn wa" target="_blank" rel="noopener" href="${waURL((want?t("wa_size")+" "+want:t("wa_hi")))}">${want?t("ask_size"):"WhatsApp"}</a></div>`;
+  $("#tireGrid").innerHTML = list.length?list.slice(0,SHOWN).map(card).join("")+(list.length>SHOWN?`<div style="grid-column:1/-1;text-align:center"><button class="btn y" id="moreT">${t("more")} (${list.length-SHOWN})</button></div>`:""):`<div class="empty" style="grid-column:1/-1">${want?`<b style="direction:ltr;display:block;font-size:22px;color:var(--txt)">${esc(want)}</b>${t("sz_none")}`:t("none")}<br><br><a class="btn wa" target="_blank" rel="noopener" href="${waURL((want?t("wa_size")+" "+want:t("wa_hi")))}">${want?t("ask_size"):"WhatsApp"}</a></div>`;
 }
 function artCard(a){
   const c=a[L]||a.en;
@@ -1028,7 +1036,8 @@ function renderServices(){
   $("#svcGrid").innerHTML=[1,2,3,4].map(i=>`<div class="cat"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${ic[i-1]}</svg></div><h3>${t("s"+i)}</h3><p>${t("s"+i+"p")}</p></div>`).join("");
 }
 function renderAll(){
-  $("#featGrid").innerHTML=TIRES.slice(0,4).map(card).join("")||`<div class="empty">${t("none")}</div>`;
+  const feat=[...TIRES.filter(x=>x.oeType==="Passenger / SUV"&&+x.dotYear>=2026),...TIRES].filter((x,i,a)=>a.indexOf(x)===i);
+  $("#featGrid").innerHTML=feat.slice(0,8).map(card).join("")||`<div class="empty">${t("none")}</div>`;
   renderTires(); renderNews(); renderServices(); renderCart(); renderBrands(); renderOils(); renderAllSizes();
   const m=location.hash.match(/^#\/article\/(.+)$/); if(m)renderPost(m[1]);
 }
@@ -1110,8 +1119,9 @@ $$("#lang button").forEach(b=>b.onclick=()=>{L=b.dataset.l;store.set("zad_lang",
 ["#fw","#fp"].forEach(s=>$(s).addEventListener("change",()=>{cascade($("#fw"),$("#fp"),$("#fr"),[t("width"),t("profile"),t("rim")]);renderTires()}));
 function setFilterSize(w,p,r){const L3=[t("width"),t("profile"),t("rim")];$("#fw").value=w;cascade($("#fw"),$("#fp"),$("#fr"),L3);$("#fp").value=p;cascade($("#fw"),$("#fp"),$("#fr"),L3);$("#fr").value=r}
 $("#hgo").onclick=()=>{setFilterSize($("#hw").value,$("#hp").value,$("#hr").value);$("#fq").value="";$("#fb").value="";$("#fv").value="";location.hash="#/tires";renderTires()};
-["#fq","#fw","#fp","#fr","#fb","#fv"].forEach(s=>$(s).addEventListener("input",renderTires));
-$("#freset").onclick=()=>{["#fq","#fw","#fp","#fr","#fb","#fv"].forEach(s=>$(s).value="");buildSelects();renderTires()};
+["#fq","#fw","#fp","#fr","#fb","#fv","#fc"].forEach(s=>$(s).addEventListener("input",()=>renderTires()));
+$("#freset").onclick=()=>{["#fq","#fw","#fp","#fr","#fb","#fv","#fc"].forEach(s=>$(s).value="");buildSelects();renderTires()};
+document.addEventListener("click",e=>{if(e.target.id==="moreT"){SHOWN+=48;renderTires(true)}});
 $$("#ntabs button").forEach(b=>b.onclick=()=>{ntab=b.dataset.k;$$("#ntabs button").forEach(x=>x.classList.toggle("on",x===b));renderNews()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAll()});
 window.addEventListener("hashchange",route);
