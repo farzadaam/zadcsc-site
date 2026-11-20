@@ -144,6 +144,39 @@ async function carModels(env, make) {
 }
 
 /* one-time import of the shop's tire list (public/data/tires.json) into D1 */
+/* live OE tire sizes from the Wheel Fitment API (wheel-size.com); needs secret WS_KEY. No results are stored. */
+const WS = "https://api.wheel-size.com/v2";
+const wsSlug = (list, name) => {
+  const n = String(name || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+  if (!n) return null;
+  const hit = list.find(x => [x.slug, x.name, x.name_en].some(v => String(v || "").toLowerCase().replace(/[^a-z0-9]/g, "") === n));
+  return hit ? hit.slug : null;
+};
+async function wsGet(env, path, ttl) {
+  const r = await fetch(`${WS}${path}${path.includes("?") ? "&" : "?"}user_key=${encodeURIComponent(env.WS_KEY)}`, ttl ? { cf: { cacheTtl: ttl, cacheEverything: true } } : {});
+  if (!r.ok) throw new Error("ws " + r.status);
+  return (await r.json()).data || [];
+}
+async function wsLookup(env, make, model, year) {
+  if (!env.WS_KEY) return { enabled: false };
+  if (!make || !model || !year) return { enabled: true, trims: [] };
+  const mk = wsSlug(await wsGet(env, "/makes/", 604800), make);
+  if (!mk) return { enabled: true, trims: [] };
+  const md = wsSlug(await wsGet(env, `/models/?make=${mk}`, 604800), model);
+  if (!md) return { enabled: true, trims: [] };
+  const rows = await wsGet(env, `/search/by_model/?make=${mk}&model=${md}&year=${year}&region=medm`);
+  const tire = w => w && (w.tire_full || w.tire) || null;
+  const rim = w => w && w.rim || null;
+  const trims = rows.slice(0, 30).map(d => ({
+    trim: d.trim || d.name || null,
+    generation: d.generation && d.generation.name || null,
+    engine: [d.engine && d.engine.capacity && d.engine.capacity + "L", d.engine && d.engine.type, d.engine && d.engine.fuel].filter(Boolean).join(" ") || null,
+    bolt: d.technical && d.technical.bolt_pattern || null,
+    wheels: (d.wheels || []).map(w => ({ stock: !!w.is_stock, front: tire(w.front), rear: w.showing_fp_only ? null : tire(w.rear), rim: rim(w.front) })).filter(w => w.front)
+  })).filter(t => t.wheels.length);
+  return { enabled: true, trims };
+}
+
 async function ensureFitImport(env, origin) {
   const KEY = "fitments_import_v2";
   const lock = await env.DB.prepare("INSERT OR IGNORE INTO meta (k, v) VALUES (?, 'running')").bind(KEY).run();
@@ -215,6 +248,11 @@ async function api(req, env, url) {
     await ensureFitImport(env, url.origin);
     const make = str(url.searchParams.get("make"), 60), model = str(url.searchParams.get("model"), 60), year = int(url.searchParams.get("year"));
     return json(await findFitments(env, make, model, year));
+  }
+  if (p === "/api/ws" && M === "GET") {
+    try {
+      return json(await wsLookup(env, str(url.searchParams.get("make"), 60), str(url.searchParams.get("model"), 60), int(url.searchParams.get("year"))));
+    } catch (e) { return json({ enabled: true, trims: [], error: "ws_unavailable" }); }
   }
   if (p.startsWith("/api/vin/") && M === "GET") {
     const vin = decodeURIComponent(p.slice(9)).toUpperCase().replace(/\s/g, "");

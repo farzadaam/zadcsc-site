@@ -8,7 +8,7 @@ acct_h:"حساب کاربری",acct_p:"سوابق خودرو، سرویس‌ها
 my_vehicles:"خودروهای من",add_vehicle:"افزودن خودرو",plate:"پلاک",mileage:"کیلومتر",svc_history:"سابقه‌ی سرویس",my_orders:"سفارش‌ها",my_bookings:"نوبت‌ها",reminders:"سرویس‌های پیش رو",
 due_on:"موعد",no_items:"موردی ثبت نشده است.",save:"ذخیره",profile:"اطلاعات من",new_password:"رمز جدید (اختیاری)",del:"حذف",
 car_found:"خودروی شناسایی‌شده",oil_rec:"روغن پیشنهادی",tire_rec:"سایز تایرهای کارخانه",no_fit:"اطلاعات این مدل هنوز در سیستم نیست؛ در واتساپ بپرسید تا راهنمایی‌تان کنیم.",
-fit_note:"اطلاعات مرجع است؛ لطفاً با دفترچه‌ی خودرو و برچسب در راننده تطبیق دهید.",engine:"موتور",body:"بدنه",show_tires:"نمایش تایرها",ask_oil:"استعلام روغن",
+ws_h:"سایز دقیق بر اساس تیپ خودرو",ws_stock:"کارخانه",ws_opt:"اختیاری",ws_src:"منبع سایزها",fit_note:"اطلاعات مرجع است؛ لطفاً با دفترچه‌ی خودرو و برچسب در راننده تطبیق دهید.",engine:"موتور",body:"بدنه",show_tires:"نمایش تایرها",ask_oil:"استعلام روغن",
 date:"تاریخ",type:"نوع",details:"جزئیات",price:"مبلغ",status:"وضعیت",items:"اقلام",admin_link:"پنل مدیریت",select:"انتخاب کنید",
 st_new:"جدید",st_confirmed:"تأییدشده",st_processing:"در حال انجام",st_done:"انجام‌شده",st_delivered:"تحویل‌شده",st_cancelled:"لغوشده",
 svc_tire:"تعویض / نصب تایر",svc_oil:"تعویض روغن",svc_balance:"بالانس و تنظیم فرمان",svc_check:"بازدید و مشاوره",svc_other:"سایر",
@@ -21,7 +21,7 @@ acct_h:"حسابي",acct_p:"سجل سياراتك وخدماتك وطلباتك 
 my_vehicles:"سياراتي",add_vehicle:"إضافة سيارة",plate:"اللوحة",mileage:"العداد (كم)",svc_history:"سجل الخدمات",my_orders:"الطلبات",my_bookings:"المواعيد",reminders:"الخدمات القادمة",
 due_on:"الموعد",no_items:"لا توجد بيانات.",save:"حفظ",profile:"بياناتي",new_password:"كلمة مرور جديدة (اختياري)",del:"حذف",
 car_found:"السيارة",oil_rec:"الزيت الموصى به",tire_rec:"مقاسات الإطارات الأصلية",no_fit:"بيانات هذا الطراز غير متوفرة بعد؛ اسألنا عبر واتساب.",
-fit_note:"البيانات مرجعية؛ يرجى مطابقتها مع دليل السيارة وملصق باب السائق.",engine:"المحرك",body:"الهيكل",show_tires:"عرض الإطارات",ask_oil:"استفسر عن الزيت",
+ws_h:"المقاسات حسب فئة السيارة",ws_stock:"أصلي",ws_opt:"اختياري",ws_src:"مصدر المقاسات",fit_note:"البيانات مرجعية؛ يرجى مطابقتها مع دليل السيارة وملصق باب السائق.",engine:"المحرك",body:"الهيكل",show_tires:"عرض الإطارات",ask_oil:"استفسر عن الزيت",
 date:"التاريخ",type:"النوع",details:"التفاصيل",price:"المبلغ",status:"الحالة",items:"العناصر",admin_link:"لوحة الإدارة",select:"اختر",
 st_new:"جديد",st_confirmed:"مؤكد",st_processing:"قيد التنفيذ",st_done:"منجز",st_delivered:"تم التسليم",st_cancelled:"ملغى",
 svc_tire:"تغيير / تركيب إطارات",svc_oil:"تغيير الزيت",svc_balance:"ترصيص وضبط الأذرعة",svc_check:"فحص واستشارة",svc_other:"أخرى",
@@ -34,7 +34,7 @@ acct_h:"My account",acct_p:"Your vehicles, service history, orders and bookings.
 my_vehicles:"My vehicles",add_vehicle:"Add vehicle",plate:"Plate",mileage:"Mileage (km)",svc_history:"Service history",my_orders:"Orders",my_bookings:"Bookings",reminders:"Upcoming services",
 due_on:"Due",no_items:"Nothing yet.",save:"Save",profile:"My details",new_password:"New password (optional)",del:"Delete",
 car_found:"Vehicle",oil_rec:"Recommended oil",tire_rec:"Factory tire sizes",no_fit:"We don't have this model on file yet — ask us on WhatsApp.",
-fit_note:"Reference data — please check against your owner's manual and door-jamb sticker.",engine:"Engine",body:"Body",show_tires:"Show tires",ask_oil:"Ask about oil",
+ws_h:"Exact sizes by trim",ws_stock:"OE",ws_opt:"Option",ws_src:"Sizes source",fit_note:"Reference data — please check against your owner's manual and door-jamb sticker.",engine:"Engine",body:"Body",show_tires:"Show tires",ask_oil:"Ask about oil",
 date:"Date",type:"Type",details:"Details",price:"Amount",status:"Status",items:"Items",admin_link:"Admin panel",select:"Select",
 st_new:"New",st_confirmed:"Confirmed",st_processing:"In progress",st_done:"Done",st_delivered:"Delivered",st_cancelled:"Cancelled",
 svc_tire:"Tire change / fitting",svc_oil:"Oil change",svc_balance:"Balancing & alignment",svc_check:"Inspection & advice",svc_other:"Other",
@@ -142,8 +142,18 @@ function showCar(car,fits){
       <p class="disclaim">${t("fit_note")}</p>
       ${ME&&car.vin?`<button class="btn o" style="color:var(--txt);border-color:#ccc;margin-top:10px" id="saveCar">${t("save_car")}</button>`:""}`
     :`<p class="empty2">${t("no_fit")}</p><a class="btn wa" target="_blank" rel="noopener" href="${waURL(t("wa_hi")+" "+(car.vin||name))}">WhatsApp</a>`}</div>`;
+  wsFill(car);
   const sc=$("#saveCar");if(sc)sc.onclick=async()=>{await call("/api/me/vehicles",{method:"POST",body:{vin:car.vin,make:car.make,model:car.model,year:car.year}}).catch(()=>{});sc.textContent=t("saved");sc.disabled=true};
   $("#carRes").querySelectorAll("[data-size]").forEach(b=>b.addEventListener("click",()=>{location.hash="#/tires"},{once:false}));
+}
+
+async function wsFill(car){
+  if(!car.make||!car.model||!car.year)return;
+  const r=await call("/api/ws?"+new URLSearchParams({make:car.make,model:car.model,year:car.year})).catch(()=>null);
+  if(!r||!r.enabled||!r.trims||!r.trims.length)return;
+  const box=document.createElement("div");box.className="box2";box.style.marginTop="12px";
+  box.innerHTML=`<h3>${t("ws_h")}</h3>`+r.trims.map(x=>`<div style="margin-bottom:10px"><b style="direction:ltr;display:inline-block">${esc([x.generation,x.trim,x.engine].filter(Boolean).join(" · "))}</b>${x.bolt?` <small style="color:var(--sub)">· ${esc(x.bolt)}</small>`:""}<div>${x.wheels.map(w=>`<span class="chipbtn" style="cursor:default;direction:ltr">${esc(w.front)}${w.rear?" / "+esc(w.rear):""}${w.rim?` <small>${esc(w.rim)}</small>`:""} <small>${w.stock?t("ws_stock"):t("ws_opt")}</small></span>`).join("")}</div></div>`).join("")+`<p class="disclaim">${t("ws_src")}: <a href="https://www.wheel-size.com" target="_blank" rel="noopener">Wheel-Size.com</a></p>`;
+  const res=$("#carRes");if(res)res.appendChild(box);
 }
 
 /* ---------- booking ---------- */
