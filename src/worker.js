@@ -252,6 +252,10 @@ async function api(req, env, url) {
     const make = str(url.searchParams.get("make"), 60), model = str(url.searchParams.get("model"), 60), year = int(url.searchParams.get("year"));
     return json(await findFitments(env, make, model, year));
   }
+  if (p === "/api/insta" && M === "GET") {
+    const { results } = await DB.prepare("SELECT id, url FROM insta ORDER BY id DESC LIMIT 6").all();
+    return json(results, 200, { "cache-control": "public, max-age=300" });
+  }
   if (p === "/api/ws" && M === "GET") {
     try {
       return json(await wsLookup(env, str(url.searchParams.get("make"), 60), str(url.searchParams.get("model"), 60), int(url.searchParams.get("year"))));
@@ -383,7 +387,8 @@ const TABLES = {
   services: ["user_id", "vehicle_id", "date", "type", "mileage", "details", "price", "next_due_date", "next_due_km"],
   orders: ["user_id", "name", "phone", "items", "total", "status", "note"],
   bookings: ["user_id", "name", "phone", "vehicle", "service", "date", "time", "status", "note"],
-  users: ["phone", "name", "email", "role", "notes"]
+  users: ["phone", "name", "email", "role", "notes"],
+  insta: ["url"]
 };
 const NUMERIC = new Set(["rating", "reviews", "year_from", "year_to", "oil_capacity_l", "user_id", "vehicle_id", "year", "mileage", "price", "next_due_km", "total"]);
 const JSONCOLS = new Set(["vehicles", "images", "tire_sizes", "items"]);
@@ -398,6 +403,10 @@ function cleanRow(table, b) {
     else v = str(v, 2000);
     if (c === "phone" && v != null) v = normPhone(v);
     if (c === "role" && v && !["customer", "admin"].includes(v)) v = "customer";
+    if (table === "insta" && c === "url") {
+      const m = String(v || "").match(/instagram\.com\/(?:[\w.]+\/)?(p|reel|tv)\/([\w-]+)/i);
+      v = m ? `https://www.instagram.com/${m[1].toLowerCase()}/${m[2]}/` : null;
+    }
     row[c] = v;
   }
   return row;
@@ -458,7 +467,7 @@ async function admin(req, env, url, p, M, me) {
   }
 
   /* generic CRUD: /api/admin/:table and /api/admin/:table/:id */
-  const g = p.match(/^\/api\/admin\/(tires|fitments|vehicles|services|orders|bookings|users)(?:\/(\d+))?$/);
+  const g = p.match(/^\/api\/admin\/(tires|fitments|vehicles|services|orders|bookings|users|insta)(?:\/(\d+))?$/);
   if (g) {
     const [, table, idS] = g;
     const id = idS ? +idS : null;
@@ -477,6 +486,7 @@ async function admin(req, env, url, p, M, me) {
       const row = cleanRow(table, await body(req));
       const cols = Object.keys(row);
       if (!cols.length) return bad("empty");
+      if (table === "insta" && !row.url) return bad("invalid_instagram_url");
       const r = await DB.prepare(`INSERT INTO ${table} (${cols.join(",")}) VALUES (${cols.map(() => "?").join(",")})`).bind(...cols.map(c => row[c])).run();
       return json({ ok: true, id: r.meta.last_row_id });
     }

@@ -205,6 +205,9 @@ footer .cp{border-top:1px solid var(--line);margin-top:28px;padding-top:18px;fon
 
 .fab{position:fixed;bottom:20px;inset-inline-start:20px;z-index:40;width:56px;height:56px;border-radius:50%;background:#1FAF55;display:grid;place-items:center;box-shadow:0 10px 24px -8px rgba(0,0,0,.4)}
 .fab svg{width:28px;height:28px;color:#fff}
+.fab.ig{bottom:86px;background:radial-gradient(circle at 30% 107%,#fdf497 0%,#fd5949 45%,#d6249f 60%,#285AEB 90%)}
+.igrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;align-items:start}
+.igrid .instagram-media{min-width:0!important;max-width:100%!important;margin:0!important}
 .toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:14px;opacity:0;transition:.25s;z-index:100;pointer-events:none}
 .toast.on{opacity:1;transform:translateX(-50%)}
 .page{display:none}
@@ -351,6 +354,13 @@ table.lst th{color:var(--sub);font-weight:600;font-size:12px}
     <div class="wrap">
       <div class="sh"><div><h2 data-t="feat_h"></h2><p data-t="feat_p"></p></div><a href="#/tires" class="more" data-t="see_all"></a></div>
       <div class="grid" id="featGrid"></div>
+    </div>
+  </section>
+
+  <section class="blk" style="padding-top:0;display:none" id="igSec">
+    <div class="wrap">
+      <div class="sh"><div><h2 id="igH"></h2><p style="direction:ltr;display:inline-block">@zad_tires</p></div><a href="https://instagram.com/zad_tires" target="_blank" rel="noopener" class="more" id="igF"></a></div>
+      <div class="igrid" id="igGrid"></div>
     </div>
   </section>
 
@@ -558,6 +568,7 @@ table.lst th{color:var(--sub);font-weight:600;font-size:12px}
   </div>
 </footer>
 
+<a class="fab ig" href="https://instagram.com/zad_tires" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
 <a class="fab waLink" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l2 .9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
 
 <div class="ov" id="ov"></div>

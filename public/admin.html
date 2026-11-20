@@ -62,6 +62,7 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
   <button data-tab="orders">سفارش‌ها</button>
   <button data-tab="tires">تایرها</button>
   <button data-tab="fitments">مشخصات خودروها</button>
+  <button data-tab="insta">اینستاگرام</button>
 </nav>
 <main id="main"></main>
 <dialog id="dlg"></dialog>
@@ -97,7 +98,7 @@ function openDlg(title,html,onSubmit){
 }
 
 /* ---------- tabs ---------- */
-const TABS={dash,customers,bookings,orders,tires,fitments};
+const TABS={dash,customers,bookings,orders,tires,fitments,insta};
 let cur="dash";
 document.querySelectorAll("#tabs button").forEach(b=>b.onclick=()=>{cur=b.dataset.tab;document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("on",x===b));TABS[cur]()});
 
@@ -183,6 +184,16 @@ async function fitments(){
   $("#addF").onclick=()=>openDlg("خودروی جدید",fields(FIT_F,{tire_sizes:"[]"}),async b=>{await api("/fitments",{method:"POST",body:b});fitments()});
   document.querySelectorAll("[data-ef]").forEach(x=>x.onclick=()=>{const v=l.find(y=>y.id==x.dataset.ef);openDlg("ویرایش",fields(FIT_F,v),async b=>{await api("/fitments/"+v.id,{method:"PUT",body:b});fitments()})});
   document.querySelectorAll("[data-df]").forEach(x=>x.onclick=async()=>{if(confirm("حذف شود؟")){await api("/fitments/"+x.dataset.df,{method:"DELETE"});fitments()}});
+}
+
+/* ---------- instagram ---------- */
+async function insta(){
+  const l=await api("/insta");
+  $("#main").innerHTML=`<div class="panel"><h3><span>پست‌های اینستاگرام روی صفحه‌ی اول (${l.length})</span><button class="btn y" id="addI">+ پست</button></h3>
+  <p class="muted" style="margin-bottom:8px">در اینستاگرام روی ⋯ پست بزنید، «Copy link» را بزنید و اینجا بچسبانید. ۶ پست آخر روی صفحه‌ی اول سایت نشان داده می‌شود.</p>
+  <table><tr><th>#</th><th>لینک</th><th>تاریخ</th><th></th></tr>${l.map(x=>`<tr><td>${x.id}</td><td class="ltr"><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.url)}</a></td><td>${esc((x.created_at||"").slice(0,10))}</td><td><button class="btn r s" data-di="${x.id}">حذف</button></td></tr>`).join("")}</table></div>`;
+  $("#addI").onclick=()=>openDlg("افزودن پست اینستاگرام",fields([["url","لینک پست یا ریلز"]]),async b=>{try{await api("/insta",{method:"POST",body:b});toast("اضافه شد");insta()}catch(e){toast("لینک درست نیست؛ لینک پست یا ریلز اینستاگرام را بچسبانید")}});
+  document.querySelectorAll("[data-di]").forEach(x=>x.onclick=async()=>{if(confirm("از سایت حذف شود؟")){await api("/insta/"+x.dataset.di,{method:"DELETE"});insta()}});
 }
 
 /* ---------- gate ---------- */
