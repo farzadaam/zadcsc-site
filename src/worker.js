@@ -1,4 +1,4 @@
-// repo: github.com/farzadaam/zadcsc-site
+// repo: github.com/farzadaam/zadcsc-site (deployed by GitHub Actions)
 // Zad CSC — API worker (Cloudflare Workers + D1)
 // Static pages (public/) are served by Workers Assets; this script answers /api/*.
 
