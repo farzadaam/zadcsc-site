@@ -1,0 +1,22 @@
+name: Deploy to Cloudflare
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check token
+        id: tok
+        env:
+          T: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: if [ -n "$T" ]; then echo "ok=1" >> "$GITHUB_OUTPUT"; else echo "CLOUDFLARE_API_TOKEN secret is not set — skipping deploy"; fi
+      - name: Deploy
+        if: steps.tok.outputs.ok == '1'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 7f9a42226e0dfde5ece658ea7d8c7194
+          command: deploy
