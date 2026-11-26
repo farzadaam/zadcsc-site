@@ -202,6 +202,7 @@ article.post p,article.post li{font-size:16.5px;color:#2a2a2a;margin-bottom:12px
 article.post ul{padding-inline-start:22px}
 article.post .box{background:#FFF6D6;border-inline-start:4px solid var(--y);padding:14px 16px;border-radius:10px;margin:18px 0}
 article.post .ltr{direction:ltr;display:inline-block;font-weight:700}
+article.post img.hero{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:16px;margin:0 0 22px;display:block}
 .back{display:inline-flex;gap:6px;font-weight:700;margin-bottom:18px}
 
 /* contact */
@@ -743,6 +744,207 @@ const OIL_BRANDS = [
    ============================================================ */
 const ARTICLES = [
 {
+  slug:"pirelli-cyber-tyre-usa", kind:"news", date:"2026-11-25", color:"#0A0A0A", min:6, img:"/news/pirelli-cyber-tyre.jpg",
+  fa:{t:"تایر هوشمند پیرلی وارد آمریکا شد؛ چرا این‌قدر طول کشید؟",
+      s:"پیرلی فناوری Cyber Tyre را در گرندپری لاس‌وگاس به آمریکا آورد. دلیل تأخیر را در اطلاعیه‌اش نگفت، ولی ماجرا سیاسی است، نه فنی.",
+      b:`<p>پیرلی روز <b>۲۳ نوامبر ۲۰۲۶</b>، هم‌زمان با گرندپری فرمول ۱ لاس‌وگاس، اعلام کرد فناوری <span class="ltr">Cyber Tyre</span> را وارد بازار آمریکا می‌کند. رئیس هیئت‌مدیره، مدیرعامل و سفیر ایتالیا در آمریکا هم در مراسم رونمایی بودند. این خبر ساده به نظر می‌رسد، ولی پشتش بیش از یک سال کشمکش سیاسی میان آمریکا، چین و ایتالیا بوده است.</p>
+<h2>Cyber Tyre چیست؟</h2>
+<p>یک سنسور کوچک داخل آج تایر چسبانده می‌شود. این سنسور شناسه‌ی تایر، فشار باد، دما و شتاب را اندازه می‌گیرد و با بلوتوث به خودرو می‌فرستد. نرم‌افزار و الگوریتم‌های خود پیرلی این داده‌ها را لحظه‌ای پردازش می‌کنند.</p>
+<ul><li>وزن سنسور حدود ۱۲ گرم است و باتری‌اش حدود پنج سال کار می‌کند.</li>
+<li>تایرهای مجهز به این فناوری روی دیواره علامت <b class="ltr">C</b> دارند.</li></ul>
+<h2>چه فایده‌ای دارد؟</h2>
+<ul><li><b>ترمز کوتاه‌تر:</b> سیستم <span class="ltr">ABS</span> نقطه‌ی حداکثر چسبندگی تایر را می‌داند و فاصله‌ی ترمز کم می‌شود.</li>
+<li><b>هشدار زودهنگام آب‌سواری (آکواپلنینگ):</b> خودرو زودتر می‌فهمد تایر روی آب در حال سُر خوردن است.</li>
+<li><b>کنترل کشش دقیق‌تر:</b> تایر خودش را به خودرو معرفی می‌کند و تنظیمات بر اساس همان تایر انجام می‌شود.</li>
+<li><b>همکاری با بوش:</b> داده‌ها مستقیم به سیستم‌های <span class="ltr">ABS</span>، <span class="ltr">ESP</span> و کنترل کشش می‌رسد.</li>
+<li><b>اطلاعات جاده:</b> داده‌ی تایرها می‌تواند خرابی و خطرهای جاده را گزارش کند.</li></ul>
+<div class="box">به گفته‌ی پیرلی، این فناوری در آینده به خودروهای خودران «حس لامسه» می‌دهد؛ یعنی خودرو بفهمد زیر چرخ‌هایش دقیقاً چه خبر است.</div>
+<h2>از کجا شروع شد؟</h2>
+<p>مدیر فنی پیرلی می‌گوید ایده‌ی تبدیل تایر به یک «سنسور فعال» بیش از بیست سال پیش شکل گرفت. مک‌لارن آرتورا در ۲۰۲۱ اولین خودرویی بود که با تایرهای سنسوردار پیرلی از کارخانه عرضه شد. حالا پیرلی پاگانی اوتوپیا رودستر را اولین خودرویی معرفی می‌کند که نسخه‌ی کامل Cyber Tyre را به‌صورت استاندارد دارد.</p>
+<h2>برنامه‌ی پیرلی در آمریکا</h2>
+<p>این خبر بخشی از یک سرمایه‌گذاری بزرگ است که هیئت‌مدیره‌ی پیرلی در ۲۲ سپتامبر ۲۰۲۶ تصویب کرد:</p>
+<ul><li>حدود <b>۱٫۲ میلیارد دلار</b> برای توسعه‌ی کارخانه‌ی رُم در ایالت جورجیا (پیرلی از ۲۰۰۲ آن‌جا حضور دارد).</li>
+<li>شروع برنامه از <b>۲۰۲۷</b> و رسیدن ظرفیت به حدود <b>۶ میلیون تایر در سال</b> تا ۲۰۳۳.</li>
+<li>حدود <b>۱۰۰۰ شغل جدید</b>.</li>
+<li>تولید تایرهای مجهز به Cyber Tyre، ارتقای خط تولید رباتیک و یک خط کاملاً خودکار جدید برای تایرهای پریمیوم.</li></ul>
+<p>آمریکا حدود ۴۰٪ حجم جهانی تایرهای گران‌قیمت (High Value) را دارد؛ برای همین پیرلی می‌خواهد آن‌جا محلی تولید کند.</p>
+<h2>چرا تا الان به آمریکا نرفته بود؟</h2>
+<p>پیرلی در اطلاعیه‌ی رسمی‌اش دلیل را نگفته است. ولی گزارش‌های رویترز و بلومبرگ ماجرا را روشن می‌کنند:</p>
+<ul><li>شرکت دولتی چینی <b>سینوکیم (Sinochem)</b> از ۲۰۱۵ بزرگ‌ترین سهام‌دار پیرلی است؛ ابتدا با حدود ۳۷٪ و حالا حدود ۳۴٪.</li>
+<li>آمریکا در اوایل ۲۰۲۵ قانونی نهایی کرد که فروش سخت‌افزار و نرم‌افزار «خودروهای متصل» مرتبط با چین و روسیه را ممنوع می‌کند.</li>
+<li>Cyber Tyre داده جمع می‌کند و با خودرو حرف می‌زند؛ پس دقیقاً زیر ذره‌بین این قانون رفت و آمریکا به پیرلی هشدار داد.</li>
+<li>دولت ایتالیا با «اختیارات طلایی» (Golden Power) وارد شد و در آوریل ۲۰۲۶ تعداد اعضای هیئت‌مدیره‌ای را که سینوکیم می‌تواند معرفی کند به سه نفر محدود کرد.</li>
+<li>بعد از آن، پیرلی در مه ۲۰۲۶ تولید Cyber Tyre در جورجیا را اعلام کرد و اداره‌ی صنعت و امنیت آمریکا (BIS) هم اجازه‌ی فروش داد.</li></ul>
+<div class="box">خلاصه: تأخیر به‌خاطر فناوری نبود؛ به‌خاطر سهام‌دار چینی و رقابت فناوری آمریکا و چین بود. حتی تایر هم حالا بخشی از سیاست شده است.</div>
+<h2>برای ما در عمان چه معنایی دارد؟</h2>
+<p>فعلاً Cyber Tyre بیشتر روی خودروهای فوق‌لوکس و به‌صورت تجهیزات کارخانه عرضه می‌شود و به این زودی در بازار عادی تایر نمی‌بینیمش. ولی جهت حرکت روشن است: تایرها هوشمند می‌شوند. قابلیتی مثل هشدار آب‌سواری برای جاده‌های خیس صلاله در فصل خریف واقعاً کاربردی است.</p>
+<p>تا آن روز، ساده‌ترین کار برای ایمنی این است که فشار باد را مرتب چک کنید و تایر را قبل از تمام شدن آج عوض کنید.</p>
+<h2>منابع</h2>
+<ul><li>اطلاعیه‌ی رسمی پیرلی، ۲۳ نوامبر ۲۰۲۶</li><li>Reuters، Bloomberg، Carscoops، Automotive World، evo</li></ul>`},
+  ar:{t:"تاير بيريللي الذكي وصل أمريكا… ليش تأخر لين الحين؟",
+      s:"بيريللي أطلقت تقنية Cyber Tyre في أمريكا خلال سباق لاس فيغاس. ما ذكرت سبب التأخير في إعلانها، بس القصة سياسية مب تقنية.",
+      b:`<p>في <b>23 نوفمبر 2026</b>، وخلال سباق فورمولا 1 في لاس فيغاس، أعلنت بيريللي دخول تقنية <span class="ltr">Cyber Tyre</span> إلى السوق الأمريكي، بحضور رئيس مجلس الإدارة والرئيس التنفيذي وسفير إيطاليا في واشنطن. الخبر يبان بسيط، بس وراه أكثر من سنة من الشد والجذب بين أمريكا والصين وإيطاليا.</p>
+<h2>وش هو Cyber Tyre؟</h2>
+<p>حساس صغير يُلصق داخل التاير، يقيس هوية التاير والضغط والحرارة والتسارع، ويرسلها للسيارة بالبلوتوث، وتعالجها برامج وخوارزميات بيريللي لحظة بلحظة.</p>
+<ul><li>وزن الحساس حوالي 12 غرام، وبطاريته تعيش حوالي خمس سنوات.</li>
+<li>الإطارات اللي فيها هالتقنية عليها علامة <b class="ltr">C</b> على الجدار.</li></ul>
+<h2>وش فايدته؟</h2>
+<ul><li><b>فرملة أقصر:</b> نظام <span class="ltr">ABS</span> يعرف نقطة أقصى تماسك للتاير، فتقصر مسافة التوقف.</li>
+<li><b>تحذير مبكر من الانزلاق على الماي:</b> السيارة تحس بخطر الانزلاق قبل لا يصير.</li>
+<li><b>تحكم أدق بالجر:</b> التاير يعرّف نفسه للسيارة، والإعدادات تتظبط على نفس التاير.</li>
+<li><b>شراكة مع بوش:</b> البيانات توصل مباشرة لأنظمة <span class="ltr">ABS</span> و<span class="ltr">ESP</span> والتحكم بالجر.</li>
+<li><b>معلومات عن الطريق:</b> بيانات الإطارات تقدر تنبه عن الحفر ومخاطر الطريق.</li></ul>
+<div class="box">حسب بيريللي، هالتقنية بتعطي السيارات ذاتية القيادة «حاسة لمس»، يعني السيارة تعرف بالضبط وش تحت كفراتها.</div>
+<h2>من وين بدأت القصة؟</h2>
+<p>المدير الفني لبيريللي يقول إن فكرة تحويل التاير إلى «حساس نشط» بدأت قبل أكثر من عشرين سنة. ماكلارين أرتورا في 2021 كانت أول سيارة تنزل من المصنع بإطارات بيريللي فيها حساسات، واليوم تقدّم بيريللي باغاني أوتوبيا رودستر كأول سيارة تجي بالنسخة الكاملة من Cyber Tyre بشكل أساسي.</p>
+<h2>خطة بيريللي في أمريكا</h2>
+<p>الخبر جزء من استثمار كبير وافق عليه مجلس إدارة بيريللي في 22 سبتمبر 2026:</p>
+<ul><li>حوالي <b>1.2 مليار دولار</b> لتوسعة مصنع روما في ولاية جورجيا (بيريللي موجودة هناك من 2002).</li>
+<li>البرنامج يبدأ في <b>2027</b>، والطاقة توصل حوالي <b>6 ملايين تاير سنوياً</b> بحلول 2033.</li>
+<li>حوالي <b>1000 وظيفة جديدة</b>.</li>
+<li>تصنيع إطارات Cyber Tyre، وتطوير خط الإنتاج الروبوتي، وخط جديد مؤتمت بالكامل للإطارات الفاخرة.</li></ul>
+<p>أمريكا فيها حوالي 40٪ من حجم الإطارات الفاخرة في العالم، وعشان كذا بيريللي تبي تصنع هناك محلياً.</p>
+<h2>ليش ما دخل أمريكا من قبل؟</h2>
+<p>بيريللي ما ذكرت السبب في إعلانها الرسمي، بس تقارير رويترز وبلومبرغ توضح القصة:</p>
+<ul><li>شركة <b>سينوكيم</b> الصينية الحكومية أكبر مساهم في بيريللي من 2015، بحصة كانت حوالي 37٪ واليوم حوالي 34٪.</li>
+<li>أمريكا اعتمدت في بداية 2025 قانون يمنع بيع أنظمة وبرامج «السيارات المتصلة» المرتبطة بالصين وروسيا.</li>
+<li>Cyber Tyre يجمع بيانات ويكلم السيارة، فدخل مباشرة تحت هالقانون، وأمريكا حذّرت بيريللي.</li>
+<li>الحكومة الإيطالية تدخلت بصلاحيات «القوة الذهبية»، وفي أبريل 2026 حدّدت عدد أعضاء مجلس الإدارة اللي تقدر سينوكيم ترشحهم بثلاثة فقط.</li>
+<li>بعدها، في مايو 2026، أعلنت بيريللي تصنيع Cyber Tyre في جورجيا، ووافق مكتب الصناعة والأمن الأمريكي (BIS) على بيعه.</li></ul>
+<div class="box">الخلاصة: التأخير ما كان بسبب التقنية، كان بسبب المساهم الصيني والتنافس التقني بين أمريكا والصين. حتى التاير صار سياسة.</div>
+<h2>وش يعني لنا في عُمان؟</h2>
+<p>حالياً Cyber Tyre ينزل بشكل رئيسي مع السيارات الفاخرة جداً من المصنع، وما بنشوفه في سوق الإطارات العادي قريب. بس الاتجاه واضح: الإطارات صايرة ذكية. ميزة مثل التحذير من الانزلاق على الماي مفيدة فعلاً لطرق صلالة المبللة في موسم الخريف.</p>
+<p>لين ذاك الوقت، أبسط شي لسلامتك: افحص ضغط الهواء بانتظام، وبدّل التاير قبل لا تخلص الدعسة.</p>
+<h2>المصادر</h2>
+<ul><li>بيان بيريللي الرسمي، 23 نوفمبر 2026</li><li>Reuters، Bloomberg، Carscoops، Automotive World، evo</li></ul>`},
+  en:{t:"Pirelli's smart tire reaches the US — so why did it take so long?",
+      s:"Pirelli launched Cyber Tyre in the US at the Las Vegas Grand Prix. Its announcement skipped the reason for the delay, but the story is political, not technical.",
+      b:`<p>On <b>23 November 2026</b>, during the Formula 1 Las Vegas Grand Prix, Pirelli announced it is bringing <span class="ltr">Cyber Tyre</span> to the US market. The chairman, the CEO and Italy's ambassador to the US attended. Simple as it sounds, the launch follows more than a year of tension between the US, China and Italy.</p>
+<h2>What is Cyber Tyre?</h2>
+<p>A small sensor is bonded inside the tread. It measures the tire's ID, pressure, temperature and acceleration and sends them to the car over Bluetooth, where Pirelli's own software and algorithms process them in real time.</p>
+<ul><li>The sensor weighs about 12 grams and its battery lasts around five years.</li>
+<li>Tires with the technology carry a <b>C</b> mark on the sidewall.</li></ul>
+<h2>What does it do?</h2>
+<ul><li><b>Shorter braking:</b> ABS knows the tire's point of maximum grip, so stopping distances shrink.</li>
+<li><b>Earlier aquaplaning warning:</b> the car senses the risk of sliding on water sooner.</li>
+<li><b>Smarter traction control:</b> the tire identifies itself, so settings match that exact tire.</li>
+<li><b>Bosch partnership:</b> tire data feeds ABS, ESP and traction control directly.</li>
+<li><b>Road data:</b> tire readings can flag potholes and road hazards.</li></ul>
+<div class="box">Pirelli says the technology will give self-driving cars a "sense of touch" — knowing exactly what is happening under the wheels.</div>
+<h2>Where it started</h2>
+<p>Pirelli's CTO says the idea of turning the tire into an "active sensor" goes back more than twenty years. The McLaren Artura became the first car to leave the factory on Pirelli sensor tires in 2021, and Pirelli now presents the Pagani Utopia Roadster as the first car with the full Cyber Tyre system as standard.</p>
+<h2>Pirelli's US plan</h2>
+<p>The launch is part of a large investment Pirelli's board approved on 22 September 2026:</p>
+<ul><li>About <b>$1.2 billion</b> to expand its plant in Rome, Georgia (Pirelli has been there since 2002).</li>
+<li>The programme starts in <b>2027</b>, reaching about <b>6 million tires a year</b> by 2033.</li>
+<li>About <b>1,000 new jobs</b>.</li>
+<li>Cyber Tyre production, upgraded robotic manufacturing and a new fully automated premium line.</li></ul>
+<p>The US accounts for about 40% of global high-value tire volumes, which is why Pirelli wants to build there.</p>
+<h2>Why not earlier?</h2>
+<p>Pirelli's announcement doesn't say. Reporting by Reuters and Bloomberg fills the gap:</p>
+<ul><li>China's state-owned <b>Sinochem</b> has been Pirelli's largest shareholder since 2015 — around 37% at first, about 34% today.</li>
+<li>In early 2025 the US finalised a rule banning connected-vehicle hardware and software linked to China and Russia.</li>
+<li>Cyber Tyre collects data and talks to the car, so it fell squarely under the rule, and the US warned Pirelli.</li>
+<li>Italy stepped in with its "golden power" rules and, in April 2026, capped the board seats Sinochem can nominate at three.</li>
+<li>In May 2026 Pirelli announced Cyber Tyre production in Georgia, and the US Bureau of Industry and Security cleared it for sale.</li></ul>
+<div class="box">Bottom line: the delay wasn't about technology. It was about a Chinese shareholder and the US–China tech race. Even tires are political now.</div>
+<h2>What it means for us in Oman</h2>
+<p>For now Cyber Tyre is mainly factory-fitted to high-end supercars, so it won't reach the regular tire market soon. But the direction is clear: tires are getting smart. An aquaplaning warning would be genuinely useful on Salalah's wet roads during the khareef.</p>
+<p>Until then, the simplest safety habit is to check your tire pressure regularly and replace tires before the tread wears out.</p>
+<h2>Sources</h2>
+<ul><li>Pirelli press release, 23 November 2026</li><li>Reuters, Bloomberg, Carscoops, Automotive World, evo</li></ul>`}
+},
+{
+  slug:"pirelli-saudi-plant-2027", kind:"news", date:"2026-11-26", color:"#0A0A0A", min:5, img:"/news/pirelli-saudi-kaec.jpg",
+  fa:{t:"اولین تایر تاریخ عربستان؛ کارخانه‌ی پیرلی در ۲۰۲۷ به تولید می‌رسد",
+      s:"صندوق سرمایه‌گذاری عربستان و پیرلی در شهر اقتصادی ملک عبدالله کارخانه‌ی تایر می‌سازند؛ با مواد اولیه از سابک و یک برند سعودی تازه.",
+      b:`<p>عربستان تا امروز حتی یک تایر سواری هم تولید نکرده است. این قرار است در <b>۲۰۲۷</b> عوض شود. مدیرعامل پیرلی گفته اولین تایری که این شرکت در عربستان می‌سازد، «اولین تایر تاریخ این کشور» خواهد بود.</p>
+<h2>چه کسانی پشت این پروژه‌اند؟</h2>
+<ul><li><b>صندوق سرمایه‌گذاری‌های عمومی عربستان (PIF)</b> با ۷۵٪ سهم.</li>
+<li><b>پیرلی</b> با ۲۵٪ سهم، به‌عنوان شریک فنی که طراحی، توسعه و بهره‌برداری کارخانه را پشتیبانی می‌کند.</li>
+<li>شرکت مشترک «Mena Tyre Company» نام دارد و قرارداد آن در ۲۶ اکتبر ۲۰۲۳ امضا شد.</li>
+<li>سرمایه‌گذاری کل حدود <b>۵۵۰ میلیون دلار</b> (حدود ۲ میلیارد ریال سعودی) است.</li></ul>
+<h2>کجا؟</h2>
+<p>کارخانه در <b>خوشه‌ی خودروسازی ملک سلمان</b> در <b>شهر اقتصادی ملک عبدالله (KAEC)</b>، در استان مکه و کنار دریای سرخ ساخته می‌شود. این خوشه همان جایی است که عربستان می‌خواهد به قطب خودروسازی منطقه تبدیلش کند؛ برند خودروی ملی «سیر» (Ceer) و کارخانه‌های لوسید و هیوندای هم بخشی از همین برنامه‌اند.</p>
+<p>قرارداد ساخت کارخانه به ارزش حدود ۶۲۸ میلیون ریال (۱۶۷ میلیون دلار) در سپتامبر ۲۰۲۵ به شرکت «سعودی امانه» داده شد.</p>
+<h2>چه چیزی تولید می‌کند؟</h2>
+<ul><li>ظرفیت سالانه: <b>۳٫۵ میلیون تایر</b> سواری.</li>
+<li>تایرهای پریمیوم با برند <b>پیرلی</b>.</li>
+<li>یک <b>برند سعودی جدید</b> برای بازار عربستان و منطقه. اسم این برند هنوز اعلام نشده است.</li></ul>
+<h2>حتی مواد اولیه هم محلی است</h2>
+<p>در فوریه‌ی ۲۰۲۶ شرکت <b>سابک (SABIC)</b> قراردادی امضا کرد تا لاستیک مصنوعی (بوتادین) و کربن سیاه را برای این کارخانه تأمین کند. این اولین قرارداد از این نوع برای تأمین مواد اولیه‌ی تولید تایر در داخل عربستان است.</p>
+<h2>چرا تأخیر داشت؟</h2>
+<p>در برنامه‌ی اولیه، تولید باید از <b>۲۰۲۶</b> شروع می‌شد. مدیرعامل پیرلی در فوریه‌ی ۲۰۲۶ گفت اولین تولید در نیمه‌ی دوم ۲۰۲۷، «به احتمال زیاد سه‌ماهه‌ی سوم» انجام می‌شود و در ژوئن هم از «تا اواسط ۲۰۲۷» حرف زد. پس موعد واقعی حدود یک سال عقب افتاده است.</p>
+<div class="box">جمع‌بندی زمان‌بندی: اعلام پروژه ۲۰۲۳ ← قرارداد ساخت ۲۰۲۵ ← قرارداد مواد اولیه با سابک ۲۰۲۶ ← اولین تولید ۲۰۲۷.</div>
+<h2>چرا برای بازار خلیج مهم است؟</h2>
+<p>تقریباً همه‌ی تایرهای بازار خلیج فارس وارداتی‌اند. طبق برآورد Marqstats، حدود ۳۸٫۹ میلیون تایر در ۲۰۲۵ در کشورهای شورای همکاری خلیج فروخته شد و تایرهای چینی حدود ۴۱٪ ارزش بازار را داشتند. کارخانه‌ی جدید با ظرفیت ۳٫۵ میلیون تایر، حدود ۹٪ تقاضای کل منطقه را پوشش می‌دهد.</p>
+<ul><li><b>زنجیره‌ی تأمین کوتاه‌تر:</b> تایر پیرلی ساخت خود منطقه.</li>
+<li><b>رقیب تازه:</b> برند سعودی جدید می‌تواند با تایرهای وارداتی ارزان رقابت کند.</li>
+<li><b>قیمت:</b> هنوز چیزی درباره‌ی قیمت‌ها اعلام نشده؛ باید صبر کرد.</li></ul>
+<h2>نظر ما</h2>
+<p>برای مشتری‌های عمان، این یعنی احتمالاً در ۲۰۲۷ و ۲۰۲۸ گزینه‌های بیشتری روی قفسه‌ها می‌بینیم. ما در زاد CSC خبرهای این کارخانه را دنبال می‌کنیم و به‌محض عرضه، مشخصات و قیمت را اعلام می‌کنیم.</p>
+<h2>منابع</h2>
+<ul><li>اطلاعیه‌ی صندوق سرمایه‌گذاری‌های عمومی عربستان و پیرلی، اکتبر ۲۰۲۳</li><li>سابک (از طریق الاقتصادیه و ارقام)، فوریه‌ی ۲۰۲۶</li><li>MEED، European Rubber Journal، Adnkronos، Marqstats</li></ul>`},
+  ar:{t:"أول تاير في تاريخ السعودية… مصنع بيريللي يبدأ الإنتاج في 2027",
+      s:"صندوق الاستثمارات العامة وبيريللي يبنون مصنع إطارات في مدينة الملك عبدالله الاقتصادية، بمواد خام من سابك وبراند سعودي جديد.",
+      b:`<p>السعودية لين اليوم ما صنعت ولا تاير سيارة واحد، وهذا بيتغير في <b>2027</b>. الرئيس التنفيذي لبيريللي قال إن أول تاير تصنعه الشركة في المملكة بيكون «أول تاير يُصنع في تاريخ البلد».</p>
+<h2>من وراء المشروع؟</h2>
+<ul><li><b>صندوق الاستثمارات العامة (PIF)</b> بحصة 75٪.</li>
+<li><b>بيريللي</b> بحصة 25٪، كشريك تقني يدعم تصميم المصنع وتطويره وتشغيله.</li>
+<li>اسم المشروع المشترك «شركة مينا للإطارات» (Mena Tyre Company)، وانعلن في 26 أكتوبر 2023.</li>
+<li>الاستثمار الإجمالي حوالي <b>550 مليون دولار</b> (قرابة 2 مليار ريال سعودي).</li></ul>
+<h2>وين؟</h2>
+<p>المصنع داخل <b>مجمع الملك سلمان لصناعة السيارات</b> في <b>مدينة الملك عبدالله الاقتصادية</b>، في منطقة مكة على ساحل البحر الأحمر. هذا المجمع هو اللي تبي السعودية تخليه مركز صناعة السيارات في المنطقة، ومعه براند «سير» الوطني ومصانع لوسيد وهيونداي.</p>
+<p>عقد بناء المصنع بقيمة حوالي 628 مليون ريال (167 مليون دولار) انعطى لشركة «السعودية أمانة» في سبتمبر 2025.</p>
+<h2>وش بيصنع؟</h2>
+<ul><li>الطاقة السنوية: <b>3.5 مليون تاير</b> لسيارات الركاب.</li>
+<li>إطارات فاخرة تحت علامة <b>بيريللي</b>.</li>
+<li><b>براند سعودي جديد</b> للسوق السعودي والمنطقة، واسمه للحين ما انعلن.</li></ul>
+<h2>حتى المواد الخام سعودية</h2>
+<p>في فبراير 2026 وقّعت <b>سابك</b> اتفاقية لتوريد المطاط الصناعي (البوتادايين) والكربون الأسود للمصنع، وهي أول اتفاقية من نوعها لتوريد مواد خام لتصنيع الإطارات محلياً في المملكة.</p>
+<h2>ليش تأخر؟</h2>
+<p>الخطة الأصلية كانت بداية الإنتاج في <b>2026</b>. في فبراير 2026 قال الرئيس التنفيذي لبيريللي إن أول إنتاج بيكون في النصف الثاني من 2027، «على الأغلب الربع الثالث»، وفي يونيو تكلم عن «منتصف 2027». يعني الموعد الفعلي تأخر حوالي سنة.</p>
+<div class="box">الجدول الزمني: إعلان المشروع 2023 ← عقد البناء 2025 ← اتفاقية المواد الخام مع سابك 2026 ← أول إنتاج 2027.</div>
+<h2>ليش مهم لسوق الخليج؟</h2>
+<p>تقريباً كل إطارات سوق الخليج مستوردة. حسب تقديرات Marqstats، انباع حوالي 38.9 مليون تاير في دول مجلس التعاون في 2025، والإطارات الصينية كانت حوالي 41٪ من قيمة السوق. المصنع الجديد بطاقة 3.5 مليون تاير يغطي حوالي 9٪ من طلب المنطقة كلها.</p>
+<ul><li><b>سلسلة إمداد أقصر:</b> تاير بيريللي مصنوع في المنطقة نفسها.</li>
+<li><b>منافس جديد:</b> البراند السعودي ممكن ينافس الإطارات المستوردة الرخيصة.</li>
+<li><b>الأسعار:</b> للحين ما انعلن شي عن الأسعار، لازم ننتظر.</li></ul>
+<h2>رأينا</h2>
+<p>لعملائنا في عُمان، هذا يعني على الأغلب خيارات أكثر على الرفوف في 2027 و2028. في زاد CSC نتابع أخبار المصنع، وأول ما تنزل منتجاته بنعلن المواصفات والأسعار.</p>
+<h2>المصادر</h2>
+<ul><li>بيان صندوق الاستثمارات العامة وبيريللي، أكتوبر 2023</li><li>سابك (عبر الاقتصادية وأرقام)، فبراير 2026</li><li>MEED، European Rubber Journal، Adnkronos، Marqstats</li></ul>`},
+  en:{t:"Saudi Arabia's first-ever tire: Pirelli's plant starts production in 2027",
+      s:"PIF and Pirelli are building a tire plant in King Abdullah Economic City, with raw materials from SABIC and a brand-new Saudi tire brand.",
+      b:`<p>Saudi Arabia has never produced a single car tire. That changes in <b>2027</b>. Pirelli's CEO says the first tire the company makes in the Kingdom will be "the first ever produced in the country".</p>
+<h2>Who is behind it?</h2>
+<ul><li><b>Public Investment Fund (PIF)</b> with a 75% stake.</li>
+<li><b>Pirelli</b> with 25%, as technology partner supporting the plant's design, development and operation.</li>
+<li>The joint venture, Mena Tyre Company, was announced on 26 October 2023.</li>
+<li>Total investment is about <b>$550 million</b> (around SAR 2 billion).</li></ul>
+<h2>Where?</h2>
+<p>The plant sits in the <b>King Salman Automotive Cluster</b> at <b>King Abdullah Economic City (KAEC)</b>, in Makkah Province on the Red Sea coast — the hub Saudi Arabia is building into the region's car-making centre, alongside the national EV brand Ceer and plants for Lucid and Hyundai.</p>
+<p>The construction contract, worth about SAR 628 million ($167 million), went to Saudi Amana in September 2025.</p>
+<h2>What will it make?</h2>
+<ul><li>Capacity: <b>3.5 million</b> passenger-car tires a year.</li>
+<li>Premium tires under the <b>Pirelli</b> brand.</li>
+<li>A <b>new Saudi brand</b> for the Saudi and regional markets. Its name hasn't been announced yet.</li></ul>
+<h2>Even the raw materials are local</h2>
+<p>In February 2026 <b>SABIC</b> signed an agreement to supply the plant with butadiene rubber and carbon black — the first deal of its kind for locally made tire raw materials in the Kingdom.</p>
+<h2>Why the delay?</h2>
+<p>The original plan was to start production in <b>2026</b>. In February 2026 Pirelli's CEO said first production would come in the second half of 2027, "most probably the third quarter", and in June he spoke of "by mid-2027". In practice, the date has slipped by about a year.</p>
+<div class="box">Timeline: project announced 2023 → construction contract 2025 → SABIC raw-materials deal 2026 → first production 2027.</div>
+<h2>Why it matters for the Gulf</h2>
+<p>Almost every tire sold in the Gulf is imported. Marqstats estimates about 38.9 million tires were sold across the GCC in 2025, with Chinese-made tires taking around 41% of market value. At 3.5 million tires a year, the new plant could cover roughly 9% of regional demand.</p>
+<ul><li><b>Shorter supply chain:</b> Pirelli tires made in the region itself.</li>
+<li><b>A new competitor:</b> the Saudi brand could take on cheap imports.</li>
+<li><b>Prices:</b> nothing has been announced yet — we'll have to wait.</li></ul>
+<h2>Our take</h2>
+<p>For drivers in Oman this likely means more choice on the shelves in 2027–2028. At Zad CSC we're following the plant closely and will share specs and prices as soon as its tires arrive.</p>
+<h2>Sources</h2>
+<ul><li>PIF and Pirelli joint announcement, October 2023</li><li>SABIC (via Al Eqtisadiah and Argaam), February 2026</li><li>MEED, European Rubber Journal, Adnkronos, Marqstats</li></ul>`}
+},
+{
   slug:"read-tire-size", kind:"guide", date:"2026-11-10", color:"#0E0E0E", min:4,
   fa:{t:"چطور سایز تایر را بخوانیم؟ راهنمای کامل ۲۷۵/۵۰R21 113V XL",
       s:"هر عدد و حرف روی دیواره‌ی تایر معنایی دارد. با یاد گرفتن آن‌ها، تایر اشتباه نمی‌خرید.",
@@ -1114,7 +1316,7 @@ function renderTires(keep){
 function artCard(a){
   const c=a[L]||a.en;
   return `<a class="ac" href="#/article/${a.slug}">
-    <div class="cv" style="background:${a.color}"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="#FF8000" stroke-width="9" stroke-dasharray="5 4"/><circle cx="50" cy="50" r="18" fill="none" stroke="#fff" stroke-width="3"/></svg></div>
+    ${a.img?`<div class="cv" style="background:${a.color} url(${a.img}) center/cover no-repeat"></div>`:`<div class="cv" style="background:${a.color}"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="#FF8000" stroke-width="9" stroke-dasharray="5 4"/><circle cx="50" cy="50" r="18" fill="none" stroke="#fff" stroke-width="3"/></svg></div>`}
     <div class="bd"><div class="meta"><span class="kind">${t("kind_"+a.kind)}</span><span>${fmtDate(a.date)}</span></div>
     <h3>${esc(c.t)}</h3><p>${esc(c.s)}</p></div></a>`;
 }
@@ -1129,7 +1331,7 @@ function renderPost(slug){
   const a=ARTICLES.find(x=>x.slug===slug); if(!a){location.hash="#/news";return}
   const c=a[L]||a.en;
   $("#post").innerHTML=`<span class="kind" style="background:var(--ink);color:var(--y);padding:3px 10px;border-radius:999px;font-size:12px;font-weight:700">${t("kind_"+a.kind)}</span>
-  <h1>${esc(c.t)}</h1><div class="meta">${fmtDate(a.date)} · ${a.min} ${t("min")}</div>${c.b}
+  <h1>${esc(c.t)}</h1><div class="meta">${fmtDate(a.date)} · ${a.min} ${t("min")}</div>${a.img?`<img class="hero" src="${a.img}" alt="${esc(c.t)}" loading="lazy">`:""}${c.b}
   <div style="margin-top:28px"><a class="btn wa" target="_blank" rel="noopener" href="${waURL(t("wa_hi"))}">${t("hero_cta2")}</a></div>`;
   document.title=c.t+" | Zad CSC";
 }
