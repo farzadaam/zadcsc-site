@@ -191,6 +191,36 @@ section.blk{padding:64px 0}
 .ac .kind{background:var(--ink);color:var(--y);padding:2px 9px;border-radius:999px;font-weight:700}
 .ac h3{font-size:18px;line-height:1.5;margin:8px 0 6px}
 .ac p{font-size:14px;color:var(--sub)}
+
+/* unified search */
+.ustabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:var(--ink3);border-radius:16px;padding:5px;margin:10px 0 16px}
+.ustabs button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;border-radius:12px;color:#cfcfcf;font-weight:700;font-size:14px}
+.ustabs button svg{width:22px;height:22px}
+.ustabs button.on{background:var(--y);color:var(--ink)}
+.uspanel{display:none}.uspanel.on{display:block}
+.usrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.usrow label,.uslbl{font-size:11px;color:var(--mut);display:block;margin-bottom:4px;text-align:center}
+.finder input.s{width:100%;background:var(--ink3);border:1px solid #3a3a3a;color:#fff;border-radius:12px;padding:11px 12px;font-size:16px;font-weight:600;margin-bottom:12px}
+.finder input.s::placeholder{color:#8a8a8a;font-weight:500}
+.uslink{display:block;text-align:center;margin-top:12px;font-size:14px;font-weight:700;color:var(--y)}
+@media (max-width:860px){.hero .finder{order:-1}.hero .wrap>div:not(.finder){display:none}.hero .wrap{padding-top:22px;padding-bottom:26px}}
+/* shop tabs */
+.shoptabs{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.shoptabs a{padding:9px 18px;border-radius:999px;background:var(--ink3);color:#ddd;font-weight:700;font-size:15px}
+.shoptabs a.on{background:var(--y);color:var(--ink)}
+/* oil filters */
+.ofil{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.ofil label{font-size:12px;color:var(--sub);display:block;margin-bottom:4px}
+@media (max-width:700px){.ofil{grid-template-columns:1fr}}
+.askbox{background:var(--card);border:1px dashed #ccc;border-radius:var(--r);padding:24px;text-align:center;margin-bottom:24px}
+.askbox p{color:var(--sub);margin-bottom:14px}
+/* battery form */
+.batcard{background:var(--ink);color:#fff;border-radius:20px;padding:24px;margin-bottom:28px;max-width:560px}
+.batcard .s{margin-bottom:0}
+.batcard .btn{width:100%;justify-content:center;margin-top:6px}
+.batcard input.s{width:100%;background:var(--ink3);border:1px solid #3a3a3a;color:#fff;border-radius:12px;padding:11px 12px;font-size:16px;margin-bottom:12px}
+.tips{display:grid;gap:12px;max-width:720px}
+.tips div{background:var(--card);border-radius:14px;padding:16px 18px;border-inline-start:5px solid var(--y)}
 .tabs{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
 .tabs button{padding:8px 16px;border-radius:999px;background:var(--card);border:1px solid #e0ded6;font-weight:600;font-size:14px}
 .tabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
@@ -356,8 +386,7 @@ table.lst th{color:var(--sub);font-weight:600;font-size:12px}
     </a>
     <nav class="main" id="nav">
       <a href="#/" data-r="home" data-t="nav_home"></a>
-      <a href="#/tires" data-r="tires" data-t="nav_tires"></a>
-      <a href="#/oils" data-r="oils" data-t="nav_oils"></a>
+      <a href="#/shop" data-r="shop" data-t="nav_shop"></a>
       <a href="#/car" data-r="car" data-t="nav_car"></a>
       <a href="#/brands" data-r="brands" data-t="nav_brands"></a>
       <a href="#/services" data-r="services" data-t="nav_services"></a>
@@ -393,20 +422,53 @@ table.lst th{color:var(--sub);font-weight:600;font-size:12px}
           <a href="#/booking" class="btn o"><span data-t="hero_cta4"></span></a>
         </div>
       </div>
-      <div class="finder">
-        <h3 data-t="finder_h"></h3>
-        <p data-t="finder_p"></p>
-        <div class="sizerow">
-          <div><label data-t="width"></label><select class="s" id="hw"></select></div>
-          <div><label data-t="profile"></label><select class="s" id="hp"></select></div>
-          <div><label data-t="rim"></label><select class="s" id="hr"></select></div>
+      <div class="finder" id="usearch">
+        <h3 data-t="us_h"></h3>
+        <div class="ustabs" id="ustabs">
+          <button data-k="tire" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/></svg><span data-t="c_tire"></span></button>
+          <button data-k="oil"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg><span data-t="c_oil"></span></button>
+          <button data-k="bat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M7 7V4h3v3M14 7V4h3v3M7 13h4M15 11v4M13 13h4"/></svg><span data-t="c_bat"></span></button>
         </div>
-        <div class="sizehint" id="hsz">— / — R—</div>
-        <button class="btn y" id="hgo" data-t="finder_btn"></button>
+        <div class="uspanel on" data-k="tire">
+          <p data-t="finder_p"></p>
+          <div class="sizerow">
+            <div><label data-t="width"></label><select class="s" id="hw"></select></div>
+            <div><label data-t="profile"></label><select class="s" id="hp"></select></div>
+            <div><label data-t="rim"></label><select class="s" id="hr"></select></div>
+          </div>
+          <div class="sizehint" id="hsz">— / — R—</div>
+          <button class="btn y" id="hgo" data-t="finder_btn"></button>
+          <a href="#/car" class="uslink" data-t="us_bycar"></a>
+        </div>
+        <div class="uspanel" data-k="oil">
+          <p data-t="us_oil_p"></p>
+          <div class="usrow">
+            <div><label data-t="us_type"></label><select class="s" id="uoT"></select></div>
+            <div><label data-t="us_visc"></label><select class="s" id="uoG"></select></div>
+          </div>
+          <label class="uslbl" data-t="us_brand"></label><select class="s" id="uoB" style="margin-bottom:14px"></select>
+          <button class="btn y" id="uoGo" data-t="us_oil_btn"></button>
+        </div>
+        <div class="uspanel" data-k="bat">
+          <p data-t="us_bat_p"></p>
+          <div class="usrow">
+            <div><label data-t="us_cap"></label><select class="s" id="ubA"></select></div>
+            <div><label data-t="us_btype"></label><select class="s" id="ubT"></select></div>
+          </div>
+          <input class="s" id="ubC" data-ph="us_car_ph">
+          <button class="btn y" id="ubGo" data-t="us_bat_btn"></button>
+          <a href="#/batteries" class="uslink" data-t="us_bat_more"></a>
+        </div>
       </div>
     </div>
   </div>
 
+  <section class="blk" style="padding-bottom:0">
+    <div class="wrap">
+      <div class="sh"><div><h2 data-t="news_h"></h2><p data-t="news_p"></p></div><a href="#/news" class="more" data-t="see_all"></a></div>
+      <div class="arts" id="homeArts"></div>
+    </div>
+  </section>
   <section class="blk">
     <div class="wrap">
       <div class="sh"><div><h2 data-t="cats_h"></h2><p data-t="cats_p"></p></div></div>
@@ -451,12 +513,6 @@ table.lst th{color:var(--sub);font-weight:600;font-size:12px}
     </div>
   </section>
 
-  <section class="blk" style="padding-top:0">
-    <div class="wrap">
-      <div class="sh"><div><h2 data-t="news_h"></h2><p data-t="news_p"></p></div><a href="#/news" class="more" data-t="see_all"></a></div>
-      <div class="arts" id="homeArts"></div>
-    </div>
-  </section>
 
   <section class="blk" style="padding-top:0">
     <div class="wrap">
@@ -468,7 +524,7 @@ table.lst th{color:var(--sub);font-weight:600;font-size:12px}
 
 <!-- TIRES -->
 <div class="page" id="p-tires">
-  <div class="pagehead"><div class="wrap"><h1 data-t="nav_tires"></h1><p data-t="tires_p"></p></div></div>
+  <div class="pagehead"><div class="wrap"><h1 data-t="nav_tires"></h1><p data-t="tires_p"></p><div class="shoptabs"><a href="#/tires" class="on" data-t="c_tire"></a><a href="#/oils" data-t="c_oil"></a><a href="#/batteries" data-t="c_bat"></a></div></div></div>
   <section class="blk" style="padding-top:28px">
     <div class="wrap shop">
       <aside class="filters">
@@ -511,13 +567,40 @@ table.lst th{color:var(--sub);font-weight:600;font-size:12px}
 </div>
 
 <div class="page" id="p-oils">
-  <div class="pagehead"><div class="wrap"><h1 data-t="nav_oils"></h1><p data-t="oils_p"></p></div></div>
+  <div class="pagehead"><div class="wrap"><h1 data-t="nav_oils"></h1><p data-t="oils_p"></p><div class="shoptabs"><a href="#/tires" data-t="c_tire"></a><a href="#/oils" class="on" data-t="c_oil"></a><a href="#/batteries" data-t="c_bat"></a></div></div></div>
   <section class="blk" style="padding-top:28px">
     <div class="wrap">
-      <div class="info"><h3 data-t="sae_h"></h3><p data-t="sae_p" data-html></p></div>
+      <div class="ofil">
+        <div><label data-t="us_type"></label><select class="fsel" id="ofT"></select></div>
+        <div><label data-t="us_visc"></label><select class="fsel" id="ofG"></select></div>
+        <div><label data-t="us_brand"></label><select class="fsel" id="ofB"></select></div>
+      </div>
+      <div class="askbox" id="oilAsk" style="display:none"><p data-t="oil_none"></p><a class="btn y" id="oilAskBtn" target="_blank" rel="noopener" data-t="oil_ask_btn"></a></div>
       <div class="gsec" id="oilShop" style="display:none"><h3 data-t="oils_shop"></h3><div class="grid" id="oilGrid" style="margin-top:12px"></div></div>
+      <div class="info"><h3 data-t="sae_h"></h3><p data-t="sae_p" data-html></p></div>
       <div id="oilGrades"></div>
       <div class="gsec"><h3 data-t="ob_h"></h3><p class="d" data-t="ob_p"></p><div class="brands" id="oilBrands"></div></div>
+    </div>
+  </section>
+</div>
+
+<!-- BATTERIES -->
+<div class="page" id="p-batteries">
+  <div class="pagehead"><div class="wrap"><h1 data-t="bat_h"></h1><p data-t="bat_p"></p><div class="shoptabs"><a href="#/tires" data-t="c_tire"></a><a href="#/oils" data-t="c_oil"></a><a href="#/batteries" class="on" data-t="c_bat"></a></div></div></div>
+  <section class="blk" style="padding-top:28px">
+    <div class="wrap">
+      <div class="batcard">
+        <h3 data-t="us_bat_p" style="font-size:17px;margin-bottom:14px"></h3>
+        <div class="usrow">
+          <div><label data-t="us_cap"></label><select class="s" id="bA"></select></div>
+          <div><label data-t="us_btype"></label><select class="s" id="bT"></select></div>
+        </div>
+        <input class="s" id="bC" data-ph="us_car_ph">
+        <button class="btn y" id="bGo" data-t="us_bat_btn"></button>
+      </div>
+      <div class="gsec"><h3 data-t="bat_tips_h"></h3>
+        <div class="tips"><div data-t="bat_t1"></div><div data-t="bat_t2"></div><div data-t="bat_t3"></div><div data-t="bat_t4"></div></div>
+      </div>
     </div>
   </section>
 </div>
@@ -1351,7 +1434,7 @@ const ARTICLES = [
 
 /* ============================================================ */
 const T = {
-fa:{tagline:"تایر · رینگ · روانکار — صلاله",nav_home:"خانه",nav_tires:"تایرها",nav_services:"خدمات",nav_news:"اخبار و مقالات",nav_contact:"تماس",
+fa:{nav_shop:"فروشگاه",us_h:"دنبال چه می‌گردید؟",c_tire:"لاستیک",c_oil:"روغن",c_bat:"باتری",us_bycar:"یا لاستیک را با مدل خودرو پیدا کنید ←",us_oil_p:"نوع و گرید روغن را انتخاب کنید.",us_type:"نوع",us_visc:"گرید (ویسکوزیته)",us_brand:"برند",us_oil_btn:"نمایش روغن‌ها",us_bat_p:"آمپر و نوع باتری را انتخاب کنید؛ قیمت را در واتساپ برایتان می‌فرستیم.",us_cap:"آمپر (Ah)",us_btype:"نوع",us_car_ph:"مدل و سال خودرو (اختیاری)",us_bat_btn:"استعلام قیمت در واتساپ",us_bat_more:"راهنمای انتخاب باتری ←",bt_std:"معمولی",bt_agm:"AGM (استارت-استاپ)",bt_efb:"EFB",bt_unsure:"مطمئن نیستم",bat_h:"باتری خودرو",bat_p:"باتری مناسب خودرویتان را با نصب و تست در محل تهیه کنید.",bat_tips_h:"قبل از خرید باتری بدانید",bat_t1:"آمپر باتری جدید را کمتر از باتری اصلی خودرو انتخاب نکنید.",bat_t2:"خودروهای دارای سیستم استارت-استاپ معمولاً باتری AGM یا EFB لازم دارند.",bat_t3:"گرمای عمان باتری را زودتر فرسوده می‌کند؛ قبل از تابستان آن را تست کنید.",bat_t4:"اگر آمپر را نمی‌دانید، مدل خودرو را بنویسید یا باتری فعلی را بیاورید تا بررسی کنیم.",wa_bat:"سلام، برای این باتری قیمت می‌خواهم:",oil_none:"این ترکیب فعلاً در فروشگاه آنلاین نیست، ولی احتمالاً در مغازه موجود است.",oil_ask_btn:"پرسیدن در واتساپ",wa_oil_q:"سلام، این روغن را می‌خواهم:",tagline:"تایر · رینگ · روانکار — صلاله",nav_home:"خانه",nav_tires:"تایرها",nav_services:"خدمات",nav_news:"اخبار و مقالات",nav_contact:"تماس",
 hero_tag:"نماینده‌ی تایرهای اصلی در صلاله",hero_h:"تایر <em>اصل</em>، ضمانت <em>واقعی</em>،<br>مشاوره‌ی فنی رایگان",
 hero_p:"تایرهای برندهای معتبر با تاریخ تولید جدید و ضمانت رسمی زاد، به‌همراه روغن و روانکار و تجهیزات آفرود. سایز تایرتان را پیدا کنید و پیش‌فاکتور را در واتساپ بگیرید.",
 hero_cta1:"مشاهده‌ی تایرها",hero_cta2:"مشاوره در واتساپ",finder_h:"جستجوی سریع سایز",finder_p:"سایز را از روی دیواره‌ی تایر فعلی‌تان بخوانید.",finder_btn:"نمایش تایرهای این سایز",
@@ -1378,7 +1461,7 @@ gd_eng:"برای خودروهای سواری و شاسی‌بلند بنزینی
 allsz_h:"همه‌ی سایزها",allsz_p:"روی هر سایز بزنید؛ اگر موجود نباشد، در واتساپ برایتان تأمین می‌کنیم. سایزهای زرد در انبار موجودند.",
 inch:"اینچی آفرود",in_stock:"موجود",tm_note:"نام‌ها و نشان‌های تجاری متعلق به صاحبان آن‌هاست.",
 wa_size:"سلام، این سایز تایر را می‌خواهم:",wa_brand:"سلام، تایر یا روغن این برند را می‌خواهم:",wa_oil:"سلام، روغن با این گرید را می‌خواهم:",sz_none:"این سایز الان در فهرست سایت نیست، ولی می‌توانیم تأمین کنیم.",ask_size:"استعلام این سایز در واتساپ"},
-ar:{tagline:"إطارات · جنوط · زيوت — صلالة",nav_home:"الرئيسية",nav_tires:"الإطارات",nav_services:"الخدمات",nav_news:"الأخبار والمقالات",nav_contact:"اتصل بنا",
+ar:{nav_shop:"المتجر",us_h:"وش تدوّر؟",c_tire:"إطارات",c_oil:"زيوت",c_bat:"بطاريات",us_bycar:"أو دوّر الإطار حسب موديل سيارتك ←",us_oil_p:"اختر نوع الزيت ولزوجته.",us_type:"النوع",us_visc:"اللزوجة",us_brand:"الماركة",us_oil_btn:"اعرض الزيوت",us_bat_p:"اختر الأمبير ونوع البطارية، ونرسل لك السعر على الواتساب.",us_cap:"الأمبير (Ah)",us_btype:"النوع",us_car_ph:"موديل وسنة السيارة (اختياري)",us_bat_btn:"اطلب السعر على الواتساب",us_bat_more:"دليل اختيار البطارية ←",bt_std:"عادية",bt_agm:"AGM (ستارت-ستوب)",bt_efb:"EFB",bt_unsure:"مب متأكد",bat_h:"بطاريات السيارات",bat_p:"بطارية مناسبة لسيارتك، مع التركيب والفحص في المحل.",bat_tips_h:"قبل لا تشتري بطارية",bat_t1:"لا تختار أمبير أقل من بطارية السيارة الأصلية.",bat_t2:"السيارات اللي فيها نظام ستارت-ستوب غالباً تحتاج بطارية AGM أو EFB.",bat_t3:"حر عُمان يتعب البطارية أسرع؛ افحصها قبل الصيف.",bat_t4:"ما تعرف الأمبير؟ اكتب موديل سيارتك أو جيب البطارية القديمة ونشوفها لك.",wa_bat:"مرحبا، أبي سعر هالبطارية:",oil_none:"هالاختيار مب موجود في المتجر الإلكتروني حالياً، بس غالباً متوفر في المحل.",oil_ask_btn:"اسأل على الواتساب",wa_oil_q:"مرحبا، أبي هالزيت:",tagline:"إطارات · جنوط · زيوت — صلالة",nav_home:"الرئيسية",nav_tires:"الإطارات",nav_services:"الخدمات",nav_news:"الأخبار والمقالات",nav_contact:"اتصل بنا",
 hero_tag:"إطارات أصلية في صلالة",hero_h:"إطار <em>أصلي</em>، ضمان <em>حقيقي</em>،<br>واستشارة فنية مجانية",
 hero_p:"إطارات من علامات موثوقة بتاريخ إنتاج حديث وضمان زاد الرسمي، مع الزيوت ومستلزمات الطرق الوعرة. اعثر على مقاسك واحصل على عرض السعر عبر واتساب.",
 hero_cta1:"تصفّح الإطارات",hero_cta2:"استشارة عبر واتساب",finder_h:"بحث سريع بالمقاس",finder_p:"اقرأ المقاس من جدار إطارك الحالي.",finder_btn:"عرض إطارات هذا المقاس",
@@ -1405,7 +1488,7 @@ gd_eng:"لسيارات الركاب والدفع الرباعي بالبنزين
 allsz_h:"جميع المقاسات",allsz_p:"اضغط على أي مقاس؛ إن لم يكن متوفراً نوفّره لك عبر واتساب. المقاسات الصفراء متوفرة في المخزن.",
 inch:"إنش للطرق الوعرة",in_stock:"متوفر",tm_note:"الأسماء والعلامات التجارية مملوكة لأصحابها.",
 wa_size:"مرحباً، أريد هذا المقاس من الإطارات:",wa_brand:"مرحباً، أريد إطاراً أو زيتاً من هذه العلامة:",wa_oil:"مرحباً، أريد زيتاً بهذه الدرجة:",sz_none:"هذا المقاس غير معروض حالياً، لكن يمكننا توفيره.",ask_size:"استفسر عن هذا المقاس عبر واتساب"},
-en:{tagline:"Tires · Wheels · Lubricants — Salalah",nav_home:"Home",nav_tires:"Tires",nav_services:"Services",nav_news:"News & Articles",nav_contact:"Contact",
+en:{nav_shop:"Shop",us_h:"What are you looking for?",c_tire:"Tires",c_oil:"Oils",c_bat:"Batteries",us_bycar:"Or find tires by car model →",us_oil_p:"Choose the oil type and grade.",us_type:"Type",us_visc:"Grade (viscosity)",us_brand:"Brand",us_oil_btn:"Show oils",us_bat_p:"Choose capacity and type — we'll send you the price on WhatsApp.",us_cap:"Capacity (Ah)",us_btype:"Type",us_car_ph:"Car model & year (optional)",us_bat_btn:"Get a price on WhatsApp",us_bat_more:"Battery buying guide →",bt_std:"Standard",bt_agm:"AGM (start-stop)",bt_efb:"EFB",bt_unsure:"Not sure",bat_h:"Car batteries",bat_p:"The right battery for your car, fitted and tested in our shop.",bat_tips_h:"Before you buy a battery",bat_t1:"Don't choose a lower Ah rating than your car's original battery.",bat_t2:"Cars with start-stop systems usually need an AGM or EFB battery.",bat_t3:"Oman's heat wears batteries out faster — test yours before summer.",bat_t4:"Not sure of the Ah? Write your car model or bring the old battery and we'll check it.",wa_bat:"Hello, I'd like a price for this battery:",oil_none:"This combination isn't in our online shop yet, but it's likely in store.",oil_ask_btn:"Ask on WhatsApp",wa_oil_q:"Hello, I'm looking for this oil:",tagline:"Tires · Wheels · Lubricants — Salalah",nav_home:"Home",nav_tires:"Tires",nav_services:"Services",nav_news:"News & Articles",nav_contact:"Contact",
 hero_tag:"Genuine tires in Salalah",hero_h:"<em>Genuine</em> tires, <em>real</em> warranty,<br>free technical advice",
 hero_p:"Trusted brands with fresh production dates and the official Zad warranty — plus oils, lubricants and off-road gear. Find your size and get a quote on WhatsApp.",
 hero_cta1:"Browse tires",hero_cta2:"Ask on WhatsApp",finder_h:"Quick size search",finder_p:"Read the size off your current tire's sidewall.",finder_btn:"Show tires in this size",
@@ -1473,7 +1556,7 @@ function applyLang(){
   $$("#lang button").forEach(b=>b.classList.toggle("on",b.dataset.l===L));
   $$(".waLink").forEach(a=>a.href=waURL(t("wa_hi")));
   document.title = L==="en"?"Zad CSC | Tires, Wheels & Tire-Industry News — Salalah":L==="ar"?"زاد CSC | إطارات وجنوط وأخبار صناعة الإطارات — صلالة":"Zad CSC | تایر، رینگ و اخبار صنعت لاستیک — صلاله";
-  buildSelects(); renderAll();
+  buildSelects(); buildUS(); renderAll();
 }
 
 /* selects */
@@ -1750,11 +1833,11 @@ Object.keys(T3).forEach(l=>Object.assign(T[l],T3[l]));
 function route(){
   const h=location.hash||"#/";
   let p="home",m;
-  if(h.startsWith("#/tires"))p="tires";else if(h.startsWith("#/car"))p="car";else if(h.startsWith("#/booking"))p="booking";else if(h.startsWith("#/account"))p="account";else if(h.startsWith("#/oils"))p="oils";else if(h.startsWith("#/brands"))p="brands";else if(h.startsWith("#/services"))p="services";else if(h.startsWith("#/news"))p="news";else if(h.startsWith("#/contact"))p="contact";
+  if(h.startsWith("#/tires")||h.startsWith("#/shop"))p="tires";else if(h.startsWith("#/batteries"))p="batteries";else if(h.startsWith("#/car"))p="car";else if(h.startsWith("#/booking"))p="booking";else if(h.startsWith("#/account"))p="account";else if(h.startsWith("#/oils"))p="oils";else if(h.startsWith("#/brands"))p="brands";else if(h.startsWith("#/services"))p="services";else if(h.startsWith("#/news"))p="news";else if(h.startsWith("#/contact"))p="contact";
   else if(m=h.match(/^#\/article\/(.+)$/)){p="article";renderPost(m[1])}
   else if(m=h.match(/^#\/(tire|oil)\/(\d+)/)){p="item";renderItem(m[1],+m[2])}
   $$(".page").forEach(e=>e.classList.toggle("on",e.id==="p-"+p));
-  $$("nav.main a").forEach(a=>a.classList.toggle("on",a.dataset.r===p||(p==="article"&&a.dataset.r==="news")||(p==="item"&&a.dataset.r===(location.hash.startsWith("#/oil/")?"oils":"tires"))));
+  $$("nav.main a").forEach(a=>a.classList.toggle("on",a.dataset.r===p||(p==="article"&&a.dataset.r==="news")||(a.dataset.r==="shop"&&["tires","oils","batteries","item"].includes(p))));
   $("#nav").classList.remove("open");
   if(p==="account")renderAccount();if(p==="car")initCar();if(p==="booking")initBooking();
   if(p!=="article"&&p!=="item")applyTitle();
@@ -1787,6 +1870,59 @@ $("#freset").onclick=()=>{["#fq","#fw","#fp","#fr","#fb","#fv","#fc"].forEach(s=
 document.addEventListener("click",e=>{if(e.target.id==="moreT"){SHOWN+=48;renderTires(true)}});
 $$("#ntabs button").forEach(b=>b.onclick=()=>{ntab=b.dataset.k;$$("#ntabs button").forEach(x=>x.classList.toggle("on",x===b));renderNews()});
 document.addEventListener("keydown",e=>{if(e.key==="Escape")closeAll()});
+
+/* ===== unified search, shop tabs, oils filter, batteries ===== */
+const BAT_AH=[35,40,45,50,55,60,65,70,75,80,90,100,110,120,150,200];
+const BAT_TYPES=["bt_std","bt_agm","bt_efb","bt_unsure"];
+let OILF={t:"",g:"",b:""};
+function oilGradesFor(k){const s=OIL_GRADES.filter(x=>!k||x.k===k).flatMap(x=>x.g);return [...new Set([...s,...(!k?OILS.map(o=>o.grade).filter(Boolean):[])])]}
+function fillOilSels(tSel,gSel,bSel,v){
+  tSel.innerHTML=`<option value="">${t("any")}</option>`+OIL_GRADES.map(x=>`<option value="${x.k}">${esc(t("g_"+x.k))}</option>`).join("");tSel.value=v.t;
+  fillSel(gSel,oilGradesFor(v.t),t("any"));gSel.value=v.g;
+  fillSel(bSel,[...new Set([...OIL_BRANDS.map(b=>b.n),...OILS.map(o=>o.brand).filter(Boolean)])].sort(),t("any"));bSel.value=v.b;
+}
+function fillBatSels(aSel,tSel){
+  const a=aSel.value,ty=tSel.value;
+  aSel.innerHTML=`<option value="">${t("bt_unsure")}</option>`+BAT_AH.map(n=>`<option value="${n}">\u200E${n} Ah</option>`).join("");aSel.value=a;
+  tSel.innerHTML=BAT_TYPES.map(k=>`<option value="${k}">${esc(t(k))}</option>`).join("");if(ty)tSel.value=ty;
+}
+function batMsg(aSel,tSel,cIn){
+  const parts=[aSel.value?aSel.value+" Ah":t("us_cap")+": "+t("bt_unsure"),t(tSel.value||"bt_unsure")];
+  if(cIn.value.trim())parts.push(cIn.value.trim());
+  return t("wa_bat")+" "+parts.join(" — ");
+}
+function buildUS(){
+  if(!$("#uoT"))return;
+  fillOilSels($("#uoT"),$("#uoG"),$("#uoB"),OILF);
+  fillOilSels($("#ofT"),$("#ofG"),$("#ofB"),OILF);
+  fillBatSels($("#ubA"),$("#ubT"));fillBatSels($("#bA"),$("#bT"));
+}
+function filteredOils(){
+  const gs=OILF.g?[OILF.g]:(OILF.t?oilGradesFor(OILF.t):null);
+  return OILS.filter(o=>(!gs||gs.some(g=>String(o.grade||o.name||"").toUpperCase().includes(g.toUpperCase())))&&(!OILF.b||String(o.brand||"").toLowerCase().includes(OILF.b.toLowerCase())));
+}
+const _renderOils=renderOils;
+renderOils=function(){
+  _renderOils();
+  const any=OILF.t||OILF.g||OILF.b, list=filteredOils();
+  if($("#oilShop")){$("#oilShop").style.display=list.length?"":"none";$("#oilGrid").innerHTML=list.map(oilCard).join("")}
+  const ask=$("#oilAsk");
+  if(ask){ask.style.display=any&&!list.length?"":"none";
+    $("#oilAskBtn").href=waURL(t("wa_oil_q")+" "+[OILF.g||(OILF.t?t("g_"+OILF.t):""),OILF.b].filter(Boolean).join(" — "));}
+};
+$$("#ustabs button").forEach(b=>b.onclick=()=>{
+  $$("#ustabs button").forEach(x=>x.classList.toggle("on",x===b));
+  $$("#usearch .uspanel").forEach(p=>p.classList.toggle("on",p.dataset.k===b.dataset.k));
+  store.set("zad_us",b.dataset.k);
+});
+{const k=store.get("zad_us","tire");const b=$(`#ustabs button[data-k="${k}"]`);if(b)b.click();}
+$("#uoT").onchange=()=>{fillSel($("#uoG"),oilGradesFor($("#uoT").value),t("any"))};
+$("#ofT").onchange=()=>{OILF.t=$("#ofT").value;OILF.g="";fillSel($("#ofG"),oilGradesFor(OILF.t),t("any"));renderOils()};
+$("#ofG").onchange=()=>{OILF.g=$("#ofG").value;renderOils()};
+$("#ofB").onchange=()=>{OILF.b=$("#ofB").value;renderOils()};
+$("#uoGo").onclick=()=>{OILF={t:$("#uoT").value,g:$("#uoG").value,b:$("#uoB").value};fillOilSels($("#ofT"),$("#ofG"),$("#ofB"),OILF);location.hash="#/oils";renderOils()};
+$("#ubGo").onclick=()=>window.open(waURL(batMsg($("#ubA"),$("#ubT"),$("#ubC"))),"_blank","noopener");
+$("#bGo").onclick=()=>window.open(waURL(batMsg($("#bA"),$("#bT"),$("#bC"))),"_blank","noopener");
 window.addEventListener("hashchange",route);
 $("#yr").textContent=new Date().getFullYear();
 
