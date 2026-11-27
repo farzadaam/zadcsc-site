@@ -456,7 +456,7 @@ table.lst th{color:var(--sub);font-weight:600;font-size:12px}
             <div><label data-t="us_btype"></label><select class="s" id="ubT"></select></div>
           </div>
           <input class="s" id="ubC" data-ph="us_car_ph">
-          <button class="btn y" id="ubGo" data-t="us_bat_btn"></button>
+          <a class="btn y" id="ubGo" target="_blank" rel="noopener" href="#" data-t="us_bat_btn"></a>
           <a href="#/batteries" class="uslink" data-t="us_bat_more"></a>
         </div>
       </div>
@@ -596,7 +596,7 @@ table.lst th{color:var(--sub);font-weight:600;font-size:12px}
           <div><label data-t="us_btype"></label><select class="s" id="bT"></select></div>
         </div>
         <input class="s" id="bC" data-ph="us_car_ph">
-        <button class="btn y" id="bGo" data-t="us_bat_btn"></button>
+        <a class="btn y" id="bGo" target="_blank" rel="noopener" href="#" data-t="us_bat_btn"></a>
       </div>
       <div class="gsec"><h3 data-t="bat_tips_h"></h3>
         <div class="tips"><div data-t="bat_t1"></div><div data-t="bat_t2"></div><div data-t="bat_t3"></div><div data-t="bat_t4"></div></div>
@@ -1896,6 +1896,7 @@ function buildUS(){
   fillOilSels($("#uoT"),$("#uoG"),$("#uoB"),OILF);
   fillOilSels($("#ofT"),$("#ofG"),$("#ofB"),OILF);
   fillBatSels($("#ubA"),$("#ubT"));fillBatSels($("#bA"),$("#bT"));
+  if(typeof updBat1==="function"){updBat1();updBat2()}
 }
 function filteredOils(){
   const gs=OILF.g?[OILF.g]:(OILF.t?oilGradesFor(OILF.t):null);
@@ -1921,8 +1922,8 @@ $("#ofT").onchange=()=>{OILF.t=$("#ofT").value;OILF.g="";fillSel($("#ofG"),oilGr
 $("#ofG").onchange=()=>{OILF.g=$("#ofG").value;renderOils()};
 $("#ofB").onchange=()=>{OILF.b=$("#ofB").value;renderOils()};
 $("#uoGo").onclick=()=>{OILF={t:$("#uoT").value,g:$("#uoG").value,b:$("#uoB").value};fillOilSels($("#ofT"),$("#ofG"),$("#ofB"),OILF);location.hash="#/oils";renderOils()};
-$("#ubGo").onclick=()=>window.open(waURL(batMsg($("#ubA"),$("#ubT"),$("#ubC"))),"_blank","noopener");
-$("#bGo").onclick=()=>window.open(waURL(batMsg($("#bA"),$("#bT"),$("#bC"))),"_blank","noopener");
+function batLink(go,a,ty,c){const upd=()=>{$(go).href=waURL(batMsg($(a),$(ty),$(c)))};[a,ty,c].forEach(x=>{$(x).addEventListener("change",upd);$(x).addEventListener("input",upd)});$(go).addEventListener("click",upd);upd();return upd}
+const updBat1=batLink("#ubGo","#ubA","#ubT","#ubC"),updBat2=batLink("#bGo","#bA","#bT","#bC");
 window.addEventListener("hashchange",route);
 $("#yr").textContent=new Date().getFullYear();
 
